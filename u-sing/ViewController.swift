@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     var index = 0
     //array to store all tracks
     var allTracks: [AnyObject] = ["1", "2","1"]
+    var allTracks1: [AnyObject] = ["1", "2"]
     let finalComposed = AVMutableComposition()
     
     
@@ -52,46 +53,28 @@ class ViewController: UIViewController {
     //    }
     
     
+    //////////////////////////////////////////////////////////////////////////////
     func mashingSongFilesAndPlayBoth(){
         
-        var audioTrack :AVMutableCompositionTrack!
         
-        for trackName in allTracks{
+        for trackName in allTracks1{
+            
             let audioAsset: AVURLAsset = AVURLAsset(URL: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource(trackName as? String, ofType: "m4a")!), options: nil)
-            //var audioTrack: AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
             
-            //            originalTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
-            
-            if (index == 0) {
-                
-                originalTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
-                
-            } else if (index == 1) {
-                audioTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
-            }
-            //
-            
-            
+            var audioTrack: AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
             
             if(index == 0){
                 print("im there")
                 do {
-                    try originalTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(CMTimeGetSeconds(kCMTimeZero)+12, audioAsset.duration.timescale)), ofTrack: audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0], atTime: kCMTimeZero)
+                    try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, audioAsset.duration), ofTrack: audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0], atTime: kCMTimeZero)
                 }catch _ {
                     print("shit, it didn't work")
                 }
-            }
-            else if(index == 1){
+            } else if(index > 0){
                 print("im here'")
                 
                 do {
                     try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, audioAsset.duration), ofTrack: audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0], atTime: CMTimeMakeWithSeconds(CMTimeGetSeconds(kCMTimeZero)+12, audioAsset.duration.timescale))
-                }catch _ {
-                    print("shit, it didn't work")
-                }
-            } else {
-                do {
-                    try originalTrack.insertTimeRange(CMTimeRangeMake(CMTimeMakeWithSeconds(CMTimeGetSeconds(kCMTimeZero)+12, audioAsset.duration.timescale), audioAsset.duration), ofTrack: audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0], atTime: CMTimeMakeWithSeconds(CMTimeGetSeconds(kCMTimeZero)+22, audioAsset.duration.timescale))
                 }catch _ {
                     print("shit, it didn't work")
                 }
@@ -121,7 +104,7 @@ class ViewController: UIViewController {
 
     
     
-    //mashing all music files together
+    ////////////////////////mashing all music files together/////////////////////////////
     func mashingSongFilesAndCutitOff(){
         
         var audioTrack :AVMutableCompositionTrack!

@@ -18,18 +18,22 @@ class ViewController: UIViewController {
     var index = 0
     //array to store all tracks
     var allTracks: [AnyObject] = ["1", "2"]
-    var allTracks1: [AnyObject] = ["1","2"]
+    var allTracks1: [AnyObject] = ["1","2","3"]
     var newTrack = AVAudioPlayer()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mashingSongFilesAndPlayBoth()
-        
-        
+        //mashingSongFilesAndPlayBoth()
+        let originalSong = NSBundle.mainBundle().URLForResource("1", withExtension: "m4a")
+//
+        let arrayOfRecordings : [SongStruct] = [SongStruct(songRef: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("2", ofType: "m4a")!), startTime: CMTimeMakeWithSeconds(15, 1), endTime: CMTimeMakeWithSeconds(25, 1)),SongStruct(songRef: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("2", ofType: "m4a")!), startTime: CMTimeMakeWithSeconds(30, 1), endTime: CMTimeMakeWithSeconds(40, 1)),SongStruct(songRef: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("2", ofType: "m4a")!), startTime: CMTimeMakeWithSeconds(50, 1), endTime: CMTimeMakeWithSeconds(60, 1))]
+       let instance = SmashingManager.sharedInstance
+        instance.genericMash(originalSong!, arrayOfRecordings: arrayOfRecordings, mixedAudioName: "mix.m4a")
         
     }
+    
     
     
     ////////////////////////setting the background music//////////////////////
@@ -70,6 +74,7 @@ class ViewController: UIViewController {
 
         for trackName in allTracks1{
             
+            
             let audioAsset: AVURLAsset = AVURLAsset(URL: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource(trackName as? String, ofType: "m4a")!), options: nil)
             
             let audioTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
@@ -84,23 +89,21 @@ class ViewController: UIViewController {
                     try originalTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, audioAsset.duration), ofTrack: audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0], atTime: kCMTimeZero)
                     
                     
-                    //lowering the volume of the part that should be lowered
+//                    //lowering the volume of the part that should be lowered
+//                    
+//                    var audioMixParam: [AVMutableAudioMixInputParameters] = []
+//                    let assetMusicTrack: AVAssetTrack = audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0]
+//                    let musicParam: AVMutableAudioMixInputParameters = AVMutableAudioMixInputParameters(track: assetMusicTrack)
+//                    musicParam.trackID = originalTrack.trackID
+// 
+//                    //testing code to lower and raise the volume back up
+//                    musicParam.setVolumeRampFromStartVolume(0.02, toEndVolume: 1, timeRange: CMTimeRangeMake(CMTimeMake(20, 1), CMTimeMakeWithSeconds(10, 1)))
+//                    
+//                    
+//                    //two comments below is part of working codes
+//                    audioMixParam.append(musicParam)
+//                    audioMix.inputParameters = audioMixParam
                     
-                    var audioMixParam: [AVMutableAudioMixInputParameters] = []
-                    let assetMusicTrack: AVAssetTrack = audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0]
-                    let musicParam: AVMutableAudioMixInputParameters = AVMutableAudioMixInputParameters(track: assetMusicTrack)
-                    musicParam.trackID = originalTrack.trackID
-                    musicParam.setVolume(0.02, atTime: CMTimeMake(20, 1)) //CMTimeGetSeconds(kCMTimeZero)+20, audioAsset.duration.timescale))
-                    musicParam.setVolume(1, atTime: CMTimeMake(30, 1))
-                    musicParam.setVolume(0.02, atTime: CMTimeMake(35, 1))
-                    musicParam.setVolume(1, atTime: CMTimeMake(40, 1))
-                    audioMixParam.append(musicParam)
-                    
-                    //When the comment below is uncommented, it doubles the size of the files
-//                    try originalTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, audioAsset.duration), ofTrack: assetMusicTrack, atTime: kCMTimeZero)
-                    
-                    //Add parameter
-                    audioMix.inputParameters = audioMixParam
                 }
                 catch _ {
                     print("didn't wor")
@@ -111,10 +114,25 @@ class ViewController: UIViewController {
                 
                 print("index > 0")
                 do {
-                    try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, audioAsset.duration), ofTrack: audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0], atTime: CMTimeMakeWithSeconds(CMTimeGetSeconds(kCMTimeZero)+20
+                    try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, audioAsset.duration), ofTrack: audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0], atTime: CMTimeMakeWithSeconds(CMTimeGetSeconds(kCMTimeZero)+Double(20*index)
                         , audioAsset.duration.timescale))
-                }
-                catch _ {
+                    
+                    //lowering the volume of the part that should be lowered
+                    
+                    var audioMixParam: [AVMutableAudioMixInputParameters] = []
+                    let assetMusicTrack: AVAssetTrack = audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0]
+                    let musicParam: AVMutableAudioMixInputParameters = AVMutableAudioMixInputParameters(track: assetMusicTrack)
+                    musicParam.trackID = originalTrack.trackID
+                    
+                    //testing code to lower and raise the volume back up
+                    musicParam.setVolumeRampFromStartVolume(0.02, toEndVolume: 1, timeRange: CMTimeRangeMake(CMTimeMake (Int64(20*index), 1), CMTimeMakeWithSeconds(10, 1)))
+                    
+                    
+                    //two comments below is part of working codes
+                    audioMixParam.append(musicParam)
+                    audioMix.inputParameters = audioMixParam
+                    
+                    }catch _ {
                     print("didn't wor")
                 }
             }

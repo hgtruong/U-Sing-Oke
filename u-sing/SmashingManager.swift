@@ -32,24 +32,29 @@ public class SmashingManager : NSObject {
             print("error when try to insert the original song into the compsotion")
         }
         
+        ////Note: you can only have ONE assetMusicTrack!!!!!!!!///
+        //Solution: instead of calling this generic function once and pass the array of struct
+        //we call this function three times and pass each individual element in!!!!!////
+        
+        
         let audioMix: AVMutableAudioMix = AVMutableAudioMix()
-        var audioMixParam: [AVMutableAudioMixInputParameters] = []
+//        var audioMixParam: [AVMutableAudioMixInputParameters] = []
+        
         //loop through every single recording inside the arrayOfRecordings
         for recording in arrayOfRecordings {
+            
             //lower the volume of the original song
-            
             let audioAsset: AVURLAsset = AVURLAsset(URL: recording.songRef, options: nil)
-            
             let assetMusicTrack: AVAssetTrack = audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0]
-            let musicParam: AVMutableAudioMixInputParameters = AVMutableAudioMixInputParameters(track: assetMusicTrack)
+            print("ASSET MUSIC TRACK \(assetMusicTrack)")
+            let musicParam: AVMutableAudioMixInputParameters = AVMutableAudioMixInputParameters(track: assetMusicTrack) //you only need one of these
             musicParam.trackID = originalTrack.trackID
             print("start time is \(recording.startTime)")
             print("end time is \(recording.endTime)")
             print("range time is \(recording.endTime - recording.startTime)")
             print("duration of the audio is: \(audioAsset.duration)")
             musicParam.setVolumeRampFromStartVolume(0.02, toEndVolume: 1, timeRange: CMTimeRangeMake(recording.startTime, audioAsset.duration))
-            audioMixParam.append(musicParam)
-            audioMix.inputParameters = audioMixParam
+            audioMix.inputParameters.append(musicParam)
             
             
             let audioTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
@@ -60,6 +65,81 @@ public class SmashingManager : NSObject {
                 print("error when try to insert the recording into the compsotion")
             }
         }
+
+        
+//        //testing out stuff starts here
+//        let audioAsset: AVURLAsset = AVURLAsset(URL: arrayOfRecordings[0] .songRef, options: nil)
+//        let assetMusicTrack: AVAssetTrack = audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0]
+//        print("ASSET MUSIC TRACK \(assetMusicTrack)")
+//        let musicParam: AVMutableAudioMixInputParameters = AVMutableAudioMixInputParameters(track: assetMusicTrack) //you only need one of these
+//        musicParam.trackID = originalTrack.trackID
+//        print("start time is \(arrayOfRecordings[0].startTime)")
+//        print("end time is \(arrayOfRecordings[0].endTime)")
+//        print("range time is \(arrayOfRecordings[0].endTime - arrayOfRecordings[0].startTime)")
+//        print("duration of the audio is: \(audioAsset.duration)")
+//        musicParam.setVolumeRampFromStartVolume(0.02, toEndVolume: 1, timeRange: CMTimeRangeMake(arrayOfRecordings[0].startTime, audioAsset.duration))
+//        audioMix.inputParameters.append(musicParam)
+//        
+//        
+//        let audioTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
+//        //insert the recording
+//        do {
+//            try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, audioAsset.duration), ofTrack: audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0], atTime: arrayOfRecordings[0].startTime)
+//        }catch _ {
+//            print("error when try to insert the recording into the compsotion")
+//        }
+//        
+//        
+//        
+//        ////////testing out stuff again////////////
+//        //lower the volume of the original song
+//        
+//        let audioAsset1: AVURLAsset = AVURLAsset(URL: arrayOfRecordings[1].songRef, options: nil)
+//        print("ASSET MUSIC TRACK \(assetMusicTrack)")
+//         //you only need one of these
+//        musicParam.trackID = originalTrack.trackID
+//        print("start time is \(arrayOfRecordings[1].startTime)")
+//        print("end time is \(arrayOfRecordings[1].endTime)")
+//        print("range time is \(arrayOfRecordings[1].endTime - arrayOfRecordings[1].startTime)")
+//        print("duration of the audio is: \(audioAsset1.duration)")
+//        musicParam.setVolumeRampFromStartVolume(0.02, toEndVolume: 1, timeRange: CMTimeRangeMake(arrayOfRecordings[1].startTime, audioAsset1.duration))
+//        audioMix.inputParameters.append(musicParam)
+//        
+//        
+////        let audioTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
+//        //insert the recording
+//        do {
+//            try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, audioAsset.duration), ofTrack: audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0], atTime: arrayOfRecordings[1].startTime)
+//        }catch _ {
+//            print("error when try to insert the recording into the compsotion")
+//        }
+//        
+//        ///////testing shit again///////////
+//        let audioAsset2: AVURLAsset = AVURLAsset(URL: arrayOfRecordings[2].songRef, options: nil)
+//        print("ASSET MUSIC TRACK \(assetMusicTrack)")
+//        //you only need one of these
+//        musicParam.trackID = originalTrack.trackID
+//        print("start time is \(arrayOfRecordings[1].startTime)")
+//        print("end time is \(arrayOfRecordings[1].endTime)")
+//        print("range time is \(arrayOfRecordings[1].endTime - arrayOfRecordings[1].startTime)")
+//        print("duration of the audio is: \(audioAsset1.duration)")
+//        musicParam.setVolumeRampFromStartVolume(0.02, toEndVolume: 1, timeRange: CMTimeRangeMake(arrayOfRecordings[2].startTime, audioAsset2.duration))
+//        audioMix.inputParameters.append(musicParam)
+//        
+//        
+//        //        let audioTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
+//        //insert the recording
+//        do {
+//            try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, audioAsset.duration), ofTrack: audioAsset.tracksWithMediaType(AVMediaTypeAudio)[0], atTime: arrayOfRecordings[2].startTime)
+//        }catch _ {
+//            print("error when try to insert the recording into the compsotion")
+//        }
+//        
+        
+        
+        
+        ///////testing out stuff ends above//////
+
         //export the compsotion
         let assetExport: AVAssetExportSession = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A)!
         let exportPath: String = NSTemporaryDirectory().stringByAppendingString(mixedAudioName)

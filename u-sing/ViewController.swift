@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         //mashingSongFilesAndPlayBoth()
         let originalSong = NSBundle.mainBundle().URLForResource("1", withExtension: "m4a")
 //
-        let arrayOfRecordings : [SongStruct] = [SongStruct(songRef: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("2", ofType: "m4a")!), startTime: CMTimeMakeWithSeconds(15, 1), endTime: CMTimeMakeWithSeconds(25, 1)),SongStruct(songRef: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("2", ofType: "m4a")!), startTime: CMTimeMakeWithSeconds(30, 1), endTime: CMTimeMakeWithSeconds(40, 1)),SongStruct(songRef: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("2", ofType: "m4a")!), startTime: CMTimeMakeWithSeconds(50, 1), endTime: CMTimeMakeWithSeconds(60, 1))]
+        let arrayOfRecordings : [SongStruct] = [SongStruct(songRef: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("3", ofType: "m4a")!), startTime: CMTimeMakeWithSeconds(15, 1), endTime: CMTimeMakeWithSeconds(25, 1)),SongStruct(songRef: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("3", ofType: "m4a")!), startTime: CMTimeMakeWithSeconds(30, 1), endTime: CMTimeMakeWithSeconds(40, 1)),SongStruct(songRef: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("3", ofType: "m4a")!), startTime: CMTimeMakeWithSeconds(50, 1), endTime: CMTimeMakeWithSeconds(60, 1))]
        let instance = SmashingManager.sharedInstance
         instance.genericMash(originalSong!, arrayOfRecordings: arrayOfRecordings, mixedAudioName: "mix.m4a")
         

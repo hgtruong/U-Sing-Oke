@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		6535E8B71D37F94E00BFCF04 /* 21.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6535E8B61D37F94E00BFCF04 /* 21.m4a */; };
 		65480FAF1D38522400B73320 /* 3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 65480FAE1D38522400B73320 /* 3.m4a */; };
+		658358F11D3E9F7F000E9F19 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658358F01D3E9F7F000E9F19 /* PageViewController.swift */; };
+		658358F31D3E9FC3000E9F19 /* SongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658358F21D3E9FC3000E9F19 /* SongListViewController.swift */; };
+		658358F51D3E9FD7000E9F19 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658358F41D3E9FD7000E9F19 /* PlayerViewController.swift */; };
 		659C56411D397EA60054AFB9 /* 22.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 659C56401D397EA60054AFB9 /* 22.m4a */; };
 		659D43C91D35598300B2B289 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659D43C81D35598300B2B289 /* AppDelegate.swift */; };
 		659D43CB1D35598300B2B289 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659D43CA1D35598300B2B289 /* ViewController.swift */; };
@@ -24,6 +27,9 @@
 /* Begin PBXFileReference section */
 		6535E8B61D37F94E00BFCF04 /* 21.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 21.m4a; sourceTree = "<group>"; };
 		65480FAE1D38522400B73320 /* 3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3.m4a; sourceTree = "<group>"; };
+		658358F01D3E9F7F000E9F19 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		658358F21D3E9FC3000E9F19 /* SongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongListViewController.swift; sourceTree = "<group>"; };
+		658358F41D3E9FD7000E9F19 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		659C56401D397EA60054AFB9 /* 22.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 22.m4a; sourceTree = "<group>"; };
 		659D43C51D35598300B2B289 /* u-sing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "u-sing.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		659D43C81D35598300B2B289 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,9 +55,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		658358EF1D3E9F45000E9F19 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				658358F41D3E9FD7000E9F19 /* PlayerViewController.swift */,
+				658358F21D3E9FC3000E9F19 /* SongListViewController.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		659D43BC1D35598300B2B289 = {
 			isa = PBXGroup;
 			children = (
+				658358EF1D3E9F45000E9F19 /* Views */,
 				659D43C71D35598300B2B289 /* u-sing */,
 				659D43C61D35598300B2B289 /* Products */,
 			);
@@ -70,7 +86,7 @@
 			children = (
 				659D43C81D35598300B2B289 /* AppDelegate.swift */,
 				65C6A7C31D383B69009D3461 /* Helper */,
-				65C6A7C01D383B31009D3461 /* Viewcontroller */,
+				65C6A7C01D383B31009D3461 /* ViewController */,
 				65C6A7BF1D383B2C009D3461 /* Model */,
 				659D43CC1D35598300B2B289 /* Main.storyboard */,
 				65480FAE1D38522400B73320 /* 3.m4a */,
@@ -93,12 +109,13 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		65C6A7C01D383B31009D3461 /* Viewcontroller */ = {
+		65C6A7C01D383B31009D3461 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				659D43CA1D35598300B2B289 /* ViewController.swift */,
+				658358F01D3E9F7F000E9F19 /* PageViewController.swift */,
 			);
-			name = Viewcontroller;
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 		65C6A7C31D383B69009D3461 /* Helper */ = {
@@ -187,9 +204,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				65C6A7BE1D3839C8009D3461 /* SongStruct.swift in Sources */,
+				658358F11D3E9F7F000E9F19 /* PageViewController.swift in Sources */,
 				65C6A7C21D383B63009D3461 /* SmashingManager.swift in Sources */,
+				658358F51D3E9FD7000E9F19 /* PlayerViewController.swift in Sources */,
 				659D43CB1D35598300B2B289 /* ViewController.swift in Sources */,
 				659D43C91D35598300B2B289 /* AppDelegate.swift in Sources */,
+				658358F31D3E9FC3000E9F19 /* SongListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +328,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "u-sing/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ht.u-sing";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ht.u-sing1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -322,7 +342,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "u-sing/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ht.u-sing";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ht.u-sing1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

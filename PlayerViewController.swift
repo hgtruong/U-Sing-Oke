@@ -10,6 +10,33 @@ import UIKit
 
 class PlayerViewController: UIViewController {
     
+    @IBOutlet weak var nextButton: UIButton!
+    
+    @IBAction func nextButton(sender: AnyObject) {
+    }
+    
+    
+    @IBOutlet weak var stopPlayButton: UIButton!
+    
+    @IBAction func stopPlayButton(sender: AnyObject) {
+    }
+    
+    @IBOutlet weak var previousSongButton: UIButton!
+
+    @IBAction func previousSongButton(sender: AnyObject) {
+    }
+    
+    @IBOutlet weak var recordButton: UIButton!
+    
+    @IBAction func recordButton(sender: AnyObject) {
+    }
+    
+    @IBOutlet weak var songProgress: NSLayoutConstraint!
+    
+    @IBAction func songProgress(sender: AnyObject) {
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

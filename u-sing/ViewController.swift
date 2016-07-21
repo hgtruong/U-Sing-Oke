@@ -22,6 +22,7 @@ class ViewController: UIViewController{
     var newTrack = AVAudioPlayer()
     
     var originalSong = NSBundle.mainBundle().URLForResource("22", withExtension: "m4a")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

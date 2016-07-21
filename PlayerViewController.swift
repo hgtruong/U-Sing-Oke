@@ -29,6 +29,19 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var recordButton: UIButton!
     
     @IBAction func recordButton(sender: AnyObject) {
+        
+        let instance = VoiceRecord.sharedInstance
+        print("RIGHT HERE!!!")
+        print("\(instance.status)")
+        
+        switch instance.status {
+        case true:
+            instance.stopRecord()
+            print("recoding")
+        case false:
+            instance.record()
+            print("stop recording")
+        }
     }
     
     @IBOutlet weak var songProgress: NSLayoutConstraint!

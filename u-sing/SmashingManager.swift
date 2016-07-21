@@ -18,13 +18,18 @@ public class SmashingManager : NSObject {
     }
     
     func genericMash(originalSong:NSURL, recording: SongStruct ,mixedAudioName:String, callback:(url:NSURL) -> Void){
-        print("originalSong.absolutString:\(originalSong.absoluteString)")
+//        print("originalSong.absolutString:\(originalSong.absoluteString)")
         let composition =  AVMutableComposition()
         
         //insret original song into composition
         let originalAudioAsset: AVURLAsset = AVURLAsset(URL: originalSong, options: nil)
         let originalTrack:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
         do {
+            
+            let tracksWithMediaType = originalAudioAsset.tracksWithMediaType(AVMediaTypeAudio)
+            
+            print("# tracks with Media Type Audio \(tracksWithMediaType.count)")
+            
             try originalTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, originalAudioAsset.duration), ofTrack: originalAudioAsset.tracksWithMediaType(AVMediaTypeAudio)[0], atTime: kCMTimeZero)
 
         } catch _ {
@@ -48,10 +53,10 @@ public class SmashingManager : NSObject {
             print("ASSET MUSIC TRACK \(assetMusicTrack)")
             let musicParam: AVMutableAudioMixInputParameters = AVMutableAudioMixInputParameters(track: assetMusicTrack) //you only need one of these
             musicParam.trackID = originalTrack.trackID
-            print("start time is \(recording.startTime)")
-            print("end time is \(recording.endTime)")
-            print("range time is \(recording.endTime - recording.startTime)")
-            print("duration of the audio is: \(audioAsset.duration)")
+//            print("start time is \(recording.startTime)")
+//            print("end time is \(recording.endTime)")
+//            print("range time is \(recording.endTime - recording.startTime)")
+//            print("duration of the audio is: \(audioAsset.duration)")
             musicParam.setVolumeRampFromStartVolume(0.02, toEndVolume: 1, timeRange: CMTimeRangeMake(recording.startTime, audioAsset.duration))
             audioMix.inputParameters.append(musicParam)
             

@@ -130,19 +130,7 @@
                                 </constraints>
                                 <state key="normal" title="Button" image="Record-76x76"/>
                                 <connections>
-                                    <action selector="recordButton:" destination="NPK-kK-SbC" eventType="touchUpInside" id="yAL-Ir-c9O"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eq6-lY-xpc">
-                                <rect key="frame" x="265" y="426" width="70" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="Ih7-0N-JkO"/>
-                                    <constraint firstAttribute="width" constant="70" id="n12-V1-Tjr"/>
-                                </constraints>
-                                <state key="normal" title="playStopButton" image="Up-83.5x83.5"/>
-                                <state key="selected" title="playStopButton"/>
-                                <connections>
-                                    <action selector="stopPlayButton:" destination="NPK-kK-SbC" eventType="touchUpInside" id="k0e-5l-Ulz"/>
+                                    <action selector="recordButton:" destination="NPK-kK-SbC" eventType="touchUpInside" id="Utf-Bb-5Mo"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dxo-z3-6Sf">
@@ -156,6 +144,18 @@
                                 <state key="normal" title="Button" image="Right-76x76"/>
                                 <connections>
                                     <action selector="nextButton:" destination="NPK-kK-SbC" eventType="touchUpInside" id="xSd-B3-SvX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eq6-lY-xpc">
+                                <rect key="frame" x="265" y="426" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="Ih7-0N-JkO"/>
+                                    <constraint firstAttribute="width" constant="70" id="n12-V1-Tjr"/>
+                                </constraints>
+                                <state key="normal" title="playStopButton" image="Up-83.5x83.5"/>
+                                <state key="selected" title="playStopButton"/>
+                                <connections>
+                                    <action selector="stopPlayButton:" destination="NPK-kK-SbC" eventType="touchUpInside" id="k0e-5l-Ulz"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -189,21 +189,13 @@
                     <connections>
                         <outlet property="nextButton" destination="G6Y-ur-XgL" id="ZjC-Lp-5UT"/>
                         <outlet property="previousSongButton" destination="Vna-i8-juj" id="r0u-6X-zgS"/>
-                        <outlet property="recordButton" destination="brM-AO-rOc" id="qNZ-Tv-yIk"/>
+                        <outlet property="recordButton" destination="brM-AO-rOc" id="hqr-xc-xig"/>
                         <outlet property="stopPlayButton" destination="eq6-lY-xpc" id="fxV-NP-9Bk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xa3-0k-kLV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="962" y="845"/>
-        </scene>
-        <!--AV Player View Controller-->
-        <scene sceneID="xuC-VU-Er3">
-            <objects>
-                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="bqX-RV-jPH" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hZu-iP-jK2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="854" y="1591"/>
         </scene>
     </scenes>
     <resources>

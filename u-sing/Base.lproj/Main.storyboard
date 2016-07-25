@@ -72,6 +72,7 @@
                     <navigationItem key="navigationItem" title="Pick Your Poison" id="PsP-sP-Bz8"/>
                     <connections>
                         <outlet property="searchButton" destination="ieE-gy-HAm" id="1f3-o2-Hpt"/>
+                        <outlet property="tableView" destination="iHx-Yx-euJ" id="uhJ-pv-Eo6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oem-WC-kOS" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -18,7 +18,7 @@ public class PlayStopManager {
     var newTrack = AVAudioPlayer()
     var currentTime = NSTimeInterval()
     var pauseTime = NSTimeInterval()
-    let bgMusicUrl:NSURL =  NSBundle.mainBundle().URLForResource("21", withExtension: "m4a")!
+    let bgMusicUrl:NSURL =  NSBundle.mainBundle().URLForResource("22", withExtension: "m4a")!
 
 
     class public var sharedInstance:PlayStopManager {

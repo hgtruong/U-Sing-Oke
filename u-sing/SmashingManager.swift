@@ -57,7 +57,7 @@ public class SmashingManager : NSObject {
 //            print("end time is \(recording.endTime)")
 //            print("range time is \(recording.endTime - recording.startTime)")
 //            print("duration of the audio is: \(audioAsset.duration)")
-            musicParam.setVolumeRampFromStartVolume(0.02, toEndVolume: 1, timeRange: CMTimeRangeMake(recording.startTime, audioAsset.duration))
+            musicParam.setVolumeRampFromStartVolume(0.4, toEndVolume: 1, timeRange: CMTimeRangeMake(recording.startTime, audioAsset.duration))
             audioMix.inputParameters.append(musicParam)
             
             

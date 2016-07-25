@@ -43,7 +43,7 @@ class PlayerViewController: UIViewController {
     @IBAction func recordButton(sender: AnyObject) {
         
         let instance = VoiceRecord.sharedInstance
-        print("RIGHT HERE!!!")
+//        print("RIGHT HERE!!!")
         print("\(instance.status)")
         
         switch instance.status {

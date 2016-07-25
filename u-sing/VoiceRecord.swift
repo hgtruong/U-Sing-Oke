@@ -40,6 +40,8 @@ public class VoiceRecord: NSObject {
     var cmDuration = CMTimeMake(0, 0)
     var audioRecorder:AVAudioRecorder!
     var arrayOfRecordings : [SongStruct] = []
+    
+    //This original song needs ot be changed to the new song
     var originalSong = NSBundle.mainBundle().URLForResource("22", withExtension: "m4a")
 
     
@@ -137,9 +139,9 @@ public class VoiceRecord: NSObject {
                 for index in arrayOfRecordings{
                     print("\(arrayOfRecordings.count)")
                     instance.genericMash(originalSong!, recording: index, mixedAudioName: "mix.m4a", callback: { (url) in
-                        print("url is before: \(url)")
+//                        print("url is before: \(url)")
                         self.originalSong = url
-                        print("url is after: \(url)")
+//                        print("url is after: \(url)")
                         dispatch_semaphore_signal(semaphore)
                     })
                     

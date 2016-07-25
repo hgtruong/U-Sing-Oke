@@ -83,8 +83,8 @@
 		658358EF1D3E9F45000E9F19 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				658358F21D3E9FC3000E9F19 /* SongListViewController.swift */,
 				658358F41D3E9FD7000E9F19 /* PlayerViewController.swift */,
+				658358F21D3E9FC3000E9F19 /* SongListViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -376,7 +376,7 @@
 				FRAMEWORK_SEARCH_PATHS = "/Users/HT/Desktop/Make\\ School\\ SA\\ 2016/realm-swift-1.0.2/ios/swift-2.2 ";
 				INFOPLIST_FILE = "u-sing/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ht.u-sing1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ht.u-sing";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -391,7 +391,7 @@
 				FRAMEWORK_SEARCH_PATHS = "/Users/HT/Desktop/Make\\ School\\ SA\\ 2016/realm-swift-1.0.2/ios/swift-2.2 ";
 				INFOPLIST_FILE = "u-sing/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ht.u-sing1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ht.u-sing";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

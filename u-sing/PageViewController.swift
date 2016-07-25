@@ -13,10 +13,8 @@ import CoreMedia
 
 class PageViewController: UIPageViewController{
     
-    var composition =  AVMutableComposition()
-    var originalTrack:AVMutableCompositionTrack!
-    var index = 0
-    var originalSong = NSBundle.mainBundle().URLForResource("22", withExtension: "m4a")
+    
+   
     
     
     //Function to generate new ViewController

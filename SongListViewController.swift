@@ -7,22 +7,35 @@
 //
 
 import UIKit
+import MediaPlayer
 
 class SongListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
+    //Variable declarations
+    var mediaQuery = MPMediaQuery()
+    var mediaCollections: [AnyObject] = []
+    
+    
     @IBOutlet weak var searchButton: UISearchBar!
     
-    
-    
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //
-        //        let songList = UITableView
-        //
-        //        songList.insert
-        // Do any additional setup after loading the view.
+    
+        //Finding the music in user's phone
+        
+        // run a query on song media type
+        mediaQuery = MPMediaQuery.songsQuery()
+        
+        // ensure what we retrieve is on device
+        mediaQuery.addFilterPredicate(MPMediaPropertyPredicate(value: false, forProperty: MPMediaItemPropertyIsCloudItem))
+        
+        // run query
+        mediaCollections = mediaQuery.collections!
+        
+        tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,13 +44,23 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        print("hello " + "\(mediaCollections.count)")
+        return mediaCollections.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("songListCell", forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel?.text = "test"
+        
+        //Populating the table view cell
+        let collection = mediaCollections[indexPath.row] as! MPMediaItemCollection
+        let representativeItem = collection.representativeItem
+        let title = representativeItem!.title
+        cell.textLabel!.text = title
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print(indexPath)
     }
 }
 

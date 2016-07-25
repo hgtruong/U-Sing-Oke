@@ -40,6 +40,8 @@ public class VoiceRecord: NSObject {
     var cmDuration = CMTimeMake(0, 0)
     var audioRecorder:AVAudioRecorder!
     var arrayOfRecordings : [SongStruct] = []
+    var originalSong = NSBundle.mainBundle().URLForResource("22", withExtension: "m4a")
+
     
 
     
@@ -126,7 +128,24 @@ public class VoiceRecord: NSObject {
                 arrayOfRecordings.append(SongStruct(songName: "recording" + "\(index)" + ".m4a", songRef: audioRecorder.url, startTime: startTime , endTime: endTime))
 
                 //3) Starting the mixing procress 
+                let instance = SmashingManager.sharedInstance
                 
+                //Using semaphore to hold off the for loop so we can complete the mixing process
+                let semaphore = dispatch_semaphore_create(0)
+                let timeoutLengthInNanoSeconds: Int64 = 10000000000  //Adjust the timeout to suit your case
+                let timeout = dispatch_time(DISPATCH_TIME_NOW, timeoutLengthInNanoSeconds)
+                for index in arrayOfRecordings{
+                    print("\(arrayOfRecordings.count)")
+                    instance.genericMash(originalSong!, recording: index, mixedAudioName: "mix.m4a", callback: { (url) in
+                        print("url is before: \(url)")
+                        self.originalSong = url
+                        print("url is after: \(url)")
+                        dispatch_semaphore_signal(semaphore)
+                    })
+                    
+                    dispatch_semaphore_wait(semaphore, timeout)
+                    
+                }//end of mixing process
                 
                 
                 
@@ -142,7 +161,7 @@ public class VoiceRecord: NSObject {
             let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
             let documentDirectory = urls[0] as NSURL
             let soundURL = documentDirectory.URLByAppendingPathComponent("sound" + "\(soundIndex)" + ".m4a")
-            print("\(soundURL)")
+            //print("\(soundURL)")
             return soundURL
     }
     

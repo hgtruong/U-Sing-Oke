@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class PlayerViewController: UIViewController {
     
@@ -19,6 +20,17 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var stopPlayButton: UIButton!
     
     @IBAction func stopPlayButton(sender: AnyObject) {
+        
+        let instance = PlayStopManager.sharedInstance
+        
+        switch instance.status {
+        case true:
+            instance.stopSong()
+        case false:
+            instance.playSong()
+        }
+        
+        
     }
     
     @IBOutlet weak var previousSongButton: UIButton!
@@ -37,10 +49,10 @@ class PlayerViewController: UIViewController {
         switch instance.status {
         case true:
             instance.stopRecord()
-            print("recoding")
+            print("stop recording")
         case false:
             instance.record()
-            print("stop recording")
+            print("recording")
         }
     }
     

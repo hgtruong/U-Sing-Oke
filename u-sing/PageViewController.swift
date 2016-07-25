@@ -33,25 +33,26 @@ class PageViewController: UIPageViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let arrayOfRecordings : [SongStruct] = [SongStruct(songRef: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("3", ofType: "m4a")!), startTime: CMTimeMakeWithSeconds(15, 1), endTime: CMTimeMakeWithSeconds(25, 1)),SongStruct(songRef: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("2", ofType: "m4a")!), startTime: CMTimeMakeWithSeconds(30, 1), endTime: CMTimeMakeWithSeconds(40, 1)),SongStruct(songRef: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("3", ofType: "m4a")!), startTime: CMTimeMakeWithSeconds(50, 1), endTime: CMTimeMakeWithSeconds(60, 1))]
-        let instance = SmashingManager.sharedInstance
+//        let arrayOfRecordings : [SongStruct] = [SongStruct(songRef: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("3", ofType: "m4a")!), startTime: CMTimeMakeWithSeconds(15, 1), endTime: CMTimeMakeWithSeconds(25, 1)),SongStruct(songRef: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("2", ofType: "m4a")!), startTime: CMTimeMakeWithSeconds(30, 1), endTime: CMTimeMakeWithSeconds(40, 1)),SongStruct(songRef: NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("3", ofType: "m4a")!), startTime: CMTimeMakeWithSeconds(50, 1), endTime: CMTimeMakeWithSeconds(60, 1))]
         
-        //Using semaphore to hold off the for loop so we can complete the mixing process
-        let semaphore = dispatch_semaphore_create(0)
-        let timeoutLengthInNanoSeconds: Int64 = 10000000000  //Adjust the timeout to suit your case
-        let timeout = dispatch_time(DISPATCH_TIME_NOW, timeoutLengthInNanoSeconds)
-        for index in arrayOfRecordings{
-            print("\(arrayOfRecordings.count)")
-            instance.genericMash(originalSong!, recording: index, mixedAudioName: "mix.m4a", callback: { (url) in
-                print("url is before: \(url)")
-                self.originalSong = url
-                print("url is after: \(url)")
-                dispatch_semaphore_signal(semaphore)
-            })
-            
-            dispatch_semaphore_wait(semaphore, timeout)
-            
-        }
+//        let instance = SmashingManager.sharedInstance
+//        
+//        //Using semaphore to hold off the for loop so we can complete the mixing process
+//        let semaphore = dispatch_semaphore_create(0)
+//        let timeoutLengthInNanoSeconds: Int64 = 10000000000  //Adjust the timeout to suit your case
+//        let timeout = dispatch_time(DISPATCH_TIME_NOW, timeoutLengthInNanoSeconds)
+//        for index in arrayOfRecordings{
+//            print("\(arrayOfRecordings.count)")
+//            instance.genericMash(originalSong!, recording: index, mixedAudioName: "mix.m4a", callback: { (url) in
+//                print("url is before: \(url)")
+//                self.originalSong = url
+//                print("url is after: \(url)")
+//                dispatch_semaphore_signal(semaphore)
+//            })
+//            
+//            dispatch_semaphore_wait(semaphore, timeout)
+//            
+//        }
         
         dataSource = self
         //

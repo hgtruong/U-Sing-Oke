@@ -20,9 +20,29 @@
 		659D43D31D35598300B2B289 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 659D43D11D35598300B2B289 /* LaunchScreen.storyboard */; };
 		659D43DD1D3559FC00B2B289 /* 2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 659D43DB1D3559FC00B2B289 /* 2.m4a */; };
 		659D43E31D359BE900B2B289 /* 1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 659D43E21D359BE900B2B289 /* 1.m4a */; };
+		65A46F3B1D42A9E20068FD0E /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A46F391D42A9E20068FD0E /* Realm.framework */; };
+		65A46F3C1D42A9E20068FD0E /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 65A46F391D42A9E20068FD0E /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		65A46F3D1D42A9E20068FD0E /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A46F3A1D42A9E20068FD0E /* RealmSwift.framework */; };
+		65A46F3E1D42A9E20068FD0E /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 65A46F3A1D42A9E20068FD0E /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		65A46F401D42B2560068FD0E /* PlayStopManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A46F3F1D42B2560068FD0E /* PlayStopManager.swift */; };
 		65C6A7BE1D3839C8009D3461 /* SongStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C6A7BD1D3839C8009D3461 /* SongStruct.swift */; };
 		65C6A7C21D383B63009D3461 /* SmashingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C6A7C11D383B63009D3461 /* SmashingManager.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		65A46F371D42A9000068FD0E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				65A46F3E1D42A9E20068FD0E /* RealmSwift.framework in Embed Frameworks */,
+				65A46F3C1D42A9E20068FD0E /* Realm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6503FAFC1D41300F006817A0 /* VoiceRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceRecord.swift; sourceTree = "<group>"; };
@@ -40,6 +60,9 @@
 		659D43D41D35598300B2B289 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		659D43DB1D3559FC00B2B289 /* 2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2.m4a; sourceTree = "<group>"; };
 		659D43E21D359BE900B2B289 /* 1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.m4a; sourceTree = "<group>"; };
+		65A46F391D42A9E20068FD0E /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		65A46F3A1D42A9E20068FD0E /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		65A46F3F1D42B2560068FD0E /* PlayStopManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayStopManager.swift; sourceTree = "<group>"; };
 		65C6A7BD1D3839C8009D3461 /* SongStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongStruct.swift; sourceTree = "<group>"; };
 		65C6A7C11D383B63009D3461 /* SmashingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmashingManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -49,6 +72,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65A46F3D1D42A9E20068FD0E /* RealmSwift.framework in Frameworks */,
+				65A46F3B1D42A9E20068FD0E /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +92,8 @@
 		659D43BC1D35598300B2B289 = {
 			isa = PBXGroup;
 			children = (
+				65A46F391D42A9E20068FD0E /* Realm.framework */,
+				65A46F3A1D42A9E20068FD0E /* RealmSwift.framework */,
 				658358EF1D3E9F45000E9F19 /* Views */,
 				659D43C71D35598300B2B289 /* u-sing */,
 				659D43C61D35598300B2B289 /* Products */,
@@ -122,6 +149,7 @@
 			children = (
 				65C6A7C11D383B63009D3461 /* SmashingManager.swift */,
 				6503FAFC1D41300F006817A0 /* VoiceRecord.swift */,
+				65A46F3F1D42B2560068FD0E /* PlayStopManager.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -136,6 +164,8 @@
 				659D43C11D35598300B2B289 /* Sources */,
 				659D43C21D35598300B2B289 /* Frameworks */,
 				659D43C31D35598300B2B289 /* Resources */,
+				65A46F371D42A9000068FD0E /* Embed Frameworks */,
+				65A46F381D42A9690068FD0E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -198,6 +228,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		65A46F381D42A9690068FD0E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		659D43C11D35598300B2B289 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -205,6 +251,7 @@
 			files = (
 				65C6A7BE1D3839C8009D3461 /* SongStruct.swift in Sources */,
 				6503FAFD1D41300F006817A0 /* VoiceRecord.swift in Sources */,
+				65A46F401D42B2560068FD0E /* PlayStopManager.swift in Sources */,
 				658358F11D3E9F7F000E9F19 /* PageViewController.swift in Sources */,
 				65C6A7C21D383B63009D3461 /* SmashingManager.swift in Sources */,
 				658358F51D3E9FD7000E9F19 /* PlayerViewController.swift in Sources */,
@@ -326,6 +373,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "/Users/HT/Desktop/Make\\ School\\ SA\\ 2016/realm-swift-1.0.2/ios/swift-2.2 ";
 				INFOPLIST_FILE = "u-sing/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ht.u-sing1";
@@ -340,6 +388,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "/Users/HT/Desktop/Make\\ School\\ SA\\ 2016/realm-swift-1.0.2/ios/swift-2.2 ";
 				INFOPLIST_FILE = "u-sing/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ht.u-sing1";

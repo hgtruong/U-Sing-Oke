@@ -25,8 +25,9 @@ class PageViewController: UIPageViewController{
     //hard coding to create two tabs pages
     private(set) lazy var orderedViewControllers: [UIViewController] = {
         let navi = self.newColoredViewController("songListNavigation") as! UINavigationController
+        let mixed = self.newColoredViewController("mixedSongListNavigation") as! UINavigationController
         return [navi,
-                self.newColoredViewController("Player")]
+                self.newColoredViewController("Player"), mixed]
     }()
 
     override func viewDidLoad() {

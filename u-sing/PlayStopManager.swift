@@ -57,10 +57,6 @@ public class PlayStopManager {
         
     }
     
-    
-    
-    
-    
     //Function to return the current so we know when the user hit the recording button during 
     //when the song is player
     func getCurrentTime() -> NSTimeInterval {

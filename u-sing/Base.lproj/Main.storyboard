@@ -79,6 +79,63 @@
             </objects>
             <point key="canvasLocation" x="161" y="845"/>
         </scene>
+        <!--Mixed Songs-->
+        <scene sceneID="VZ9-Rh-bD8">
+            <objects>
+                <viewController id="642-8k-28c" customClass="MixedSongListViewController" customModule="u_sing" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1jP-VQ-jZK"/>
+                        <viewControllerLayoutGuide type="bottom" id="mZz-yx-cvX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Tb1-Nh-d8w">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bof-Dn-yzt">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="mixedListCell" textLabel="2ow-yq-uaM" style="IBUITableViewCellStyleDefault" id="f7e-7l-ftm">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f7e-7l-ftm" id="Ki6-E8-UTC">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2ow-yq-uaM">
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="642-8k-28c" id="Brb-In-mPw"/>
+                                    <outlet property="delegate" destination="642-8k-28c" id="m5f-ZZ-FfQ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bof-Dn-yzt" firstAttribute="width" secondItem="Tb1-Nh-d8w" secondAttribute="width" id="2E9-qu-r3h"/>
+                            <constraint firstItem="bof-Dn-yzt" firstAttribute="height" secondItem="Tb1-Nh-d8w" secondAttribute="height" id="88G-Qm-545"/>
+                            <constraint firstItem="bof-Dn-yzt" firstAttribute="centerX" secondItem="Tb1-Nh-d8w" secondAttribute="centerX" id="CiB-vw-qZ1"/>
+                            <constraint firstItem="bof-Dn-yzt" firstAttribute="centerY" secondItem="Tb1-Nh-d8w" secondAttribute="centerY" id="Tph-zh-etq"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Mixed Songs" id="fM3-Sk-mBK"/>
+                    <connections>
+                        <outlet property="tableView" destination="bof-Dn-yzt" id="nyL-OQ-eGV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N6k-GI-8M7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="168" y="1637"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="7wd-Mg-eS1">
             <objects>
@@ -197,6 +254,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xa3-0k-kLV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="962" y="845"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="acc-zR-9bK">
+            <objects>
+                <navigationController storyboardIdentifier="mixedSongListNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="2Qw-R5-joC" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mx0-Ta-A4u">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="642-8k-28c" kind="relationship" relationship="rootViewController" id="dqd-Nn-csD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vts-S4-5W6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-724" y="1637"/>
         </scene>
     </scenes>
     <resources>

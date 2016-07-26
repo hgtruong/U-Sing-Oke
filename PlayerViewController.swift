@@ -23,12 +23,19 @@ class PlayerViewController: UIViewController {
         
         let instance = PlayStopManager.sharedInstance
         
-        switch instance.status {
-        case true:
+        print(instance.newTrack.currentTime)
+        
+        if instance.newTrack.currentTime < instance.newTrack.duration || instance.newTrack.currentTime == 0.0 {
+            switch instance.status {
+            case true:
+                instance.pauseSong()
+            case false:
+                instance.playSong()
+            }
+        }else {
             instance.stopSong()
-        case false:
-            instance.playSong()
         }
+        
         
         
     }

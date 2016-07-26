@@ -18,7 +18,15 @@ public class PlayStopManager {
     var newTrack = AVAudioPlayer()
     var currentTime = NSTimeInterval()
     var pauseTime = NSTimeInterval()
-    let bgMusicUrl:NSURL =  NSBundle.mainBundle().URLForResource("22", withExtension: "m4a")!
+    var bgMusicUrl = NSURL()
+    
+    func setUpNewTrack(){
+        do{
+            newTrack = try AVAudioPlayer(contentsOfURL: bgMusicUrl)
+        }catch _ {
+            print("newTrac couldn't be set")
+        }
+    }
 
 
     class public var sharedInstance:PlayStopManager {
@@ -27,37 +35,28 @@ public class PlayStopManager {
     
     //Function to play the song outloud so users can hear and sing too
     func playSong(){
-        
-        
-        
-        do {
-            
-            newTrack =  try AVAudioPlayer(contentsOfURL:bgMusicUrl)
+    
             newTrack.prepareToPlay()
-            
-            if(pauseTime != 0){
-                newTrack.playAtTime(pauseTime)
-            }else {
             newTrack.play()
-            }
-            
-            
-            //setting status
             status = true
-        } catch _ {
-            print("song is not found.")
-        }
+  
     }//end of playSong function
     
     //Function to stop playing song
     func stopSong() {
 
         newTrack.stop()
-        pauseTime = newTrack.currentTime
         status = false
-        newTrack.prepareToPlay()
         
     }//end of stopSong fucntion
+    
+    //Funciton to pause the song
+    func pauseSong() {
+        newTrack.pause()
+        status = false
+        
+    }
+    
     
     
     

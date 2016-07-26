@@ -80,11 +80,13 @@ public class VoiceRecord: NSObject {
                     //setting status of record
                     self.status = true
                     
+                    //before recording, stopping the AVPlayer instance 
+                   
                     //record
                     try! self.audioRecorder = AVAudioRecorder(URL: self.directoryUrl()!, settings: recordSettings)
                     self.audioRecorder.record()
                     self.start = instance.getCurrentTime()
-                    
+             
                 } else{
                     print("not granted")
                 }

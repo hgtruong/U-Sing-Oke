@@ -15,6 +15,11 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     //Variable declarations
     var mediaQuery = MPMediaQuery()
     var mediaCollections: [AnyObject] = []
+//    var collection = MPMediaItemCollection()
+//    var representativeItem = MPMediaItem()
+    var songTitle = String()
+    var selectedTitle = String()
+    
     
     
     @IBOutlet weak var searchButton: UISearchBar!
@@ -53,14 +58,27 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         
         //Populating the table view cell
         let collection = mediaCollections[indexPath.row] as! MPMediaItemCollection
-        let representativeItem = collection.representativeItem
-        let title = representativeItem!.title
-        cell.textLabel!.text = title
+        let representativeItem = collection.representativeItem!
+        songTitle = representativeItem.title!
+        cell.textLabel!.text = songTitle
+//        print("song title is: \(songTitle)")
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print(indexPath)
+        
+        //Manually calling the play button from here and passing the song selected at the row
+        let instance = PlayStopManager.sharedInstance
+        
+        //getting the title of song at selected row
+        let selection = tableView.cellForRowAtIndexPath(indexPath)
+        selectedTitle = (selection?.textLabel?.text)!
+        
+        print("Selected Title is \(selectedTitle)")
+        instance.bgMusicUrl = NSBundle.mainBundle().URLForResource("\(selectedTitle)", withExtension: ".m4a")!
+        instance.setUpNewTrack()
+        instance.status = false
+//        print("\(instance.newTrack.duration)")
     }
 }
 

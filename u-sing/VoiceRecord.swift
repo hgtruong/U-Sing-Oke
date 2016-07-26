@@ -13,7 +13,7 @@ import RealmSwift
 
 private var _shareInstance: VoiceRecord = VoiceRecord()
 
-public class VoiceRecord: NSObject {
+public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
     
 
     
@@ -42,8 +42,9 @@ public class VoiceRecord: NSObject {
     var arrayOfRecordings : [SongStruct] = []
     
     //This original song needs ot be changed to the new song
-    var originalSong = NSBundle.mainBundle().URLForResource("22", withExtension: "m4a")
-
+//    var originalSong = NSBundle.mainBundle().URLForResource("22", withExtension: "m4a")
+    var originalSong = NSURL()
+    
     
 
     
@@ -60,7 +61,8 @@ public class VoiceRecord: NSObject {
         
         //setting up audio recoding session to start recording
         do {
-            try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+//            try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions: AVAudioSessionCategoryOptions.MixWithOthers)
             try audioRecorder = AVAudioRecorder(URL: NSBundle.mainBundle().bundleURL.absoluteURL,
                                                 settings: recordSettings)
             audioRecorder.prepareToRecord()
@@ -74,7 +76,8 @@ public class VoiceRecord: NSObject {
                     print("granted")
                     
                     //set category and activate recorder session
-                    try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+//                    try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions: AVAudioSessionCategoryOptions.MixWithOthers)
+                    
                     try! audioSession.setActive(true)
                     
                     //setting status of record
@@ -103,26 +106,26 @@ public class VoiceRecord: NSObject {
             //variable declaration
             let instance = PlayStopManager.sharedInstance
             self.end = instance.getCurrentTime()
-            
-            //cov
-            
+
             //init
             let audioSession = AVAudioSession.sharedInstance()
             
             do {
-                try audioSession.setActive(false)
+//                instance.pauseSong()
+//                do {
+//                    try audioSession.setActive(false, withOptions: .NotifyOthersOnDeactivation)
+//                }
+//                catch _ {
+//                    print("Couldn't setActive to False")
+//                }
+                
                 self.audioRecorder.stop()
                 self.status = false
-                
-                
                /////////////////After recording is finished //////////////////////
-                
-                
                 //1) create a struct for the record
                 
                 //Finding the duration of the recording, this might turn out to be not needed
                 self.duration = endDiff.timeIntervalSinceDate(startDiff)
-                
                 
                 //converting NSTimeInvertal start and end to CMTime
                 startTime = CMTimeMakeWithSeconds(start, 1000000)
@@ -140,20 +143,13 @@ public class VoiceRecord: NSObject {
                 let timeout = dispatch_time(DISPATCH_TIME_NOW, timeoutLengthInNanoSeconds)
                 for index in arrayOfRecordings{
                     print("\(arrayOfRecordings.count)")
-                    instance.genericMash(originalSong!, recording: index, mixedAudioName: "mix.m4a", callback: { (url) in
-//                        print("url is before: \(url)")
+                    instance.genericMash(originalSong, recording: index, mixedAudioName: "mix.m4a", callback: { (url) in
                         self.originalSong = url
-//                        print("url is after: \(url)")
                         dispatch_semaphore_signal(semaphore)
                     })
-                    
                     dispatch_semaphore_wait(semaphore, timeout)
-                    
                 }//end of mixing process
-                
-                
-                
-            } catch {
+                } catch _ {
             }
         }
         
@@ -173,5 +169,14 @@ public class VoiceRecord: NSObject {
     //Function to return the status of the record
     func returnStatus() -> Bool {
         return status
+    }
+    
+    public func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
+        do{
+            try AVAudioSession.sharedInstance().setActive(false)
+
+        } catch _ {
+            print("Couldn't setActive to False")
+        }
     }
 }

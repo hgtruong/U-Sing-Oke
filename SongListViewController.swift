@@ -79,6 +79,10 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         instance.setUpNewTrack()
         instance.status = false
 //        print("\(instance.newTrack.duration)")
+        
+        //setting the selected song as the original track for VoiceRecord and smashing
+        let anotherInstance = VoiceRecord.sharedInstance
+        anotherInstance.originalSong = NSBundle.mainBundle().URLForResource("\(selectedTitle)", withExtension: ".m4a")!
     }
 }
 

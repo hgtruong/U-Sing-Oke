@@ -51,7 +51,7 @@ class PlayerViewController: UIViewController {
         
         let instance = VoiceRecord.sharedInstance
 //        print("RIGHT HERE!!!")
-        print("\(instance.status)")
+        print("Status of recorder is: \(instance.status)")
         
         switch instance.status {
         case true:

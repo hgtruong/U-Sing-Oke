@@ -61,8 +61,13 @@ public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
         
         //setting up audio recoding session to start recording
         do {
-//            try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
-            try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions: AVAudioSessionCategoryOptions.MixWithOthers)
+
+            //This line below lowers the sound of the audio when the record button is hit
+//            try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions: AVAudioSessionCategoryOptions.MixWithOthers)
+            
+            //The comment below prevents the sound from lowering when the record button is hit
+            try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions: .DefaultToSpeaker)
+            
             try audioRecorder = AVAudioRecorder(URL: NSBundle.mainBundle().bundleURL.absoluteURL,
                                                 settings: recordSettings)
             audioRecorder.prepareToRecord()
@@ -133,22 +138,26 @@ public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
                 
                 //2) append it to the array ofstructs
                 arrayOfRecordings.append(SongStruct(songName: "recording" + "\(index)" + ".m4a", songRef: audioRecorder.url, startTime: startTime , endTime: endTime))
-
-                //3) Starting the mixing procress 
-                let instance = SmashingManager.sharedInstance
                 
-                //Using semaphore to hold off the for loop so we can complete the mixing process
-                let semaphore = dispatch_semaphore_create(0)
-                let timeoutLengthInNanoSeconds: Int64 = 10000000000  //Adjust the timeout to suit your case
-                let timeout = dispatch_time(DISPATCH_TIME_NOW, timeoutLengthInNanoSeconds)
-                for index in arrayOfRecordings{
-                    print("\(arrayOfRecordings.count)")
-                    instance.genericMash(originalSong, recording: index, mixedAudioName: "mix.m4a", callback: { (url) in
-                        self.originalSong = url
-                        dispatch_semaphore_signal(semaphore)
-                    })
-                    dispatch_semaphore_wait(semaphore, timeout)
-                }//end of mixing process
+//                print("\(arrayOfRecordings.last)")
+//
+//                //3) Starting the mixing procress 
+//                let instance = SmashingManager.sharedInstance
+//                //Using semaphore to hold off the for loop so we can complete the mixing process
+//                let semaphore = dispatch_semaphore_create(0)
+//                let timeoutLengthInNanoSeconds: Int64 = 10000000000  //Adjust the timeout to suit your case
+//                let timeout = dispatch_time(DISPATCH_TIME_NOW, timeoutLengthInNanoSeconds)
+//                for index in arrayOfRecordings{
+//                    print("\(arrayOfRecordings.count)")
+//                    instance.genericMash(originalSong, recording: index, mixedAudioName: "mix.m4a", callback: { (url) in
+//                        self.originalSong = url
+//                        dispatch_semaphore_signal(semaphore)
+//                    })
+//                    dispatch_semaphore_wait(semaphore, timeout)
+//                }//end of mixing process
+////
+                
+                
                 } catch _ {
             }
         }
@@ -171,12 +180,12 @@ public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
         return status
     }
     
-    public func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
-        do{
-            try AVAudioSession.sharedInstance().setActive(false)
-
-        } catch _ {
-            print("Couldn't setActive to False")
-        }
-    }
+//    public func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
+//        do{
+//            try AVAudioSession.sharedInstance().setActive(false)
+//
+//        } catch _ {
+//            print("Couldn't setActive to False")
+//        }
+//    }
 }

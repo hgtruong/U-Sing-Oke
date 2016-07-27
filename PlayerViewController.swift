@@ -32,8 +32,6 @@ class PlayerViewController: UIViewController {
             case false:
                 instance.playSong()
             }
-        }else {
-            instance.stopSong()
         }
         
         

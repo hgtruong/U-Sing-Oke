@@ -21,23 +21,12 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mix.findAllMixedSongs()
+        //Assigning media manager
+//        let path = NSTemporaryDirectory() as NSURL
         
         tableView.reloadData()
     }
-//    
-//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 3
-//    }
-//    
-//
-//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        
-//        let cell = tableView.dequeueReusableCellWithIdentifier("mixedListCell", forIndexPath: indexPath) as UITableViewCell
-//        cell.textLabel!.text = "test"
-//        return cell
-//        
-//    }
+
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

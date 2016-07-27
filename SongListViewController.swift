@@ -49,7 +49,7 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("hello " + "\(mediaCollections.count)")
+//        print("hello " + "\(mediaCollections.count)")
         return mediaCollections.count
     }
     
@@ -73,16 +73,17 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         //getting the title of song at selected row
         let selection = tableView.cellForRowAtIndexPath(indexPath)
         selectedTitle = (selection?.textLabel?.text)!
-        
         print("Selected Title is \(selectedTitle)")
-        instance.bgMusicUrl = NSBundle.mainBundle().URLForResource("\(selectedTitle)", withExtension: ".m4a")!
+    
+        let filePath = NSBundle.mainBundle().pathForResource("\(selectedTitle)", ofType: ".m4a")
+        instance.bgMusicUrl = NSURL.fileURLWithPath(filePath!)
         instance.setUpNewTrack()
         instance.status = false
 //        print("\(instance.newTrack.duration)")
         
         //setting the selected song as the original track for VoiceRecord and smashing
         let anotherInstance = VoiceRecord.sharedInstance
-        anotherInstance.originalSong = NSBundle.mainBundle().URLForResource("\(selectedTitle)", withExtension: ".m4a")!
+        anotherInstance.originalSong = NSURL.fileURLWithPath(filePath!)
     }
 }
 

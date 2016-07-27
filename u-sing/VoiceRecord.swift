@@ -39,6 +39,8 @@ public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
     var endTime: CMTime = CMTimeMake(0, 0)
     var cmDuration = CMTimeMake(0, 0)
     var audioRecorder:AVAudioRecorder!
+//    var audioRecorder1:AVAudioRecorder!
+
     var arrayOfRecordings : [SongStruct] = []
     
     //This original song needs ot be changed to the new song
@@ -70,6 +72,10 @@ public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
             
             try audioRecorder = AVAudioRecorder(URL: NSBundle.mainBundle().bundleURL.absoluteURL,
                                                 settings: recordSettings)
+            
+            //////////////
+//            try audioRecorder1 = AVAudioRecorder(URL: NSBundle.mainBundle().bundleURL.absoluteURL,
+//                                                settings: recordSettings)
             audioRecorder.prepareToRecord()
         } catch {
         }
@@ -90,7 +96,7 @@ public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
                     
                     //before recording, stopping the AVPlayer instance 
                    
-                    //record
+                    ///////////////
                     try! self.audioRecorder = AVAudioRecorder(URL: self.directoryUrl()!, settings: recordSettings)
                     self.audioRecorder.record()
                     self.start = instance.getCurrentTime()
@@ -106,6 +112,7 @@ public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
         
     //Function to stop the recording
         func stopRecord() {
+            
             index = index + 1
             
             //variable declaration
@@ -113,65 +120,81 @@ public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
             self.end = instance.getCurrentTime()
 
             //init
-            let audioSession = AVAudioSession.sharedInstance()
+//            let audioSession = AVAudioSession.sharedInstance()
+    
+            self.audioRecorder.stop()
+            self.status = false
+            /////////////////After recording is finished //////////////////////
+            //1) create a struct for the record
             
+            //Finding the duration of the recording, this might turn out to be not needed
+            self.duration = endDiff.timeIntervalSinceDate(startDiff)
+            
+            //converting NSTimeInvertal start and end to CMTime
+            startTime = CMTimeMakeWithSeconds(start, 1000000)
+            endTime = CMTimeMakeWithSeconds(end, 1000000)
+            
+            //2) append it to the array ofstructs
+            arrayOfRecordings.append(SongStruct(songName: "recording" + "\(index)" + ".m4a", songRef: audioRecorder.url, startTime: startTime , endTime: endTime))
+
+        }
+    
+    //Function to delete all files in tmp folder
+    func clearTempFolder() {
+        let fileManager = NSFileManager.defaultManager()
+        let tempFolderPath = NSTemporaryDirectory()
+        do {
+            let filePaths = try fileManager.contentsOfDirectoryAtPath(tempFolderPath)
+            for filePath in filePaths {
+                try fileManager.removeItemAtPath(NSTemporaryDirectory() + filePath)
+            }
+        } catch {
+            print("Could not clear temp folder: \(error)")
+        }
+    }
+    
+    //Function to delete all files in documents that is .m4a
+    func clearM4aFile() {
+            
+            let fileManager = NSFileManager.defaultManager()
+            let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL
+            let documentsPath = documentsUrl.path
+        
             do {
-//                instance.pauseSong()
-//                do {
-//                    try audioSession.setActive(false, withOptions: .NotifyOthersOnDeactivation)
-//                }
-//                catch _ {
-//                    print("Couldn't setActive to False")
-//                }
+                if let documentPath = documentsPath
+                {
+                    let fileNames = try fileManager.contentsOfDirectoryAtPath("\(documentPath)")
+                    print("all files in cache: \(fileNames)")
+                    for fileName in fileNames {
+                        
+                        if (fileName.hasSuffix(".m4a") && fileName.hasPrefix("mix"))
+                        {
+                            let filePathName = "\(documentPath)/\(fileName)"
+                            try fileManager.removeItemAtPath(filePathName)
+                        }
+                    }
+                    
+                    let files = try fileManager.contentsOfDirectoryAtPath("\(documentPath)")
+                    print("all files in cache after deleting images: \(files)")
+                }
                 
-                self.audioRecorder.stop()
-                self.status = false
-               /////////////////After recording is finished //////////////////////
-                //1) create a struct for the record
-                
-                //Finding the duration of the recording, this might turn out to be not needed
-                self.duration = endDiff.timeIntervalSinceDate(startDiff)
-                
-                //converting NSTimeInvertal start and end to CMTime
-                startTime = CMTimeMakeWithSeconds(start, 1000000)
-                endTime = CMTimeMakeWithSeconds(end, 1000000)
-                
-                //2) append it to the array ofstructs
-                arrayOfRecordings.append(SongStruct(songName: "recording" + "\(index)" + ".m4a", songRef: audioRecorder.url, startTime: startTime , endTime: endTime))
-                
-//                print("\(arrayOfRecordings.last)")
-//
-//                //3) Starting the mixing procress 
-//                let instance = SmashingManager.sharedInstance
-//                //Using semaphore to hold off the for loop so we can complete the mixing process
-//                let semaphore = dispatch_semaphore_create(0)
-//                let timeoutLengthInNanoSeconds: Int64 = 10000000000  //Adjust the timeout to suit your case
-//                let timeout = dispatch_time(DISPATCH_TIME_NOW, timeoutLengthInNanoSeconds)
-//                for index in arrayOfRecordings{
-//                    print("\(arrayOfRecordings.count)")
-//                    instance.genericMash(originalSong, recording: index, mixedAudioName: "mix.m4a", callback: { (url) in
-//                        self.originalSong = url
-//                        dispatch_semaphore_signal(semaphore)
-//                    })
-//                    dispatch_semaphore_wait(semaphore, timeout)
-//                }//end of mixing process
-////
-                
-                
-                } catch _ {
+            } catch {
+                print("Could not clear temp folder: \(error)")
             }
         }
-        
+
+
+    
     //Function to create directory to save the recording
     func directoryUrl() -> NSURL? {
         
-            soundIndex = soundIndex + 1
-            let fileManager = NSFileManager.defaultManager()
-            let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-            let documentDirectory = urls[0] as NSURL
-            let soundURL = documentDirectory.URLByAppendingPathComponent("sound" + "\(soundIndex)" + ".m4a")
-            //print("\(soundURL)")
-            return soundURL
+        soundIndex = soundIndex + 1
+        let fileManager = NSTemporaryDirectory().stringByAppendingString("recording" + "\(soundIndex)" + ".m4a")
+//        print("fileManager: \(fileManager)")
+        let documentDirectory = NSURL(fileURLWithPath: fileManager)
+//       print("documentdirectory: \(documentDirectory)")
+        return documentDirectory
+        
     }
     
 
@@ -180,12 +203,6 @@ public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
         return status
     }
     
-//    public func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
-//        do{
-//            try AVAudioSession.sharedInstance().setActive(false)
-//
-//        } catch _ {
-//            print("Couldn't setActive to False")
-//        }
-//    }
+    
+    
 }

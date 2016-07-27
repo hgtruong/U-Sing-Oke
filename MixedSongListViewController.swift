@@ -15,6 +15,19 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var tableView: UITableView!
     
     var mix = getAllMixedSongs()
+    
+    
+//    func directoryUrl() -> String? {
+//        
+//        let fileManager = NSFileManager.defaultManager()
+//        let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+//        let documentDirectory = urls[0].absoluteString
+//        let stringDocumentDirectory = documentDirectory.stringByAppendingString(mixName)
+//        let finalDocumentDirectory = stringDocumentDirectory.stringByReplacingOccurrencesOfString("file://", withString: "")
+//        //        print("stringdocumen diretory  url is: \(stringDocumentDirectory)")
+//        //        print("finalDocument url is: \(finalDocumentDirectory)")
+//        return finalDocumentDirectory
+//    }
 
     
     
@@ -22,7 +35,8 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         
         //Assigning media manager
-//        let path = NSTemporaryDirectory() as NSURL
+        let fileMngr = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        fileMngr
         
         tableView.reloadData()
     }

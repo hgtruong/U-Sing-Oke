@@ -25,29 +25,12 @@ public class SmashingManager : NSObject {
         mixName = mixedAudioName
         let composition =  AVMutableComposition()
         
-        print("OringinalSong path is: \(originalSong)")
-//
-//        var searchPaths: [AnyObject] = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-//        let documentPath_: String = searchPaths[0] as! String
-////        let finalDocumenPath = documentPath_.stringByReplacingOccurrencesOfString("file:///", withString: "")
-//        let pathToSave: String = NSURL(fileURLWithPath: originalSong.absoluteString).URLByAppendingPathComponent("recording.m4a").absoluteString
-//        let finalPathToSave = pathToSave.stringByReplacingOccurrencesOfString("file:/", withString: "")
-//       
-//
-//        print("pathToSave is: \(pathToSave)")
-//        print("finaldocumentpath is: \(finalPathToSave)")
-//
-//
-//        //insret original song into composition
-//        let audioUrl = NSURL.fileURLWithPath(finalPathToSave)
+//        print("OringinalSong path is: \(originalSong)")
+
         
         //Comment below is the working code
         let originalAudioAsset: AVURLAsset = AVURLAsset(URL: originalSong, options: nil)
 
-        //statement below is for testing purpose
-//        let originalAudioAsset: AVURLAsset = AVURLAsset(URL: audioUrl, options: nil)
-        
-        print("original audio assset is: \(originalAudioAsset)")
 
         let originalTrack:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
         do {
@@ -80,11 +63,7 @@ public class SmashingManager : NSObject {
 //            print("ASSET MUSIC TRACK \(assetMusicTrack)")
             let musicParam: AVMutableAudioMixInputParameters = AVMutableAudioMixInputParameters(track: assetMusicTrack) //you only need one of these
             musicParam.trackID = originalTrack.trackID
-//            print("start time is \(recording.startTime)")
-//            print("end time is \(recording.endTime)")
-//            print("range time is \(recording.endTime - recording.startTime)")
-//            print("duration of the audio is: \(audioAsset.duration)")
-            musicParam.setVolumeRampFromStartVolume(0.3, toEndVolume: 1, timeRange: CMTimeRangeMake(recording.startTime, audioAsset.duration))
+            musicParam.setVolumeRampFromStartVolume(0.2, toEndVolume: 1, timeRange: CMTimeRangeMake(recording.startTime, audioAsset.duration))
             audioMix.inputParameters.append(musicParam)
             
             
@@ -99,9 +78,8 @@ public class SmashingManager : NSObject {
         //export the compsotion
         let assetExport: AVAssetExportSession = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A)!
         
-        let exportPath: String = NSTemporaryDirectory().stringByAppendingString(mixedAudioName)
-        
-//        let exportPath: String = mixUrl
+//        let exportPath: String = NSTemporaryDirectory().stringByAppendingString(mixedAudioName)
+        let exportPath: String = directoryUrl()!
         
         let exportURL: NSURL = NSURL.fileURLWithPath(exportPath)
         if NSFileManager.defaultManager().fileExistsAtPath(exportPath) {
@@ -130,10 +108,11 @@ public class SmashingManager : NSObject {
         
         let fileManager = NSFileManager.defaultManager()
         let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        let documentDirectory = urls[0] as NSURL
-        let soundURL = documentDirectory.URLByAppendingPathComponent(mixName)
-        mixUrl = soundURL.absoluteString
-        print("mix url is: \(mixUrl)")
-        return mixUrl
+        let documentDirectory = urls[0].absoluteString
+        let stringDocumentDirectory = documentDirectory.stringByAppendingString(mixName)
+        let finalDocumentDirectory = stringDocumentDirectory.stringByReplacingOccurrencesOfString("file://", withString: "")
+//        print("stringdocumen diretory  url is: \(stringDocumentDirectory)")
+//        print("finalDocument url is: \(finalDocumentDirectory)")
+        return finalDocumentDirectory
     }
 }

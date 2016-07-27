@@ -21,7 +21,8 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
     var pauseTime = NSTimeInterval()
     var bgMusicUrl = NSURL()
     var musicUrl = String()
-    var index = 0
+    var finalIndex = 0
+    var numOfFinalMix = 0
     
     //Function to set up the track to be played selected by the user
     func setUpNewTrack(){
@@ -29,12 +30,9 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
             
             newTrack = try AVAudioPlayer(contentsOfURL: bgMusicUrl)
             newTrack.delegate = self
-//            musicUrl = bgMusicUrl.absoluteString
-//            print("music url is: \(musicUrl)")
-//            newTrack = try AVAudioPlayer(contentsOfURL: NSURL.fileURLWithPath(bgMusicUrl))
             
         }catch _ {
-            print("newTrac couldn't be set")
+            print("newTrack couldn't be set")
         }
     }
 
@@ -63,8 +61,8 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
     
      public func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
         
-        index = index + 1
         
+        numOfFinalMix = numOfFinalMix + 1
         print("inside audioplayer didfinish playing")
         //3) Starting the mixing procress
         let instance = SmashingManager.sharedInstance
@@ -72,19 +70,33 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
         
         //Using semaphore to hold off the for loop so we can complete the mixing process
         let semaphore = dispatch_semaphore_create(0)
-        let timeoutLengthInNanoSeconds: Int64 = 100000000000000  //Adjust the timeout to suit your case
+        let timeoutLengthInNanoSeconds: Int64 = 100000000000000000  //Adjust the timeout to suit your case
         let timeout = dispatch_time(DISPATCH_TIME_NOW, timeoutLengthInNanoSeconds)
         for index in voiceInstance.arrayOfRecordings{
+            finalIndex = finalIndex + 1
             print("\(voiceInstance.arrayOfRecordings.count)")
+            print("\(finalIndex)")
+            if (finalIndex == voiceInstance.arrayOfRecordings.count) {
+                instance.genericMash(voiceInstance.originalSong, recording: index, mixedAudioName: "finalmix" + "\(numOfFinalMix)" + ".m4a", callback: { (url) in
+                    voiceInstance.originalSong = url
+                    dispatch_semaphore_signal(semaphore)
+                })
+            }else{
             instance.genericMash(voiceInstance.originalSong, recording: index, mixedAudioName: "mix.m4a", callback: { (url) in
                 voiceInstance.originalSong = url
                 dispatch_semaphore_signal(semaphore)
             })
+            }
             dispatch_semaphore_wait(semaphore, timeout)
         }//end of mixing process
-    
+        
+        
+        print("before delete: \(voiceInstance.arrayOfRecordings)")
         //Removing all the previous recordings after the song had finished
         voiceInstance.arrayOfRecordings.removeAll()
+//        voiceInstance.clearTempFolder()
+        voiceInstance.clearM4aFile()
+        print("after delete: \(voiceInstance.arrayOfRecordings)")
     }
     
     //Funciton to pause the song
@@ -99,6 +111,7 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
     func getCurrentTime() -> NSTimeInterval {
         
         currentTime = newTrack.currentTime
+        
         return currentTime
         
     }//end of getCurrenTime function

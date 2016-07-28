@@ -20,7 +20,7 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
     var currentTime = NSTimeInterval()
     var pauseTime = NSTimeInterval()
     var bgMusicUrl = NSURL()
-    var musicUrl = String()
+    var selectedTitle = String()
     var finalIndex = 0
     var numOfFinalMix = 0
     
@@ -67,7 +67,8 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
         //3) Starting the mixing procress
         let instance = SmashingManager.sharedInstance
         let voiceInstance = VoiceRecord.sharedInstance
-        
+//        print("Selected Title is: \(selectedTitle)")
+//        
         //Using semaphore to hold off the for loop so we can complete the mixing process
         let semaphore = dispatch_semaphore_create(0)
         let timeoutLengthInNanoSeconds: Int64 = 100000000000000000  //Adjust the timeout to suit your case
@@ -77,7 +78,7 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
             print("\(voiceInstance.arrayOfRecordings.count)")
             print("\(finalIndex)")
             if (finalIndex == voiceInstance.arrayOfRecordings.count) {
-                instance.genericMash(voiceInstance.originalSong, recording: index, mixedAudioName: "finalmix" + "\(numOfFinalMix)" + ".m4a", callback: { (url) in
+                instance.genericMash(voiceInstance.originalSong, recording: index, mixedAudioName: "\(selectedTitle)" + "mix.m4a", callback: { (url) in
                     voiceInstance.originalSong = url
                     dispatch_semaphore_signal(semaphore)
                 })
@@ -91,12 +92,12 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
         }//end of mixing process
         
         
-        print("before delete: \(voiceInstance.arrayOfRecordings)")
+
         //Removing all the previous recordings after the song had finished
         voiceInstance.arrayOfRecordings.removeAll()
-//        voiceInstance.clearTempFolder()
+        voiceInstance.clearTempFolder()
         voiceInstance.clearM4aFile()
-        print("after delete: \(voiceInstance.arrayOfRecordings)")
+
     }
     
     //Funciton to pause the song

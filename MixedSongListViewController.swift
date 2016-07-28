@@ -14,29 +14,49 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBOutlet weak var tableView: UITableView!
     
-    var mix = getAllMixedSongs()
+    //Array to store all mashed songs
+    var mashedSongArray:[AnyObject] = []
     
     
-//    func directoryUrl() -> String? {
-//        
-//        let fileManager = NSFileManager.defaultManager()
-//        let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-//        let documentDirectory = urls[0].absoluteString
-//        let stringDocumentDirectory = documentDirectory.stringByAppendingString(mixName)
-//        let finalDocumentDirectory = stringDocumentDirectory.stringByReplacingOccurrencesOfString("file://", withString: "")
-//        //        print("stringdocumen diretory  url is: \(stringDocumentDirectory)")
-//        //        print("finalDocument url is: \(finalDocumentDirectory)")
-//        return finalDocumentDirectory
+    //    let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+    //    let url = NSURL(fileURLWithPath: path)
+    //    let filePath = url.URLByAppendingPathComponent("nameOfFileHere").path!
+    //    let fileManager = NSFileManager.defaultManager()
+    //    if fileManager.fileExistsAtPath(filePath) {
+    //    print("FILE AVAILABLE")
+    //    } else {
+    //    print("FILE NOT AVAILABLE")
+    //    }
+    //    
+    
+    
+    
+    
+//    
+//    var fileManager: NSFileManager = NSFileManager.defaultManager()
+//    var bundleURL: NSURL = NSBundle.mainBundle().bundleURL()
+//    var contents: [AnyObject] = try! fileManager.contentsOfDirectoryAtURL(bundleURL, includingPropertiesForKeys: [], options: NSDirectoryEnumerationSkipsHiddenFiles)
+//    var predicate: NSPredicate = NSPredicate(format: "pathExtension == 'png'")
+//    for fileURL: NSURL in contents.filteredArrayUsingPredicate(predicate) {
+//    // Enumerate each .png file in directory
+//    // Enumerate each .png file in directory
 //    }
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Assigning media manager
-        let fileMngr = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        fileMngr
+
+        //Finding all the .m4a mixed files
+        let fileManager: NSFileManager = NSFileManager.defaultManager()
+        let path = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        let urls = path[0].absoluteString
+        let enumerator = fileManager.enumeratorAtPath(urls)
+        while let element = enumerator?.nextObject() as? String {
+            if element.hasSuffix(".m4a") {
+                print("insdie elemetn")
+                mashedSongArray.append(element)
+            }
+        }
+         print("mashed array is: \(mashedSongArray)")
         
         tableView.reloadData()
     }
@@ -44,13 +64,14 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return mashedSongArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("mixedListCell", forIndexPath: indexPath)
-        
-        cell.textLabel!.text = "TESTING"
+        let songName = mashedSongArray[indexPath.row].absoluteString
+        print("\(songName)")
+//        cell.textLabel!.text =
         
         return cell
     }

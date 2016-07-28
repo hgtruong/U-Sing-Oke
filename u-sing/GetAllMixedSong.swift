@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class getAllMixedSongs {
+public class GetAllMixedSong {
     
     var accessUrl = NSBundle.mainBundle().URLsForResourcesWithExtension("m4a", subdirectory: "tmp")
     

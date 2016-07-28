@@ -23,7 +23,6 @@ class PlayerViewController: UIViewController {
         
         let instance = PlayStopManager.sharedInstance
         
-        print(instance.newTrack.currentTime)
         
         if instance.newTrack.currentTime < instance.newTrack.duration || instance.newTrack.currentTime == 0.0 {
             switch instance.status {

@@ -11,7 +11,7 @@
 		6535E8B71D37F94E00BFCF04 /* 21.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6535E8B61D37F94E00BFCF04 /* 21.m4a */; };
 		65480FAF1D38522400B73320 /* 3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 65480FAE1D38522400B73320 /* 3.m4a */; };
 		654891D51D47FBE0002E3709 /* MixedSongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654891D41D47FBE0002E3709 /* MixedSongListViewController.swift */; };
-		654891D71D480939002E3709 /* getAllMixedSongs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654891D61D480939002E3709 /* getAllMixedSongs.swift */; };
+		654891D71D480939002E3709 /* GetAllMixedSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654891D61D480939002E3709 /* GetAllMixedSong.swift */; };
 		655BA4331D49472600BA6896 /* jeopardy.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 655BA4321D49472600BA6896 /* jeopardy.m4a */; };
 		655BA4371D49475E00BA6896 /* 1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 655BA4341D49475E00BA6896 /* 1.m4a */; };
 		655BA4381D49475E00BA6896 /* 21.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 655BA4351D49475E00BA6896 /* 21.m4a */; };
@@ -55,7 +55,7 @@
 		6535E8B61D37F94E00BFCF04 /* 21.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 21.m4a; sourceTree = "<group>"; };
 		65480FAE1D38522400B73320 /* 3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3.m4a; sourceTree = "<group>"; };
 		654891D41D47FBE0002E3709 /* MixedSongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MixedSongListViewController.swift; sourceTree = "<group>"; };
-		654891D61D480939002E3709 /* getAllMixedSongs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getAllMixedSongs.swift; sourceTree = "<group>"; };
+		654891D61D480939002E3709 /* GetAllMixedSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAllMixedSong.swift; sourceTree = "<group>"; };
 		655BA4321D49472600BA6896 /* jeopardy.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = jeopardy.m4a; path = ../jeopardy.m4a; sourceTree = "<group>"; };
 		655BA4341D49475E00BA6896 /* 1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = 1.m4a; path = ../1.m4a; sourceTree = "<group>"; };
 		655BA4351D49475E00BA6896 /* 21.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = 21.m4a; path = ../21.m4a; sourceTree = "<group>"; };
@@ -168,7 +168,7 @@
 				65C6A7C11D383B63009D3461 /* SmashingManager.swift */,
 				6503FAFC1D41300F006817A0 /* VoiceRecord.swift */,
 				65A46F3F1D42B2560068FD0E /* PlayStopManager.swift */,
-				654891D61D480939002E3709 /* getAllMixedSongs.swift */,
+				654891D61D480939002E3709 /* GetAllMixedSong.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -277,7 +277,7 @@
 				65A46F401D42B2560068FD0E /* PlayStopManager.swift in Sources */,
 				658358F11D3E9F7F000E9F19 /* PageViewController.swift in Sources */,
 				65C6A7C21D383B63009D3461 /* SmashingManager.swift in Sources */,
-				654891D71D480939002E3709 /* getAllMixedSongs.swift in Sources */,
+				654891D71D480939002E3709 /* GetAllMixedSong.swift in Sources */,
 				654891D51D47FBE0002E3709 /* MixedSongListViewController.swift in Sources */,
 				658358F51D3E9FD7000E9F19 /* PlayerViewController.swift in Sources */,
 				659D43C91D35598300B2B289 /* AppDelegate.swift in Sources */,

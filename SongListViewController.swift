@@ -78,12 +78,16 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         let filePath = NSBundle.mainBundle().pathForResource("\(selectedTitle)", ofType: ".m4a")
         instance.bgMusicUrl = NSURL.fileURLWithPath(filePath!)
         instance.setUpNewTrack()
+        //setting title to be used as final mix name
+        instance.selectedTitle = self.selectedTitle
         instance.status = false
 //        print("\(instance.newTrack.duration)")
         
         //setting the selected song as the original track for VoiceRecord and smashing
         let anotherInstance = VoiceRecord.sharedInstance
         anotherInstance.originalSong = NSURL.fileURLWithPath(filePath!)
+        
+    
     }
 }
 

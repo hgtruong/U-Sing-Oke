@@ -19,6 +19,7 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
 //    var representativeItem = MPMediaItem()
     var songTitle = String()
     var selectedTitle = String()
+    var m4aFiles: [AnyObject] = []
     
     
     
@@ -74,6 +75,22 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         let selection = tableView.cellForRowAtIndexPath(indexPath)
         selectedTitle = (selection?.textLabel?.text)!
         print("Selected Title is \(selectedTitle)")
+        
+        
+        //Setting location to play the song from user's phone
+        let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+        
+        do {
+            // Get the directory contents urls (including subfolders urls)
+            let directoryContents = try NSFileManager.defaultManager().contentsOfDirectoryAtURL( documentsUrl, includingPropertiesForKeys: nil, options: [])
+            //            print(directoryContents)
+            
+            // if you want to filter the directory contents you can do like this:
+            m4aFiles = directoryContents.filter{ $0.pathExtension == "m4a" }
+            
+        }catch _ {
+            print("error in songlistviewcontroler playing selected song")
+        }
     
         let filePath = NSBundle.mainBundle().pathForResource("\(selectedTitle)", ofType: ".m4a")
         instance.bgMusicUrl = NSURL.fileURLWithPath(filePath!)

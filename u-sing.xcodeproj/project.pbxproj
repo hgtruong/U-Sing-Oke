@@ -54,7 +54,7 @@
 		6503FAFC1D41300F006817A0 /* VoiceRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceRecord.swift; sourceTree = "<group>"; };
 		6535E8B61D37F94E00BFCF04 /* 21.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 21.m4a; sourceTree = "<group>"; };
 		65480FAE1D38522400B73320 /* 3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3.m4a; sourceTree = "<group>"; };
-		654891D41D47FBE0002E3709 /* MixedSongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MixedSongListViewController.swift; sourceTree = "<group>"; };
+		654891D41D47FBE0002E3709 /* MixedSongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MixedSongListViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		654891D61D480939002E3709 /* GetAllMixedSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAllMixedSong.swift; sourceTree = "<group>"; };
 		655BA4321D49472600BA6896 /* jeopardy.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = jeopardy.m4a; path = ../jeopardy.m4a; sourceTree = "<group>"; };
 		655BA4341D49475E00BA6896 /* 1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = 1.m4a; path = ../1.m4a; sourceTree = "<group>"; };

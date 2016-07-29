@@ -32,6 +32,8 @@
 		65A46F401D42B2560068FD0E /* PlayStopManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A46F3F1D42B2560068FD0E /* PlayStopManager.swift */; };
 		65C6A7BE1D3839C8009D3461 /* SongStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C6A7BD1D3839C8009D3461 /* SongStruct.swift */; };
 		65C6A7C21D383B63009D3461 /* SmashingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C6A7C11D383B63009D3461 /* SmashingManager.swift */; };
+		65DD9B511D4BE93300761E46 /* NSObject+iPodManagerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DD9B501D4BE93300761E46 /* NSObject+iPodManagerHelper.m */; };
+		65DD9B531D4BEF3700761E46 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD9B521D4BEF3700761E46 /* TestViewController.swift */; };
 		65F58A491D4A98D900D8C386 /* jeopardy.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 655BA4321D49472600BA6896 /* jeopardy.m4a */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +79,10 @@
 		65A46F3F1D42B2560068FD0E /* PlayStopManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayStopManager.swift; sourceTree = "<group>"; };
 		65C6A7BD1D3839C8009D3461 /* SongStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongStruct.swift; sourceTree = "<group>"; };
 		65C6A7C11D383B63009D3461 /* SmashingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmashingManager.swift; sourceTree = "<group>"; };
+		65DD9B4C1D4BE90F00761E46 /* u-sing-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "u-sing-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		65DD9B4F1D4BE93300761E46 /* NSObject+iPodManagerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+iPodManagerHelper.h"; sourceTree = "<group>"; };
+		65DD9B501D4BE93300761E46 /* NSObject+iPodManagerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+iPodManagerHelper.m"; sourceTree = "<group>"; };
+		65DD9B521D4BEF3700761E46 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +130,9 @@
 		659D43C71D35598300B2B289 /* u-sing */ = {
 			isa = PBXGroup;
 			children = (
+				65DD9B4F1D4BE93300761E46 /* NSObject+iPodManagerHelper.h */,
+				65DD9B501D4BE93300761E46 /* NSObject+iPodManagerHelper.m */,
+				65DD9B4C1D4BE90F00761E46 /* u-sing-Bridging-Header.h */,
 				659D43C81D35598300B2B289 /* AppDelegate.swift */,
 				658358EF1D3E9F45000E9F19 /* Views */,
 				65C6A7C31D383B69009D3461 /* Helper */,
@@ -157,6 +166,7 @@
 		65C6A7C01D383B31009D3461 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				65DD9B521D4BEF3700761E46 /* TestViewController.swift */,
 				658358F01D3E9F7F000E9F19 /* PageViewController.swift */,
 			);
 			name = ViewController;
@@ -279,8 +289,10 @@
 				65C6A7C21D383B63009D3461 /* SmashingManager.swift in Sources */,
 				654891D71D480939002E3709 /* GetAllMixedSong.swift in Sources */,
 				654891D51D47FBE0002E3709 /* MixedSongListViewController.swift in Sources */,
+				65DD9B511D4BE93300761E46 /* NSObject+iPodManagerHelper.m in Sources */,
 				658358F51D3E9FD7000E9F19 /* PlayerViewController.swift in Sources */,
 				659D43C91D35598300B2B289 /* AppDelegate.swift in Sources */,
+				65DD9B531D4BEF3700761E46 /* TestViewController.swift in Sources */,
 				658358F31D3E9FC3000E9F19 /* SongListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,14 +408,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = "/Users/HT/Desktop/Make\\ School\\ SA\\ 2016/realm-swift-1.0.2/ios/swift-2.2 ";
 				INFOPLIST_FILE = "u-sing/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MODULE_NAME = "u-sing";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ht.u-sing";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "u-sing-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -411,14 +428,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = "/Users/HT/Desktop/Make\\ School\\ SA\\ 2016/realm-swift-1.0.2/ios/swift-2.2 ";
 				INFOPLIST_FILE = "u-sing/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MODULE_NAME = "u-sing";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ht.u-sing";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "u-sing-Bridging-Header.h";
 			};
 			name = Release;
 		};

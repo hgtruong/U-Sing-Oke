@@ -167,7 +167,7 @@ public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
                     print("all files in cache: \(fileNames)")
                     for fileName in fileNames {
                         
-                        if (fileName.hasSuffix(".m4a") && fileName.hasPrefix("mix"))
+                        if (fileName.hasSuffix(".m4a"))// && fileName.hasPrefix("mix"))
                         {
                             let filePathName = "\(documentPath)/\(fileName)"
                             try fileManager.removeItemAtPath(filePathName)

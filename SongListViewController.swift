@@ -8,6 +8,8 @@
 
 import UIKit
 import MediaPlayer
+import MobileCoreServices
+import CoreFoundation
 
 class SongListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -22,15 +24,12 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     var m4aFiles: [AnyObject] = []
     var songPicked:[String] = []
     
-    
-    
-    ////////////////////////////////
+//    var collection = MPMediaItemCollection()
+//    var representativeItem = MPMediaItem()
+//    var collectionDidSelect = MPMediaItemCollection()
+//    var representativeItemDidSelect = MPMediaItem()
     
 
-    
-    
-    
-    //////////////////////////////
     
     
     @IBOutlet weak var searchButton: UISearchBar!
@@ -51,6 +50,18 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         // run query
         mediaCollections = mediaQuery.collections!
         
+        
+        //setting the media picker delegate
+        let mediaPickerController = MPMediaPickerController(mediaTypes: .Music)
+        mediaPickerController.delegate = self
+        mediaPickerController.showsCloudItems = false
+        mediaPickerController.allowsPickingMultipleItems = false
+        mediaPickerController.modalPresentationStyle = .Popover
+        mediaPickerController.preferredContentSize = CGSizeMake(500,600)
+        presentViewController(mediaPickerController, animated: true, completion: {})
+        
+       
+        
         tableView.reloadData()
     }
     
@@ -70,11 +81,15 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         //Populating the table view cell
         let collection = mediaCollections[indexPath.row] as! MPMediaItemCollection
         let representativeItem = collection.representativeItem!
+//        print("repre item is: \(representativeItem)")
         songTitle = representativeItem.title!
         cell.textLabel!.text = songTitle
 //        print("song title is: \(songTitle)")
         return cell
     }
+    
+    
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -86,52 +101,16 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         selectedTitle = (selection?.textLabel?.text)!
         print("Selected Title is \(selectedTitle)")
         
+        let collectionDidSelect = mediaCollections[indexPath.row] as! MPMediaItemCollection
+        let representativeItemDidSelect = collectionDidSelect.representativeItem!
+        
         let filePath = NSBundle.mainBundle().pathForResource("\(selectedTitle)", ofType: ".m4a")
         print("FilePath is \(filePath)")
         
         /////////////////////////////////Trying to do it from the phone///////////////////////
         
-//        let player = MPMusicPlayerController.systemMusicPlayer()
-        let collection = mediaCollections[indexPath.row] as! MPMediaItemCollection
-        let representativeItem = collection.representativeItem!
-//        let url = representativeItem.valueForProperty(MPMediaItemPropertyAssetURL)
-//        print("url is: \(url)")
-        
-//
-//        player.setQueueWithItemCollection(collection)
-//        player.nowPlayingItem = representativeItem
-//        
-//        
-//        //getting the fucking url now...hopefully
-//        let nowPlayingItem = player.nowPlayingItem
-//        
-//        let mediaUrl = nowPlayingItem?.valueForProperty(MPMediaItemPropertyAssetURL)
-//        
-//        print("media Url is: \(mediaUrl!)")
-//        
-//        let myAVPlayerItem = AVPlayerItem.init(URL: mediaUrl! as! NSURL)
-//        
-//        let myAVPlayer: AVPlayer = AVPlayer(playerItem: myAVPlayerItem)
-//
-//        myAVPlayer.play() 
-        
-        
-        print("representativeItem: \(representativeItem)")
-        let player = MPMusicPlayerController.systemMusicPlayer()
-        player.nowPlayingItem = representativeItem
-        let currentSong = player.nowPlayingItem
-        let currentSongUrl = currentSong?.valueForProperty(MPMediaItemPropertyAssetURL)
-        print("current song url: \(currentSongUrl)")
-        
-        instance.bgMusicUrl = NSURL.fileURLWithPath((currentSongUrl?.absoluteString)!)
-        print("bgmusicurl is: \(instance.bgMusicUrl)")
-        instance.setUpNewTrack()
-        
-        
-        
-        
-        
-        
+
+        //Importing music from the phone to app's document directory
         
         
         
@@ -153,17 +132,47 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
 }
 
 //
-// // MARK: - Navigation
-//
-//extension SongListViewController: UITableViewDataSource{
-//
-//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 3
-//    }
-//
-//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCellWithIdentifier("customcell", forIndexPath: indexPath) as! UITableViewCell
-//        cell.textLabel?.text = "test"
-//        return cell
-//    }
-//}
+// // MARK: - MPMediaPickerController delegate methods
+
+extension SongListViewController : MPMediaPickerControllerDelegate {
+    // must implement these, as there is no automatic dismissal
+    
+    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+        print("did pick")
+        let player = MPMusicPlayerController.applicationMusicPlayer()
+        player.setQueueWithItemCollection(mediaItemCollection)
+        
+        
+        
+        let object = iPodManagerHelper()
+        for i in 0..<mediaItemCollection.items.count {
+            //            self.exportAssetAsSourceFormat(mediaItemCollection.items[i])
+            object.exportAssetAsSourceFormat(mediaItemCollection.items[i])
+            
+            //NSLog(@"for loop : %d", i);
+            //NSLog(@"for loop : %d", i);
+        }
+//        player.play()
+        
+        //Use the two lines below whenever we need to clear m4a files in document directory
+//        let instance = VoiceRecord.sharedInstance
+//        instance.clearM4aFile()
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
+        print("cancel")
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+}
+
+extension SongListViewController : UIBarPositioningDelegate {
+    func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
+        return .TopAttached
+    }
+}
+
+
+

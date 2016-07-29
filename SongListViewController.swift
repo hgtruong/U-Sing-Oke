@@ -20,7 +20,17 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     var songTitle = String()
     var selectedTitle = String()
     var m4aFiles: [AnyObject] = []
+    var songPicked:[String] = []
     
+    
+    
+    ////////////////////////////////
+    
+
+    
+    
+    
+    //////////////////////////////
     
     
     @IBOutlet weak var searchButton: UISearchBar!
@@ -76,33 +86,67 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         selectedTitle = (selection?.textLabel?.text)!
         print("Selected Title is \(selectedTitle)")
         
-        
-        //Setting location to play the song from user's phone
-        let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-        
-        do {
-            // Get the directory contents urls (including subfolders urls)
-            let directoryContents = try NSFileManager.defaultManager().contentsOfDirectoryAtURL( documentsUrl, includingPropertiesForKeys: nil, options: [])
-            //            print(directoryContents)
-            
-            // if you want to filter the directory contents you can do like this:
-            m4aFiles = directoryContents.filter{ $0.pathExtension == "m4a" }
-            
-        }catch _ {
-            print("error in songlistviewcontroler playing selected song")
-        }
-    
         let filePath = NSBundle.mainBundle().pathForResource("\(selectedTitle)", ofType: ".m4a")
-        instance.bgMusicUrl = NSURL.fileURLWithPath(filePath!)
-        instance.setUpNewTrack()
-        //setting title to be used as final mix name
-        instance.selectedTitle = self.selectedTitle
-        instance.status = false
-//        print("\(instance.newTrack.duration)")
+        print("FilePath is \(filePath)")
         
-        //setting the selected song as the original track for VoiceRecord and smashing
-        let anotherInstance = VoiceRecord.sharedInstance
-        anotherInstance.originalSong = NSURL.fileURLWithPath(filePath!)
+        /////////////////////////////////Trying to do it from the phone///////////////////////
+        
+//        let player = MPMusicPlayerController.systemMusicPlayer()
+        let collection = mediaCollections[indexPath.row] as! MPMediaItemCollection
+        let representativeItem = collection.representativeItem!
+//        let url = representativeItem.valueForProperty(MPMediaItemPropertyAssetURL)
+//        print("url is: \(url)")
+        
+//
+//        player.setQueueWithItemCollection(collection)
+//        player.nowPlayingItem = representativeItem
+//        
+//        
+//        //getting the fucking url now...hopefully
+//        let nowPlayingItem = player.nowPlayingItem
+//        
+//        let mediaUrl = nowPlayingItem?.valueForProperty(MPMediaItemPropertyAssetURL)
+//        
+//        print("media Url is: \(mediaUrl!)")
+//        
+//        let myAVPlayerItem = AVPlayerItem.init(URL: mediaUrl! as! NSURL)
+//        
+//        let myAVPlayer: AVPlayer = AVPlayer(playerItem: myAVPlayerItem)
+//
+//        myAVPlayer.play() 
+        
+        
+        print("representativeItem: \(representativeItem)")
+        let player = MPMusicPlayerController.systemMusicPlayer()
+        player.nowPlayingItem = representativeItem
+        let currentSong = player.nowPlayingItem
+        let currentSongUrl = currentSong?.valueForProperty(MPMediaItemPropertyAssetURL)
+        print("current song url: \(currentSongUrl)")
+        
+        instance.bgMusicUrl = NSURL.fileURLWithPath((currentSongUrl?.absoluteString)!)
+        print("bgmusicurl is: \(instance.bgMusicUrl)")
+        instance.setUpNewTrack()
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        ////////////////////////////////////////////////////////////////////////////////////////
+//        instance.bgMusicUrl = NSURL.fileURLWithPath(filePath!)
+//        instance.setUpNewTrack()
+//        //setting title to be used as final mix name
+//        instance.selectedTitle = self.selectedTitle
+//        instance.status = false
+////        print("\(instance.newTrack.duration)")
+//        
+//        //setting the selected song as the original track for VoiceRecord and smashing
+//        let anotherInstance = VoiceRecord.sharedInstance
+//        anotherInstance.originalSong = NSURL.fileURLWithPath(filePath!)
         
     
     }

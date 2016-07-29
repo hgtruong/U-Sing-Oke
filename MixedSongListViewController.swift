@@ -17,6 +17,7 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
     //Array to store all mashed songs
     var m4aFileNames:[AnyObject] = []
     var m4aFiles:[AnyObject] = []
+    var selectedM4a = NSURL()
     var finalSongName = String()
     var selectedTitle = String()
     
@@ -66,26 +67,57 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
 //    
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        //Manually calling the play button from here and passing the song selected at the row
+        let instance = PlayStopManager.sharedInstance
+        
+        //getting the title of song at selected row
+        let selection = tableView.cellForRowAtIndexPath(indexPath)
+        selectedTitle = (selection?.textLabel?.text)!
+        print("Selected Title is \(selectedTitle)")
 //        
-//        //Manually calling the play button from here and passing the song selected at the row
-//        let instance = PlayStopManager.sharedInstance
-//        
-//        //getting the title of song at selected row
-//        let selection = tableView.cellForRowAtIndexPath(indexPath)
-//        selectedTitle = (selection?.textLabel?.text)!
-//        print("Selected Title is \(selectedTitle)")
-//        
-//        let filePath = NSBundle.mainBundle().pathForResource("\(selectedTitle)", ofType: ".m4a")
+        let filePath = NSBundle.mainBundle().pathForResource("21mix", ofType: ".m4a")
+        print("filePath is: \(filePath)")
 //        instance.bgMusicUrl = NSURL.fileURLWithPath(filePath!)
 //        instance.setUpNewTrack()
 //        //setting title to be used as final mix name
 //        instance.selectedTitle = self.selectedTitle
 //        instance.status = false
 //        //        print("\(instance.newTrack.duration)")
-//        
-//        //setting the selected song as the original track for VoiceRecord and smashing
+        
+        
+        ///////////////////////////////new code to read from document direcotry////////////////////////
+        
+        let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+        
+        do {
+            // Get the directory contents urls (including subfolders urls)
+            let directoryContents = try NSFileManager.defaultManager().contentsOfDirectoryAtURL( documentsUrl, includingPropertiesForKeys: nil, options: [])
+            //            print(directoryContents)
+            
+            // if you want to filter the directory contents you can do like this:
+            m4aFiles = directoryContents.filter{ $0.pathExtension == "m4a" }
+//            print("m4a urls in did select: \(m4aFiles)")
+            selectedM4a = m4aFiles[indexPath.row] as! NSURL
+            let stringSelectedM4a = selectedM4a.absoluteString
+            let finalM4a = stringSelectedM4a.stringByReplacingOccurrencesOfString("file:///", withString: "")
+            instance.bgMusicUrl = NSURL.fileURLWithPath(finalM4a)
+            instance.setUpNewTrack()
+            
+//            print("m4a list: \(selectedM4a)")
+          
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        
+        
+        //////////////////////////////////////////////////////////////////////////////////////////////
+        
+        //setting the selected song as the original track for VoiceRecord and smashing
 //        let anotherInstance = VoiceRecord.sharedInstance
 //        anotherInstance.originalSong = NSURL.fileURLWithPath(filePath!)
-//    }
+    }
+    
 }

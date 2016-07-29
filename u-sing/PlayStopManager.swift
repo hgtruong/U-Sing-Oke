@@ -14,6 +14,10 @@ private var _shareInstance: PlayStopManager = PlayStopManager()
 
 public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
     
+    class public var sharedInstance:PlayStopManager {
+        return _shareInstance
+    }
+    
     //creating a static status variable
     var status: Bool = false
     var newTrack = AVAudioPlayer()
@@ -23,13 +27,19 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
     var selectedTitle = String()
     var finalIndex = 0
     var numOfFinalMix = 0
+    var avPlayer = AVPlayer()
     
     //Function to set up the track to be played selected by the user
     func setUpNewTrack(){
         do{
             
+            
             newTrack = try AVAudioPlayer(contentsOfURL: bgMusicUrl)
+//            newTrack = AVPlayer(playerItem: AVPlayerItem)
             newTrack.delegate = self
+//            avPlayer = AVPlayer(URL: bgMusicUrl)
+//            avPlayer.rate = 1.0;
+//            avPlayer.play()
             
         }catch _ {
             print("newTrack couldn't be set")
@@ -37,15 +47,14 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
     }
 
 
-    class public var sharedInstance:PlayStopManager {
-        return _shareInstance
-    }
+    
     
     //Function to play the song outloud so users can hear and sing too
     func playSong(){
     
             newTrack.prepareToPlay()
             newTrack.play()
+//        avPlayer.play()
             status = true
   
     }//end of playSong function
@@ -62,6 +71,30 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
      public func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
         
         
+        
+        //Checking if the mix already exists so we don't mash anything
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /////////////////////////////////////////////////////////////////////////////////////
         numOfFinalMix = numOfFinalMix + 1
         print("inside audioplayer didfinish playing")
         //3) Starting the mixing procress

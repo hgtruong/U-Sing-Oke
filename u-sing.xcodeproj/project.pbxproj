@@ -12,7 +12,6 @@
 		65480FAF1D38522400B73320 /* 3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 65480FAE1D38522400B73320 /* 3.m4a */; };
 		654891D51D47FBE0002E3709 /* MixedSongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654891D41D47FBE0002E3709 /* MixedSongListViewController.swift */; };
 		654891D71D480939002E3709 /* GetAllMixedSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654891D61D480939002E3709 /* GetAllMixedSong.swift */; };
-		655BA4331D49472600BA6896 /* jeopardy.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 655BA4321D49472600BA6896 /* jeopardy.m4a */; };
 		655BA4371D49475E00BA6896 /* 1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 655BA4341D49475E00BA6896 /* 1.m4a */; };
 		655BA4381D49475E00BA6896 /* 21.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 655BA4351D49475E00BA6896 /* 21.m4a */; };
 		655BA4391D49475E00BA6896 /* 22.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 655BA4361D49475E00BA6896 /* 22.m4a */; };
@@ -33,6 +32,7 @@
 		65A46F401D42B2560068FD0E /* PlayStopManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A46F3F1D42B2560068FD0E /* PlayStopManager.swift */; };
 		65C6A7BE1D3839C8009D3461 /* SongStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C6A7BD1D3839C8009D3461 /* SongStruct.swift */; };
 		65C6A7C21D383B63009D3461 /* SmashingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C6A7C11D383B63009D3461 /* SmashingManager.swift */; };
+		65F58A491D4A98D900D8C386 /* jeopardy.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 655BA4321D49472600BA6896 /* jeopardy.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -237,7 +237,6 @@
 				655BA4371D49475E00BA6896 /* 1.m4a in Resources */,
 				655BA4381D49475E00BA6896 /* 21.m4a in Resources */,
 				655BA4391D49475E00BA6896 /* 22.m4a in Resources */,
-				655BA4331D49472600BA6896 /* jeopardy.m4a in Resources */,
 				6535E8B71D37F94E00BFCF04 /* 21.m4a in Resources */,
 				659D43E31D359BE900B2B289 /* 1.m4a in Resources */,
 				659D43DD1D3559FC00B2B289 /* 2.m4a in Resources */,
@@ -245,6 +244,7 @@
 				659D43D31D35598300B2B289 /* LaunchScreen.storyboard in Resources */,
 				659D43D01D35598300B2B289 /* Assets.xcassets in Resources */,
 				65480FAF1D38522400B73320 /* 3.m4a in Resources */,
+				65F58A491D4A98D900D8C386 /* jeopardy.m4a in Resources */,
 				659D43CE1D35598300B2B289 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -70,8 +70,8 @@ public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
             //The comment below prevents the sound from lowering when the record button is hit
             try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions: .DefaultToSpeaker)
             
-            try audioRecorder = AVAudioRecorder(URL: NSBundle.mainBundle().bundleURL.absoluteURL,
-                                                settings: recordSettings)
+//            try audioRecorder = AVAudioRecorder(URL: NSBundle.mainBundle().bundleURL.absoluteURL,
+//                                                settings: recordSettings)
             
             //////////////
 //            try audioRecorder1 = AVAudioRecorder(URL: NSBundle.mainBundle().bundleURL.absoluteURL,

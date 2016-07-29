@@ -77,8 +77,8 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
         selectedTitle = (selection?.textLabel?.text)!
         print("Selected Title is \(selectedTitle)")
 //        
-        let filePath = NSBundle.mainBundle().pathForResource("21mix", ofType: ".m4a")
-        print("filePath is: \(filePath)")
+//        let filePath = NSBundle.mainBundle().pathForResource("21mix", ofType: ".m4a")
+//        print("filePath is: \(filePath)")
 //        instance.bgMusicUrl = NSURL.fileURLWithPath(filePath!)
 //        instance.setUpNewTrack()
 //        //setting title to be used as final mix name

@@ -61,7 +61,9 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         presentViewController(mediaPickerController, animated: true, completion: {})
         
        
-        
+        //Use the two lines below whenever we need to clear m4a files in document directory
+//                let instance = VoiceRecord.sharedInstance
+//                instance.clearM4aFile()
         tableView.reloadData()
     }
     
@@ -154,9 +156,7 @@ extension SongListViewController : MPMediaPickerControllerDelegate {
         }
 //        player.play()
         
-        //Use the two lines below whenever we need to clear m4a files in document directory
-//        let instance = VoiceRecord.sharedInstance
-//        instance.clearM4aFile()
+        
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }

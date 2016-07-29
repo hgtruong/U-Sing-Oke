@@ -96,18 +96,25 @@
         
         NSString *filePath = [[docDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:ex];
         
-        int fileNumber = 0;
-        NSString *fileNumberString = nil;
-        NSString *fileNameWithNumber = nil;
-        while ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-            fileNumber++;
-            fileNumberString = [NSString stringWithFormat:@"-%02d", fileNumber];
-            fileNameWithNumber = [fileName stringByAppendingString:fileNumberString];
-            filePath = [[docDir stringByAppendingPathComponent:fileNameWithNumber] stringByAppendingPathExtension:ex];
-            //NSLog(@"filePath = %@", filePath);
+//        int fileNumber = 0;
+//        NSString *fileNumberString = nil;
+//        NSString *fileNameWithNumber = nil;
+//        while ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+//            fileNumber++;
+//            fileNumberString = [NSString stringWithFormat:@"-%02d", fileNumber];
+//            fileNameWithNumber = [fileName stringByAppendingString:fileNumberString];
+//            filePath = [[docDir stringByAppendingPathComponent:fileNameWithNumber] stringByAppendingPathExtension:ex];
+//            NSLog(@"filePath = %@", filePath);
+//        }
+//        
+        // -------------------------------------
+        
+        
+        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]){
+             NSError *deleteErr = nil;
+            [[NSFileManager defaultManager] removeItemAtPath:filePath error:&deleteErr];
         }
         
-        // -------------------------------------
         
         [self deleteMyFile:filePath];
         filePath = [filePath stringByAppendingString:@".mov"];

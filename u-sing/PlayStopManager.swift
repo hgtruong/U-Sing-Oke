@@ -69,32 +69,7 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
     
     
      public func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
-        
-        
-        
-        //Checking if the mix already exists so we don't mash anything
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        /////////////////////////////////////////////////////////////////////////////////////
+  
         numOfFinalMix = numOfFinalMix + 1
         print("inside audioplayer didfinish playing")
         //3) Starting the mixing procress
@@ -104,12 +79,14 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
 //        
         //Using semaphore to hold off the for loop so we can complete the mixing process
         let semaphore = dispatch_semaphore_create(0)
-        let timeoutLengthInNanoSeconds: Int64 = 100000000000000000  //Adjust the timeout to suit your case
-        let timeout = dispatch_time(DISPATCH_TIME_NOW, timeoutLengthInNanoSeconds)
+        let timeoutLengthInNanoSeconds: Int64 = 1000000000000000000  //Adjust the timeout to suit your case
+        let timeout = dispatch_time(DISPATCH_TIME_FOREVER, timeoutLengthInNanoSeconds)
         for index in voiceInstance.arrayOfRecordings{
             finalIndex = finalIndex + 1
             print("\(voiceInstance.arrayOfRecordings.count)")
             print("\(finalIndex)")
+//            print("orginalSong: \(voiceInstance.originalSong)")
+            print("SelectedTitle: \(selectedTitle)")
             if (finalIndex == voiceInstance.arrayOfRecordings.count) {
                 instance.genericMash(voiceInstance.originalSong, recording: index, mixedAudioName: "\(selectedTitle)" + "mix.m4a", callback: { (url) in
                     voiceInstance.originalSong = url
@@ -126,10 +103,10 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
         
         
 
-        //Removing all the previous recordings after the song had finished
+//        Removing all the previous recordings after the song had finished
         voiceInstance.arrayOfRecordings.removeAll()
         voiceInstance.clearTempFolder()
-        voiceInstance.clearM4aFile()
+        voiceInstance.clearDocFolder()
 
     }
     
@@ -144,7 +121,14 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
     //when the song is player
     func getCurrentTime() -> NSTimeInterval {
         
-        currentTime = newTrack.currentTime
+        
+        if(currentTime != 0){
+            
+            currentTime = newTrack.currentTime
+        }else {
+            print("Please select to play")
+            exit(0)
+        }
         
         return currentTime
         

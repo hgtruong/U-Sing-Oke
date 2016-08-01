@@ -26,8 +26,7 @@ class PageViewController: UIPageViewController{
     private(set) lazy var orderedViewControllers: [UIViewController] = {
         let navi = self.newColoredViewController("songListNavigation") as! UINavigationController
         let mixed = self.newColoredViewController("mixedSongListNavigation") as! UINavigationController
-        return [navi,
-                self.newColoredViewController("Player"), mixed]
+        return [self.newColoredViewController("Player"), navi, mixed]
     }()
 
     override func viewDidLoad() {

@@ -107,7 +107,7 @@ public class SmashingManager : NSObject {
     func directoryUrl() -> String? {
         
         let fileManager = NSFileManager.defaultManager()
-        let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        let urls = fileManager.URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask)
         let documentDirectory = urls[0].absoluteString
         let stringDocumentDirectory = documentDirectory.stringByAppendingString(mixName)
         let finalDocumentDirectory = stringDocumentDirectory.stringByReplacingOccurrencesOfString("file://", withString: "")

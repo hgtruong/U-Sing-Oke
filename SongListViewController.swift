@@ -21,14 +21,12 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
 //    var representativeItem = MPMediaItem()
     var songTitle = String()
     var selectedTitle = String()
-    var m4aFiles: [AnyObject] = []
     var songPicked:[String] = []
     
-//    var collection = MPMediaItemCollection()
-//    var representativeItem = MPMediaItem()
-//    var collectionDidSelect = MPMediaItemCollection()
-//    var representativeItemDidSelect = MPMediaItem()
-    
+    var m4aFileNames:[AnyObject] = []
+    var m4aFiles:[AnyObject] = []
+    var selectedM4a = NSURL()
+    var finalSongName = String()
 
     
     
@@ -37,7 +35,7 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        
     
         //Finding the music in user's phone
         
@@ -59,12 +57,40 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         mediaPickerController.modalPresentationStyle = .Popover
         mediaPickerController.preferredContentSize = CGSizeMake(500,600)
         presentViewController(mediaPickerController, animated: true, completion: {})
-        
+        super.viewDidLoad()
+//        filterM4a()
+    
        
-        //Use the two lines below whenever we need to clear m4a files in document directory
+//        Use the two lines below whenever we need to clear m4a files in document directory
 //                let instance = VoiceRecord.sharedInstance
-//                instance.clearM4aFile()
+//                instance.clearDocFolder()
         tableView.reloadData()
+    }
+    
+    
+    //Function to filter out m4a files for table view cells
+    func filterM4a() {
+
+        ///////////Getting the songs from the document directory//////////////////
+        let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+        
+        do {
+            // Get the directory contents urls (including subfolders urls)
+            let directoryContents = try NSFileManager.defaultManager().contentsOfDirectoryAtURL( documentsUrl, includingPropertiesForKeys: nil, options: [])
+            print(directoryContents)
+            
+            // if you want to filter the directory contents you can do like this:
+            m4aFiles = directoryContents.filter{ $0.pathExtension == "m4a" }
+            m4aFileNames = m4aFiles.flatMap({$0.URLByDeletingPathExtension!})
+            print("m4aFiles in filter function: \(m4aFiles)")
+            
+            
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        tableView.reloadData()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,20 +99,28 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        print("hello " + "\(mediaCollections.count)")
-        return mediaCollections.count
+        print("numOfRows: " + "\(m4aFiles.count)")
+        return m4aFiles.count
     }
     
+    
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("songListCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("songListCell", forIndexPath: indexPath)
         
-        //Populating the table view cell
-        let collection = mediaCollections[indexPath.row] as! MPMediaItemCollection
-        let representativeItem = collection.representativeItem!
-//        print("repre item is: \(representativeItem)")
-        songTitle = representativeItem.title!
-        cell.textLabel!.text = songTitle
-//        print("song title is: \(songTitle)")
+        print("m4aFiles in TableView: \(m4aFileNames[0])")
+        print("m4aFiles in TableView: \(m4aFileNames[indexPath.row])")
+        
+//        print("indexPath = \(indexPath.row)")
+        let songName = m4aFileNames[indexPath.row].absoluteString
+        if let rangOfZero = songName.rangeOfString("Documents/", options: NSStringCompareOptions.BackwardsSearch){
+            finalSongName = String(songName.characters.suffixFrom(rangOfZero.endIndex))
+        }
+        print("final song is: \(finalSongName)")
+        cell.textLabel!.text = finalSongName
+        
+        tableView.reloadData()
+        
         return cell
     }
     
@@ -95,41 +129,18 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        //Manually calling the play button from here and passing the song selected at the row
         let instance = PlayStopManager.sharedInstance
-        
-        //getting the title of song at selected row
-        let selection = tableView.cellForRowAtIndexPath(indexPath)
-        selectedTitle = (selection?.textLabel?.text)!
-        print("Selected Title is \(selectedTitle)")
-        
-        let collectionDidSelect = mediaCollections[indexPath.row] as! MPMediaItemCollection
-        let representativeItemDidSelect = collectionDidSelect.representativeItem!
-        
-        let filePath = NSBundle.mainBundle().pathForResource("\(selectedTitle)", ofType: ".m4a")
-        print("FilePath is \(filePath)")
-        
-        /////////////////////////////////Trying to do it from the phone///////////////////////
-        
-
-        //Importing music from the phone to app's document directory
+        selectedM4a = m4aFiles[indexPath.row] as! NSURL
+        let stringSelectedM4a = selectedM4a.absoluteString
+        let finalM4a = stringSelectedM4a.stringByReplacingOccurrencesOfString("file:///", withString: "")
+        instance.bgMusicUrl = NSURL.fileURLWithPath(finalM4a)
+        instance.setUpNewTrack()
+        instance.selectedTitle = stringSelectedM4a
         
         
-        
-        
-        ////////////////////////////////////////////////////////////////////////////////////////
-//        instance.bgMusicUrl = NSURL.fileURLWithPath(filePath!)
-//        instance.setUpNewTrack()
-//        //setting title to be used as final mix name
-//        instance.selectedTitle = self.selectedTitle
-//        instance.status = false
-////        print("\(instance.newTrack.duration)")
-//        
-//        //setting the selected song as the original track for VoiceRecord and smashing
-//        let anotherInstance = VoiceRecord.sharedInstance
-//        anotherInstance.originalSong = NSURL.fileURLWithPath(filePath!)
-        
-    
+        //        setting the selected song as the original track for VoiceRecord and smashing
+        let anotherInstance = VoiceRecord.sharedInstance
+        anotherInstance.originalSong = NSURL.fileURLWithPath(finalM4a)
     }
 }
 
@@ -140,11 +151,10 @@ extension SongListViewController : MPMediaPickerControllerDelegate {
     // must implement these, as there is no automatic dismissal
     
     func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+        
         print("did pick")
         let player = MPMusicPlayerController.applicationMusicPlayer()
         player.setQueueWithItemCollection(mediaItemCollection)
-        
-        
         
         let object = iPodManagerHelper()
         for i in 0..<mediaItemCollection.items.count {
@@ -154,16 +164,14 @@ extension SongListViewController : MPMediaPickerControllerDelegate {
             //NSLog(@"for loop : %d", i);
             //NSLog(@"for loop : %d", i);
         }
-//        player.play()
-        
-        
-        
         self.dismissViewControllerAnimated(true, completion: nil)
+        filterM4a()
     }
     
     func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
         print("cancel")
         self.dismissViewControllerAnimated(true, completion: nil)
+        tableView.reloadData()
     }
     
 }

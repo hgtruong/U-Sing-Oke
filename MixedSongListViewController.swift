@@ -20,12 +20,13 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
     var selectedM4a = NSURL()
     var finalSongName = String()
     var selectedTitle = String()
+    var finalM4a = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
-        let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+        let instance = VoiceRecord.sharedInstance
+        let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask).first!
         
         do {
             // Get the directory contents urls (including subfolders urls)
@@ -43,6 +44,9 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
             print(error.localizedDescription)
         }
         
+        
+        //If need to clear m4a files in libr
+//        instance.clearLibFolder()
         tableView.reloadData()
     }
 
@@ -53,16 +57,19 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
         return m4aFileNames.count
     }
     
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("mixedListCell", forIndexPath: indexPath)
         
 //        print("indexPath: \(indexPath)")
 //        print("m4a index: \(m4aFileNames[0])")
         let songName = m4aFileNames[indexPath.row].absoluteString
-        if let rangOfZero = songName.rangeOfString("Documents/", options: NSStringCompareOptions.BackwardsSearch){
+//        print("indexPath: \(songName)")
+        if let rangOfZero = songName.rangeOfString("Library/", options: NSStringCompareOptions.BackwardsSearch){
             finalSongName = String(songName.characters.suffixFrom(rangOfZero.endIndex))
         }
         cell.textLabel!.text = finalSongName
+        tableView.reloadData()
         return cell
     }
     
@@ -75,8 +82,8 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
         //getting the title of song at selected row
         let selection = tableView.cellForRowAtIndexPath(indexPath)
         selectedTitle = (selection?.textLabel?.text)!
-        print("Selected Title is \(selectedTitle)")
-//        
+//        print("Selected Title is \(selectedTitle)")
+//
 //        let filePath = NSBundle.mainBundle().pathForResource("21mix", ofType: ".m4a")
 //        print("filePath is: \(filePath)")
 //        instance.bgMusicUrl = NSURL.fileURLWithPath(filePath!)
@@ -89,7 +96,7 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
         
         ///////////////////////////////new code to read from document direcotry////////////////////////
         
-        let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+        let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask).first!
         
         do {
             // Get the directory contents urls (including subfolders urls)
@@ -101,7 +108,7 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
 //            print("m4a urls in did select: \(m4aFiles)")
             selectedM4a = m4aFiles[indexPath.row] as! NSURL
             let stringSelectedM4a = selectedM4a.absoluteString
-            let finalM4a = stringSelectedM4a.stringByReplacingOccurrencesOfString("file:///", withString: "")
+            finalM4a = stringSelectedM4a.stringByReplacingOccurrencesOfString("file:///", withString: "")
             instance.bgMusicUrl = NSURL.fileURLWithPath(finalM4a)
             instance.setUpNewTrack()
             
@@ -115,9 +122,9 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
         
         //////////////////////////////////////////////////////////////////////////////////////////////
         
-        //setting the selected song as the original track for VoiceRecord and smashing
-//        let anotherInstance = VoiceRecord.sharedInstance
-//        anotherInstance.originalSong = NSURL.fileURLWithPath(filePath!)
+//        setting the selected song as the original track for VoiceRecord and smashing
+        let anotherInstance = VoiceRecord.sharedInstance
+        anotherInstance.originalSong = NSURL.fileURLWithPath(finalM4a)
     }
     
 }

@@ -70,8 +70,8 @@ public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
             //The comment below prevents the sound from lowering when the record button is hit
             try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions: .DefaultToSpeaker)
             
-//            try audioRecorder = AVAudioRecorder(URL: NSBundle.mainBundle().bundleURL.absoluteURL,
-//                                                settings: recordSettings)
+            try audioRecorder = AVAudioRecorder(URL: NSBundle.mainBundle().bundleURL.absoluteURL,
+                                                settings: recordSettings)
             
             //////////////
 //            try audioRecorder1 = AVAudioRecorder(URL: NSBundle.mainBundle().bundleURL.absoluteURL,
@@ -154,7 +154,7 @@ public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
     }
     
     //Function to delete all files in documents that is .m4a
-    func clearM4aFile() {
+    func clearDocFolder() {
             
             let fileManager = NSFileManager.defaultManager()
             let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL
@@ -184,6 +184,35 @@ public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
         }
 
 
+    //Function to delete all files in documents that is .m4a
+    func clearLibFolder() {
+        
+        let fileManager = NSFileManager.defaultManager()
+        let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask).first! as NSURL
+        let documentsPath = documentsUrl.path
+        
+        do {
+            if let documentPath = documentsPath
+            {
+                let fileNames = try fileManager.contentsOfDirectoryAtPath("\(documentPath)")
+                print("all files in cache: \(fileNames)")
+                for fileName in fileNames {
+                    
+                    if (fileName.hasSuffix(".m4a")) // && fileName.hasPrefix("mix"))
+                    {
+                        let filePathName = "\(documentPath)/\(fileName)"
+                        try fileManager.removeItemAtPath(filePathName)
+                    }
+                }
+                
+                let files = try fileManager.contentsOfDirectoryAtPath("\(documentPath)")
+                print("all files in cache after deleting images: \(files)")
+            }
+            
+        } catch {
+            print("Could not clear library folder: \(error)")
+        }
+    }
     
     //Function to create directory to save the recording
     func directoryUrl() -> NSURL? {

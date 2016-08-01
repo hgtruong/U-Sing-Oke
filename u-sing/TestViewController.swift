@@ -44,7 +44,9 @@ extension TestViewController : MPMediaPickerControllerDelegate {
         let object = iPodManagerHelper()
         for i in 0..<mediaItemCollection.items.count {
             //            self.exportAssetAsSourceFormat(mediaItemCollection.items[i])
-            object.exportAssetAsSourceFormat(mediaItemCollection.items[i])
+            object.exportAssetAsSourceFormat(mediaItemCollection.items[i],completion:{
+                
+            })
             
             //NSLog(@"for loop : %d", i);
             //NSLog(@"for loop : %d", i);

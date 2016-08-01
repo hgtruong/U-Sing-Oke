@@ -10,6 +10,6 @@
 @import MediaPlayer;
 @import AVFoundation;
 @interface iPodManagerHelper : NSObject 
-- (void)exportAssetAsSourceFormat:(MPMediaItem *)item;
+- (void)exportAssetAsSourceFormat:(MPMediaItem *)item completion:(void(^)(void))callback;
 -(void)deleteMyFile:(NSString *)path;
 @end

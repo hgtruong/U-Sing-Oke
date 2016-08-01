@@ -17,8 +17,8 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     //Variable declarations
     var mediaQuery = MPMediaQuery()
     var mediaCollections: [AnyObject] = []
-//    var collection = MPMediaItemCollection()
-//    var representativeItem = MPMediaItem()
+    //    var collection = MPMediaItemCollection()
+    //    var representativeItem = MPMediaItem()
     var songTitle = String()
     var selectedTitle = String()
     var songPicked:[String] = []
@@ -27,16 +27,35 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     var m4aFiles:[AnyObject] = []
     var selectedM4a = NSURL()
     var finalSongName = String()
-
+    var documentsUrl = NSURL()
+    
     
     
     @IBOutlet weak var searchButton: UISearchBar!
     
     @IBOutlet weak var tableView: UITableView!
     
-    override func viewDidLoad() {
-        
+    @IBOutlet weak var AddSongButton: UIButton!
     
+    @IBAction func AddSongButton(sender: AnyObject) {
+        
+        let mediaPickerController = MPMediaPickerController(mediaTypes: .Music)
+        mediaPickerController.delegate = self
+        mediaPickerController.showsCloudItems = false
+        mediaPickerController.allowsPickingMultipleItems = false
+        mediaPickerController.modalPresentationStyle = .Popover
+        mediaPickerController.preferredContentSize = CGSizeMake(500,600)
+        self.presentViewController(mediaPickerController, animated: true, completion: {})
+        
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //Creating a dispatch group
+        
+        
         //Finding the music in user's phone
         
         // run a query on song media type
@@ -49,30 +68,26 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         mediaCollections = mediaQuery.collections!
         
         
-        //setting the media picker delegate
         let mediaPickerController = MPMediaPickerController(mediaTypes: .Music)
         mediaPickerController.delegate = self
         mediaPickerController.showsCloudItems = false
         mediaPickerController.allowsPickingMultipleItems = false
         mediaPickerController.modalPresentationStyle = .Popover
         mediaPickerController.preferredContentSize = CGSizeMake(500,600)
-        presentViewController(mediaPickerController, animated: true, completion: {})
-        super.viewDidLoad()
-//        filterM4a()
-    
-       
-//        Use the two lines below whenever we need to clear m4a files in document directory
-//                let instance = VoiceRecord.sharedInstance
-//                instance.clearDocFolder()
+        self.presentViewController(mediaPickerController, animated: true, completion: {})
+ 
+        
+       // Use the two lines below whenever we need to clear m4a files in document directory
+//        let instance = VoiceRecord.sharedInstance
+//        instance.clearDocFolder()
+        
         tableView.reloadData()
     }
     
     
     //Function to filter out m4a files for table view cells
     func filterM4a() {
-
-        ///////////Getting the songs from the document directory//////////////////
-        let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+        
         
         do {
             // Get the directory contents urls (including subfolders urls)
@@ -81,8 +96,9 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
             
             // if you want to filter the directory contents you can do like this:
             m4aFiles = directoryContents.filter{ $0.pathExtension == "m4a" }
+//            print("m4aFiles in filter function: \(m4aFiles)")
             m4aFileNames = m4aFiles.flatMap({$0.URLByDeletingPathExtension!})
-            print("m4aFiles in filter function: \(m4aFiles)")
+//            print("m4aFileNames in filter function: \(m4aFileNames)"
             
             
         } catch let error as NSError {
@@ -108,18 +124,17 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("songListCell", forIndexPath: indexPath)
         
+        
         print("m4aFiles in TableView: \(m4aFileNames[0])")
         print("m4aFiles in TableView: \(m4aFileNames[indexPath.row])")
         
-//        print("indexPath = \(indexPath.row)")
+        //        print("indexPath = \(indexPath.row)")
         let songName = m4aFileNames[indexPath.row].absoluteString
         if let rangOfZero = songName.rangeOfString("Documents/", options: NSStringCompareOptions.BackwardsSearch){
             finalSongName = String(songName.characters.suffixFrom(rangOfZero.endIndex))
         }
         print("final song is: \(finalSongName)")
         cell.textLabel!.text = finalSongName
-        
-        tableView.reloadData()
         
         return cell
     }
@@ -135,10 +150,17 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         let finalM4a = stringSelectedM4a.stringByReplacingOccurrencesOfString("file:///", withString: "")
         instance.bgMusicUrl = NSURL.fileURLWithPath(finalM4a)
         instance.setUpNewTrack()
-        instance.selectedTitle = stringSelectedM4a
+        
+        //Extracting the selected song name
+        let songName = m4aFileNames[indexPath.row].absoluteString
+        if let rangOfZero = songName.rangeOfString("Documents/", options: NSStringCompareOptions.BackwardsSearch){
+            finalSongName = String(songName.characters.suffixFrom(rangOfZero.endIndex))
+        }
+        print("finalM4a in song list view is: \(finalSongName)")
+        instance.selectedTitle = finalSongName
         
         
-        //        setting the selected song as the original track for VoiceRecord and smashing
+        // setting the selected song as the original track for VoiceRecord and smashing
         let anotherInstance = VoiceRecord.sharedInstance
         anotherInstance.originalSong = NSURL.fileURLWithPath(finalM4a)
     }
@@ -159,19 +181,21 @@ extension SongListViewController : MPMediaPickerControllerDelegate {
         let object = iPodManagerHelper()
         for i in 0..<mediaItemCollection.items.count {
             //            self.exportAssetAsSourceFormat(mediaItemCollection.items[i])
-            object.exportAssetAsSourceFormat(mediaItemCollection.items[i])
-            
-            //NSLog(@"for loop : %d", i);
-            //NSLog(@"for loop : %d", i);
+            object.exportAssetAsSourceFormat(mediaItemCollection.items[i],completion:{
+                //setting the document url to document directory
+                self.documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+                
+                self.filterM4a()
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
+                
+            })
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
-        filterM4a()
     }
     
     func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
         print("cancel")
         self.dismissViewControllerAnimated(true, completion: nil)
-        tableView.reloadData()
     }
     
 }

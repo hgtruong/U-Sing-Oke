@@ -11,11 +11,6 @@ import AVFoundation
 
 class PlayerViewController: UIViewController {
     
-    @IBOutlet weak var nextButton: UIButton!
-    
-    @IBAction func nextButton(sender: AnyObject) {
-    }
-    
     
     @IBOutlet weak var stopPlayButton: UIButton!
     
@@ -32,15 +27,24 @@ class PlayerViewController: UIViewController {
                 instance.playSong()
             }
         }
-        
-        
-        
     }
     
-    @IBOutlet weak var previousSongButton: UIButton!
-
-    @IBAction func previousSongButton(sender: AnyObject) {
+    
+    
+    
+    @IBOutlet weak var FinishButton: UIButton!
+    
+    @IBAction func FinishButton(sender: AnyObject) {
+        
+        //Start smashing when user hits the finish recording
+        let instance = PlayStopManager.sharedInstance
+        instance.startSmashing()
+        
+        
     }
+  
+    
+    
     
     @IBOutlet weak var recordButton: UIButton!
     

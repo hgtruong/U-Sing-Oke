@@ -14,7 +14,7 @@
 
 
 
-- (void)exportAssetAsSourceFormat:(MPMediaItem *)item {
+- (void)exportAssetAsSourceFormat:(MPMediaItem *)item completion:(void(^)(void))callback {
     
     NSURL *assetURL = [item valueForProperty:MPMediaItemPropertyAssetURL];
     
@@ -129,8 +129,11 @@
                 NSFileManager *fileMgr = [NSFileManager defaultManager];
                 NSError *error;
                 NSString *newpath = [filePath stringByReplacingOccurrencesOfString:@".mov" withString:@""];
-                if ([fileMgr moveItemAtPath:filePath toPath:newpath error:&error] != YES)
+                if ([fileMgr moveItemAtPath:filePath toPath:newpath error:&error] != YES){
                     NSLog(@"Unable to move file: %@", [error localizedDescription]);
+                }else{
+                    callback();
+                }
             }else
             {
                 //NSLog(@"export session error");

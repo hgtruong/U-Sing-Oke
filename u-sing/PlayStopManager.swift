@@ -20,7 +20,7 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
     
     //creating a static status variable
     var status: Bool = false
-    var newTrack = AVAudioPlayer()
+    var newTrack :AVAudioPlayer!
     var currentTime = NSTimeInterval()
     var pauseTime = NSTimeInterval()
     var bgMusicUrl = NSURL()
@@ -31,16 +31,10 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
     
     //Function to set up the track to be played selected by the user
     func setUpNewTrack(){
+        
         do{
-            
-            
             newTrack = try AVAudioPlayer(contentsOfURL: bgMusicUrl)
-//            newTrack = AVPlayer(playerItem: AVPlayerItem)
             newTrack.delegate = self
-//            avPlayer = AVPlayer(URL: bgMusicUrl)
-//            avPlayer.rate = 1.0;
-//            avPlayer.play()
-            
         }catch _ {
             print("newTrack couldn't be set")
         }
@@ -52,10 +46,15 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
     //Function to play the song outloud so users can hear and sing too
     func playSong(){
     
+        do{
             newTrack.prepareToPlay()
             newTrack.play()
-//        avPlayer.play()
             status = true
+        }catch _ {
+            let alertController = UIAlertController(title: "No Song Chosen!", message: "Please select a song to get started!", preferredStyle: .Alert)
+            alertController.show()
+        }
+        
   
     }//end of playSong function
     
@@ -77,6 +76,7 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
         //3) Starting the mixing procress
         let instance = SmashingManager.sharedInstance
         let voiceInstance = VoiceRecord.sharedInstance
+        voiceInstance.stopRecord()
         //        print("Selected Title is: \(selectedTitle)")
         //
         //Using semaphore to hold off the for loop so we can complete the mixing process
@@ -115,44 +115,6 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
      public func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
         
         startSmashing()
-  
-//        numOfFinalMix = numOfFinalMix + 1
-//        print("inside audioplayer didfinish playing")
-//        //3) Starting the mixing procress
-//        let instance = SmashingManager.sharedInstance
-//        let voiceInstance = VoiceRecord.sharedInstance
-////        print("Selected Title is: \(selectedTitle)")
-////        
-//        //Using semaphore to hold off the for loop so we can complete the mixing process
-//        let semaphore = dispatch_semaphore_create(0)
-//        let timeoutLengthInNanoSeconds: Int64 = 1000000000000000000  //Adjust the timeout to suit your case
-//        let timeout = dispatch_time(DISPATCH_TIME_FOREVER, timeoutLengthInNanoSeconds)
-//        for index in voiceInstance.arrayOfRecordings{
-//            finalIndex = finalIndex + 1
-//            print("\(voiceInstance.arrayOfRecordings.count)")
-//            print("\(finalIndex)")
-////            print("orginalSong: \(voiceInstance.originalSong)")
-//            print("SelectedTitle: \(selectedTitle)")
-//            if (finalIndex == voiceInstance.arrayOfRecordings.count) {
-//                instance.genericMash(voiceInstance.originalSong, recording: index, mixedAudioName: "\(selectedTitle)" + "mix.m4a", callback: { (url) in
-//                    voiceInstance.originalSong = url
-//                    dispatch_semaphore_signal(semaphore)
-//                })
-//            }else{
-//            instance.genericMash(voiceInstance.originalSong, recording: index, mixedAudioName: "mix.m4a", callback: { (url) in
-//                voiceInstance.originalSong = url
-//                dispatch_semaphore_signal(semaphore)
-//            })
-//            }
-//            dispatch_semaphore_wait(semaphore, timeout)
-//        }//end of mixing process
-    
-        
-
-////        Removing all the previous recordings after the song had finished
-//        voiceInstance.arrayOfRecordings.removeAll()
-//        voiceInstance.clearTempFolder()
-//        voiceInstance.clearDocFolder()
 
     }
     
@@ -167,18 +129,8 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
     //when the song is player
     func getCurrentTime() -> NSTimeInterval {
         
-        
-//        if(currentTime != 0){
-        
             currentTime = newTrack.currentTime
             return currentTime
-//            
-//        }else {
-//            print("Please select to play")
-//            exit(0)
-//        }
-        
-        
         
     }//end of getCurrenTime function
     

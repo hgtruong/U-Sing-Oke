@@ -11,6 +11,8 @@ import AVFoundation
 
 class PlayerViewController: UIViewController {
     
+    var currentSong = String()
+    
     
     @IBOutlet weak var stopPlayButton: UIButton!
     
@@ -18,15 +20,25 @@ class PlayerViewController: UIViewController {
         
         let instance = PlayStopManager.sharedInstance
         
-        
-        if instance.newTrack.currentTime < instance.newTrack.duration || instance.newTrack.currentTime == 0.0 {
-            switch instance.status {
-            case true:
-                instance.pauseSong()
-            case false:
-                instance.playSong()
-            }
+    
+            if let isNil = instance.newTrack {
+                let currentTime = isNil.currentTime
+                if currentTime < instance.newTrack.duration || currentTime == 0.0 {
+                    switch instance.status {
+                    case true:
+                        instance.pauseSong()
+                    case false:
+                        instance.playSong()
+                    }
+                }
+            } else{
+            let alertController = UIAlertController(title: "No Song Chosen!", message: "Please select a song to get started!", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Cancel, handler: nil))
+            alertController.show()
         }
+        
+         
+        
     }
     
     
@@ -37,13 +49,40 @@ class PlayerViewController: UIViewController {
     @IBAction func FinishButton(sender: AnyObject) {
         
         //Start smashing when user hits the finish recording
-        let instance = PlayStopManager.sharedInstance
-        instance.startSmashing()
+        let playInstance = PlayStopManager.sharedInstance
+        let voiceInstance = VoiceRecord.sharedInstance
+        let songInstance = CurrentSongname.sharedInstance
         
         
-    }
-  
-    
+        if let isNil = playInstance.newTrack {
+            
+            print("Insdie finish condition")
+            currentSong = songInstance.songName!
+            
+            print("current song is: \(currentSong)")
+            
+            if currentSong.rangeOfString("mix") != nil && playInstance.status == true{
+                let alertController = UIAlertController(title: "Invalid Task", message: "You ain't got nothing to mix", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Cancel, handler: nil))
+                alertController.show()
+                
+            }else if currentSong.rangeOfString("mix") == nil && playInstance.status == true && (voiceInstance.status == false && voiceInstance.arrayOfRecordings.count >= 1) || voiceInstance.status == true {
+                voiceInstance.stopRecord()
+                playInstance.stopSong()
+                playInstance.startSmashing()
+            }else {
+                let alertController = UIAlertController(title: "Invalid Task", message: "Please press record", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Cancel, handler: nil))
+                alertController.show()
+            }
+        }else {
+            let alertController = UIAlertController(title: "Invalid Task", message: "Plese pick a song first", preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Cancel, handler: nil))
+            alertController.show()
+        }
+}
+
+
     
     
     @IBOutlet weak var recordButton: UIButton!
@@ -51,18 +90,49 @@ class PlayerViewController: UIViewController {
     @IBAction func recordButton(sender: AnyObject) {
         
         let instance = VoiceRecord.sharedInstance
+        let playInstance = PlayStopManager.sharedInstance
+        let songInstance = CurrentSongname.sharedInstance
+        
 //        print("RIGHT HERE!!!")
         print("Status of recorder is: \(instance.status)")
-        
-        switch instance.status {
-        case true:
-            instance.stopRecord()
-            print("stop recording")
-        case false:
-            instance.record()
-            print("recording")
+
+        if let isNil = playInstance.newTrack{
+            
+            currentSong = songInstance.songName!
+            
+            print("current song is: \(currentSong)")
+            print("play status is: \(playInstance.status)")
+            
+            if currentSong.rangeOfString("mix") != nil && playInstance.status == true{
+                let alertController = UIAlertController(title: "Be nice", message: "Can't record while playing a mix", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Cancel, handler: nil))
+                alertController.show()
+                
+            }else if currentSong.rangeOfString("mix") == nil && playInstance.status == true {
+                switch instance.status {
+                case true:
+                    instance.stopRecord()
+                    print("stop recording")
+                case false:
+                    instance.record()
+                    print("recording")
+                }
+            }else {
+                let alertController = UIAlertController(title: "No Song Chosen", message: "Please pick a song first!", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Cancel, handler: nil))
+                alertController.show()
+            }
+        }else {
+                let alertController = UIAlertController(title: "No Song Chosen", message: "Please pick a song first!", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Cancel, handler: nil))
+                alertController.show()
         }
     }
+    
+        
+        
+        
+      
     
     @IBOutlet weak var songProgress: NSLayoutConstraint!
     
@@ -73,7 +143,10 @@ class PlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+//        var background: UIColor = UIColor(patternImage: UIImage(named: "background.jpg")!)
+//        self.view.backgroundColor = background
+//        background.re
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -92,4 +165,8 @@ class PlayerViewController: UIViewController {
      }
      */
     
+    
+    
 }
+
+

@@ -53,8 +53,8 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Creating a dispatch group
-        
+        //Setting Directiory path
+        self.documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
         
         //Finding the music in user's phone
         
@@ -82,6 +82,7 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
 //        instance.clearDocFolder()
         
         tableView.reloadData()
+        
     }
     
     
@@ -133,7 +134,7 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         if let rangOfZero = songName.rangeOfString("Documents/", options: NSStringCompareOptions.BackwardsSearch){
             finalSongName = String(songName.characters.suffixFrom(rangOfZero.endIndex))
         }
-        print("final song is: \(finalSongName)")
+//        print("final song is: \(finalSongName)")
         cell.textLabel!.text = finalSongName
         
         return cell
@@ -151,6 +152,7 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         instance.bgMusicUrl = NSURL.fileURLWithPath(finalM4a)
         instance.setUpNewTrack()
         
+        
         //Extracting the selected song name
         let songName = m4aFileNames[indexPath.row].absoluteString
         if let rangOfZero = songName.rangeOfString("Documents/", options: NSStringCompareOptions.BackwardsSearch){
@@ -158,6 +160,11 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         }
         print("finalM4a in song list view is: \(finalSongName)")
         instance.selectedTitle = finalSongName
+        
+        //Assiging current song for record compare
+        let songInstance = CurrentSongname.sharedInstance
+        songInstance.songName = finalSongName
+        
         
         
         // setting the selected song as the original track for VoiceRecord and smashing
@@ -183,7 +190,7 @@ extension SongListViewController : MPMediaPickerControllerDelegate {
             //            self.exportAssetAsSourceFormat(mediaItemCollection.items[i])
             object.exportAssetAsSourceFormat(mediaItemCollection.items[i],completion:{
                 //setting the document url to document directory
-                self.documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+//                self.documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
                 
                 self.filterM4a()
                 
@@ -195,15 +202,17 @@ extension SongListViewController : MPMediaPickerControllerDelegate {
     
     func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
         print("cancel")
+        filterM4a()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+
 }
 
 extension SongListViewController : UIBarPositioningDelegate {
     func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
         return .TopAttached
     }
+    
 }
 
 

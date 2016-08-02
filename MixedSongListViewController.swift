@@ -9,8 +9,15 @@
 import UIKit
 import MediaPlayer
 
+
+private var _shareInstance: MixedSongListViewController = MixedSongListViewController()
+
 class MixedSongListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    class public var sharedInstance:MixedSongListViewController {
+        return _shareInstance
+    }
+    
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -21,7 +28,8 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
     var finalSongName = String()
     var selectedTitle = String()
     var finalM4a = String()
-    
+    var songName = String()
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,8 +53,8 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
         
         
         //If need to clear m4a files in libr
-//        let instance = VoiceRecord.sharedInstance
-//        instance.clearLibFolder()
+        let instance = VoiceRecord.sharedInstance
+        instance.clearLibFolder()
         
         tableView.reloadData()
     }
@@ -74,7 +82,7 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
         return cell
     }
     
-//    
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //Manually calling the play button from here and passing the song selected at the row
@@ -84,20 +92,16 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
         let selection = tableView.cellForRowAtIndexPath(indexPath)
         selectedTitle = (selection?.textLabel?.text)!
         
-//        print("Selected Title is \(selectedTitle)")
-//
-//        let filePath = NSBundle.mainBundle().pathForResource("21mix", ofType: ".m4a")
-//        print("filePath is: \(filePath)")
-//        instance.bgMusicUrl = NSURL.fileURLWithPath(filePath!)
-//        instance.setUpNewTrack()
-//        //setting title to be used as final mix name
-//        instance.selectedTitle = self.selectedTitle
-//        instance.status = false
-//        //        print("\(instance.newTrack.duration)")
+        //Assiging current song for record compare
+        let songInstance = CurrentSongname.sharedInstance
+        songInstance.songName = selectedTitle
         
         
-        ///////////////////////////////new code to read from document direcotry////////////////////////
         
+        print("Selected Title in mixed did select is:  \(selectedTitle)")
+        
+        
+        //Reading in from library directory
         let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask).first!
         
         do {
@@ -112,6 +116,7 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
             let stringSelectedM4a = selectedM4a.absoluteString
             finalM4a = stringSelectedM4a.stringByReplacingOccurrencesOfString("file:///", withString: "")
             instance.bgMusicUrl = NSURL.fileURLWithPath(finalM4a)
+            
             instance.setUpNewTrack()
             
 //            print("m4a list: \(selectedM4a)")
@@ -119,14 +124,24 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
         } catch let error as NSError {
             print(error.localizedDescription)
         }
-        
-        
-        
-        //////////////////////////////////////////////////////////////////////////////////////////////
-        
+
 //        setting the selected song as the original track for VoiceRecord and smashing
         let anotherInstance = VoiceRecord.sharedInstance
         anotherInstance.originalSong = NSURL.fileURLWithPath(finalM4a)
     }
+    
+    //Function to set the name of the song play
+    func songNameSetter(name: String) {
+        
+        print("param value: \(name)")
+       
+        self.songName = name
+         print("songname value: \(songName)")
+    }
+    
+    func songNameGetter() -> String {
+        return self.songName
+    }
+    
     
 }

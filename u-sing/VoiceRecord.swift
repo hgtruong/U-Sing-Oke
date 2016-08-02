@@ -27,7 +27,6 @@ public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
     
     
     //Variables declarations
-    let realm = try! Realm()
     var index = 0
     var soundIndex = 0
     var start = NSTimeInterval()
@@ -73,9 +72,6 @@ public class VoiceRecord: NSObject, AVAudioPlayerDelegate {
             try audioRecorder = AVAudioRecorder(URL: NSBundle.mainBundle().bundleURL.absoluteURL,
                                                 settings: recordSettings)
             
-            //////////////
-//            try audioRecorder1 = AVAudioRecorder(URL: NSBundle.mainBundle().bundleURL.absoluteURL,
-//                                                settings: recordSettings)
             audioRecorder.prepareToRecord()
         } catch {
         }

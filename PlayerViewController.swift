@@ -142,11 +142,20 @@ class PlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PlayerViewController.didClickOnASong(_:)), name: "didClickOnASong", object: nil)
 //        var background: UIColor = UIColor(patternImage: UIImage(named: "background.jpg")!)
 //        self.view.backgroundColor = background
 //        background.re
 
+    }
+    
+    func didClickOnASong(noti:NSNotification){
+        let song = noti.object as! NSURL
+        let playInstance = PlayStopManager.sharedInstance
+        playInstance.bgMusicUrl = song
+        playInstance.setUpNewTrack()
+        playInstance.playSong()
+        
     }
     
     override func didReceiveMemoryWarning() {

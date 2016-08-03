@@ -40,8 +40,18 @@ class PageViewController: UIPageViewController{
                                animated: true,
                                completion: nil)
         }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnASong), name: "didClickOnASong", object: nil)
         
         // Do any additional setup after loading the view.
+    }
+    
+    func didClickOnASong(){
+        if let firstViewController = orderedViewControllers.first {
+            setViewControllers([firstViewController],
+                               direction: .Reverse,
+                               animated: true,
+                               completion: nil)
+        }
     }
     
     

@@ -170,6 +170,10 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         // setting the selected song as the original track for VoiceRecord and smashing
         let anotherInstance = VoiceRecord.sharedInstance
         anotherInstance.originalSong = NSURL.fileURLWithPath(finalM4a)
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("didClickOnASong", object: selectedM4a)
+        
+        
     }
 }
 

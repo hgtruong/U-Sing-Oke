@@ -100,6 +100,9 @@ public class SmashingManager : NSObject {
             
         })
         
+        //If need to clear m4a files in libr
+        let instance = VoiceRecord.sharedInstance
+        instance.clearLibFolder()
     }
     
     

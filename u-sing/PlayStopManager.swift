@@ -107,14 +107,18 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
         
         //Removing all the previous recordings after the song had finished
         voiceInstance.arrayOfRecordings.removeAll()
+        print("array cont: \(voiceInstance.arrayOfRecordings.count)")
         voiceInstance.clearTempFolder()
+        voiceInstance.clearLibFolder()
 //        voiceInstance.clearDocFolder()
     }
     
         
      public func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
         
+        finalIndex = 0
         startSmashing()
+
 
     }
     

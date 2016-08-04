@@ -171,6 +171,7 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         let anotherInstance = VoiceRecord.sharedInstance
         anotherInstance.originalSong = NSURL.fileURLWithPath(finalM4a)
         
+        //Goes to the player and automatically play the selected song
         NSNotificationCenter.defaultCenter().postNotificationName("didClickOnASong", object: selectedM4a)
         
         

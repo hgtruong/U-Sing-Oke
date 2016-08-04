@@ -14,34 +14,39 @@ import CoreMedia
 class PageViewController: UIPageViewController{
     
     
-   
-    
     
     //Function to generate new ViewController
     private func newColoredViewController(color: String) -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("\(color)ViewController")
     }
     
-    //hard coding to create two tabs pages
-    private(set) lazy var orderedViewControllers: [UIViewController] = {
-        let navi = self.newColoredViewController("songListNavigation") as! UINavigationController
-        let mixed = self.newColoredViewController("mixedSongListNavigation") as! UINavigationController
-        return [self.newColoredViewController("Player"), navi, mixed]
+    
+    private(set) lazy var navi: UINavigationController = {
+        return self.newColoredViewController("songListNavigation") as! UINavigationController
     }()
+    
+    private(set) lazy var mixed: UINavigationController = {
+        return self.newColoredViewController("mixedSongListNavigation") as! UINavigationController
+    }()
+    
+    //hard coding to create two tabs pages
+    var orderedViewControllers: [UIViewController]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         dataSource = self
-        
+        orderedViewControllers = [self.newColoredViewController("Player"), navi, mixed]
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController],
                                direction: .Forward,
                                animated: true,
                                completion: nil)
         }
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnASong), name: "didClickOnASong", object: nil)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnASong), name: "didClickOnASong", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnAMixedSong), name: "didClickOnAMixedSong", object: nil)
+//
         // Do any additional setup after loading the view.
     }
     
@@ -54,6 +59,15 @@ class PageViewController: UIPageViewController{
         }
     }
     
+    
+    func didClickOnAMixedSong(){
+        if let firstViewController = orderedViewControllers.first {
+            setViewControllers([firstViewController],
+                               direction: .Forward,
+                               animated: true,
+                               completion: nil)
+        }
+    }
     
     
     override func didReceiveMemoryWarning() {

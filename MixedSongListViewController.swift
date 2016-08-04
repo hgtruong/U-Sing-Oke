@@ -33,33 +33,62 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask).first!
+//        
+//        do {
+//            // Get the directory contents urls (including subfolders urls)
+//            let directoryContents = try NSFileManager.defaultManager().contentsOfDirectoryAtURL( documentsUrl, includingPropertiesForKeys: nil, options: [])
+////            print(directoryContents)
+//            
+//            // if you want to filter the directory contents you can do like this:
+//            m4aFiles = directoryContents.filter{ $0.pathExtension == "m4a" }
+////            print("m4a urls: \(m4aFiles)")
+//            m4aFileNames = m4aFiles.flatMap({$0.URLByDeletingPathExtension!})
+//            print("m4a list in mixedSong View: \(m4aFileNames)")
+////            print("m4a count: \(m4aFileNames.count)")
+//            
+//        } catch let error as NSError {
+//            print(error.localizedDescription)
+//        }
+        
+        
+//        //If need to clear m4a files in libr
+//        let instance = VoiceRecord.sharedInstance
+//        instance.clearLibFolder()
+        
+        mixedFilterM4a()
+        tableView.reloadData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        mixedFilterM4a()
+    }
+
+    func mixedFilterM4a() {
+        
         let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask).first!
         
         do {
             // Get the directory contents urls (including subfolders urls)
             let directoryContents = try NSFileManager.defaultManager().contentsOfDirectoryAtURL( documentsUrl, includingPropertiesForKeys: nil, options: [])
-//            print(directoryContents)
+            //            print(directoryContents)
             
             // if you want to filter the directory contents you can do like this:
             m4aFiles = directoryContents.filter{ $0.pathExtension == "m4a" }
-//            print("m4a urls: \(m4aFiles)")
+                        print("m4a mixed urls: \(m4aFiles)")
             m4aFileNames = m4aFiles.flatMap({$0.URLByDeletingPathExtension!})
             print("m4a list in mixedSong View: \(m4aFileNames)")
-//            print("m4a count: \(m4aFileNames.count)")
+                        print("m4a mixed count: \(m4aFileNames.count)")
+            
+             tableView.reloadData()
             
         } catch let error as NSError {
             print(error.localizedDescription)
         }
         
+       
         
-        //If need to clear m4a files in libr
-        let instance = VoiceRecord.sharedInstance
-        instance.clearLibFolder()
-        
-        tableView.reloadData()
     }
-
-    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        print("m4a count is: \(m4aFileNames.count)")
@@ -77,6 +106,7 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
         if let rangOfZero = songName.rangeOfString("Library/", options: NSStringCompareOptions.BackwardsSearch){
             finalSongName = String(songName.characters.suffixFrom(rangOfZero.endIndex))
         }
+        print("Final Song name in mixed view is: \(finalSongName)")
         cell.textLabel!.text = finalSongName
 
         return cell
@@ -116,7 +146,6 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
             let stringSelectedM4a = selectedM4a.absoluteString
             finalM4a = stringSelectedM4a.stringByReplacingOccurrencesOfString("file:///", withString: "")
             instance.bgMusicUrl = NSURL.fileURLWithPath(finalM4a)
-            
             instance.setUpNewTrack()
             
 //            print("m4a list: \(selectedM4a)")
@@ -128,7 +157,13 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
 //        setting the selected song as the original track for VoiceRecord and smashing
         let anotherInstance = VoiceRecord.sharedInstance
         anotherInstance.originalSong = NSURL.fileURLWithPath(finalM4a)
+        
+        
+        //Goes to the player and automatically play the selected song
+        NSNotificationCenter.defaultCenter().postNotificationName("didClickOnAMixedSong", object: selectedM4a)
     }
+    
+    
     
     //Function to set the name of the song play
     func songNameSetter(name: String) {

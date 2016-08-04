@@ -26,8 +26,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iHx-Yx-euJ">
-                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iHx-Yx-euJ">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="songListCell" textLabel="cLV-Yq-nnz" style="IBUITableViewCellStyleDefault" id="SCE-M2-e2T">
@@ -56,9 +56,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="iHx-Yx-euJ" secondAttribute="trailing" id="S7H-TM-ugX"/>
-                            <constraint firstItem="iHx-Yx-euJ" firstAttribute="leading" secondItem="acs-0s-x3a" secondAttribute="leading" id="iiG-4T-ZOn"/>
-                            <constraint firstItem="Ri4-fP-Ytg" firstAttribute="top" secondItem="iHx-Yx-euJ" secondAttribute="bottom" id="qtl-Rw-MJh"/>
+                            <constraint firstItem="iHx-Yx-euJ" firstAttribute="bottom" secondItem="Ri4-fP-Ytg" secondAttribute="top" id="U76-EI-7Yr"/>
+                            <constraint firstItem="iHx-Yx-euJ" firstAttribute="leading" secondItem="acs-0s-x3a" secondAttribute="leading" id="eft-rx-5zm"/>
+                            <constraint firstItem="iHx-Yx-euJ" firstAttribute="top" secondItem="hFh-Pr-uLW" secondAttribute="bottom" id="l09-oG-ppP"/>
+                            <constraint firstAttribute="trailing" secondItem="iHx-Yx-euJ" secondAttribute="trailing" id="yUl-eE-XbM"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Songs List" id="PsP-sP-Bz8">

@@ -56,6 +56,7 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
 //        let instance = VoiceRecord.sharedInstance
 //        instance.clearLibFolder()
         
+//        tableView.backgroundColor = UIColor().HexToColor("##FB0032", alpha: 1.0)
         mixedFilterM4a()
         tableView.reloadData()
     }
@@ -108,7 +109,12 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
         }
         print("Final Song name in mixed view is: \(finalSongName)")
         cell.textLabel!.text = finalSongName
+        //        cell.textLabel?.textColor = UIColor().HexToColor("#FFFFFF", alpha: 1.0)
+        cell.textLabel?.textColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
+        //        cell.backgroundColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
+        
 
+        
         return cell
     }
     

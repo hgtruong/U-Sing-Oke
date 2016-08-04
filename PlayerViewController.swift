@@ -23,7 +23,9 @@ class PlayerViewController: UIViewController {
     
     
     //Variables
+    @IBOutlet weak var ImageView: UIImageView!
 
+    
     
     
     override func viewDidLoad() {
@@ -34,11 +36,11 @@ class PlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PlayerViewController.didClickOnAMixedSong(_:)), name: "didClickOnAMixedSong", object: nil)
         
         FinishButton.hidden = true
-        
-        
-        
+
+        ImageView.image = self.ResizeImage(UIImage(named: "Musical.png")!, targetSize: CGSizeMake(ImageView.frame.size.width, ImageView.frame.size.height))
         
     }
+    
     
     
     var currentSong = String()
@@ -100,12 +102,12 @@ class PlayerViewController: UIViewController {
                 playInstance.startSmashing()
                 
                 
-                // Create and add the view to the screen.
-                let progressHUD = ProgressHUD(text: "Saving Photo")
-                self.view.addSubview(progressHUD)
-                // All done!
-                
-                self.view.backgroundColor = UIColor.blackColor()
+//                // Create and add the view to the screen.
+//                let progressHUD = ProgressHUD(text: "Processing...")
+//                self.view.addSubview(progressHUD)
+//                // All done!
+//                self.view.backgroundColor = UIColor.whiteColor()
+//                FinishButton.reloadInputViews()
                 
             }else {
                 let alertController = UIAlertController(title: "Invalid Task", message: "Please press record", preferredStyle: .Alert)
@@ -203,6 +205,34 @@ class PlayerViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    //Function to resize Image
+    func ResizeImage(image: UIImage, targetSize: CGSize) -> UIImage! {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / image.size.width
+        let heightRatio = targetSize.height / image.size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSizeMake(size.width * heightRatio, size.height * heightRatio)
+        } else {
+            newSize = CGSizeMake(size.width * widthRatio,  size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRectMake(0, 0, newSize.width, newSize.height)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.drawInRect(rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
     
     

@@ -106,6 +106,7 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
             print(error.localizedDescription)
         }
         
+//        tableView.backgroundColor = UIColor().HexToColor("##FB0032", alpha: 1.0)
         tableView.reloadData()
         
     }
@@ -136,6 +137,9 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         }
 //        print("final song is: \(finalSongName)")
         cell.textLabel!.text = finalSongName
+//        cell.textLabel?.textColor = UIColor().HexToColor("#FFFFFF", alpha: 1.0)
+        cell.textLabel?.textColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
+//        cell.backgroundColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
         
         return cell
     }

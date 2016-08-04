@@ -168,43 +168,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="SOT-Mx-W9j">
-                                <rect key="frame" x="0.0" y="341" width="600" height="31"/>
-                                <connections>
-                                    <action selector="songProgress:" destination="NPK-kK-SbC" eventType="valueChanged" id="Blz-bO-U5b"/>
-                                </connections>
-                            </slider>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brM-AO-rOc">
-                                <rect key="frame" x="270" y="426" width="60" height="60"/>
+                                <rect key="frame" x="262" y="459" width="76" height="76"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="AZx-Z0-eoM"/>
                                 </constraints>
-                                <state key="normal" image="Mic-60"/>
+                                <state key="normal" image="Mic-76"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="AZx-Z0-eoM"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="recordButton:" destination="NPK-kK-SbC" eventType="touchUpInside" id="Utf-Bb-5Mo"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6Y-ur-XgL">
-                                <rect key="frame" x="482" y="426" width="60" height="60"/>
+                                <rect key="frame" x="485" y="459" width="76" height="76"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="O8f-fR-jtM"/>
                                 </constraints>
-                                <state key="normal" image="Check-60"/>
+                                <state key="normal" image="Check-76">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="O8f-fR-jtM"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="FinishButton:" destination="NPK-kK-SbC" eventType="touchUpInside" id="ZkQ-wf-43a"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dxo-z3-6Sf">
-                                <rect key="frame" x="0.0" y="20" width="600" height="300"/>
+                                <rect key="frame" x="0.0" y="40" width="600" height="350"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="ZNC-vY-lQ1">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="350"/>
+                                    </constraint>
+                                </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eq6-lY-xpc">
-                                <rect key="frame" x="62" y="426" width="60" height="60"/>
+                                <rect key="frame" x="41" y="459" width="76" height="76"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="z89-aN-UoY"/>
+                                    <constraint firstAttribute="height" constant="76" id="zLA-sN-8A5"/>
                                 </constraints>
-                                <state key="normal" image="Play-60">
+                                <state key="normal" image="Play-76">
                                     <color key="titleColor" red="0.53333333333333333" green="0.70196078431372544" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <state key="selected" image="Mic-60"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="z89-aN-UoY"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="stopPlayButton:" destination="NPK-kK-SbC" eventType="touchUpInside" id="k0e-5l-Ulz"/>
                                 </connections>
@@ -212,29 +230,39 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="SOT-Mx-W9j" firstAttribute="leading" secondItem="YZY-WH-0pP" secondAttribute="leadingMargin" constant="-18" id="3jt-X3-uxm"/>
+                            <constraint firstAttribute="trailing" secondItem="dxo-z3-6Sf" secondAttribute="trailing" id="2HZ-pd-2F5"/>
+                            <constraint firstItem="dxo-z3-6Sf" firstAttribute="centerX" secondItem="brM-AO-rOc" secondAttribute="centerX" id="3CH-ta-LuA"/>
                             <constraint firstItem="brM-AO-rOc" firstAttribute="baseline" secondItem="G6Y-ur-XgL" secondAttribute="baseline" id="4nN-Za-JvJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="G6Y-ur-XgL" secondAttribute="trailing" constant="38" id="5YM-uF-3q2"/>
+                            <constraint firstItem="eq6-lY-xpc" firstAttribute="leading" secondItem="YZY-WH-0pP" secondAttribute="leadingMargin" constant="21" id="6MD-lI-auU"/>
+                            <constraint firstItem="dxo-z3-6Sf" firstAttribute="leading" secondItem="YZY-WH-0pP" secondAttribute="leading" id="75P-jJ-mNA"/>
                             <constraint firstItem="eq6-lY-xpc" firstAttribute="leading" secondItem="YZY-WH-0pP" secondAttribute="leadingMargin" constant="42" id="BHf-3g-3yg"/>
-                            <constraint firstAttribute="trailing" secondItem="dxo-z3-6Sf" secondAttribute="trailing" id="BXu-sH-eLX"/>
-                            <constraint firstItem="dxo-z3-6Sf" firstAttribute="top" secondItem="bcx-WT-fQl" secondAttribute="bottom" id="CSq-iM-iik"/>
-                            <constraint firstItem="dxo-z3-6Sf" firstAttribute="centerX" secondItem="SOT-Mx-W9j" secondAttribute="centerX" id="I5E-ey-vUw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="G6Y-ur-XgL" secondAttribute="trailing" constant="19" id="DYq-iL-n0V"/>
+                            <constraint firstItem="eq6-lY-xpc" firstAttribute="top" secondItem="brM-AO-rOc" secondAttribute="top" id="KHM-uf-mf3"/>
                             <constraint firstItem="eq6-lY-xpc" firstAttribute="leading" secondItem="YZY-WH-0pP" secondAttribute="leading" constant="259" id="S8P-En-PrD"/>
                             <constraint firstItem="AMd-tR-Q2E" firstAttribute="top" secondItem="eq6-lY-xpc" secondAttribute="bottom" constant="114" id="Srx-Te-YWm"/>
+                            <constraint firstItem="eq6-lY-xpc" firstAttribute="top" secondItem="dxo-z3-6Sf" secondAttribute="bottom" constant="69" id="V4j-4P-vBb">
+                                <variation key="heightClass=regular-widthClass=regular" constant="95"/>
+                            </constraint>
+                            <constraint firstItem="AMd-tR-Q2E" firstAttribute="top" secondItem="eq6-lY-xpc" secondAttribute="bottom" constant="65" id="Zr9-C2-fT7"/>
                             <constraint firstItem="eq6-lY-xpc" firstAttribute="baseline" secondItem="brM-AO-rOc" secondAttribute="baseline" id="mVG-5V-bP0"/>
-                            <constraint firstItem="SOT-Mx-W9j" firstAttribute="top" secondItem="dxo-z3-6Sf" secondAttribute="bottom" constant="21" id="oOt-Ik-B8J"/>
-                            <constraint firstItem="eq6-lY-xpc" firstAttribute="top" secondItem="SOT-Mx-W9j" secondAttribute="bottom" constant="55" id="tlw-Cy-duU"/>
-                            <constraint firstItem="SOT-Mx-W9j" firstAttribute="centerX" secondItem="brM-AO-rOc" secondAttribute="centerX" id="vUa-ED-cyT"/>
-                            <constraint firstItem="dxo-z3-6Sf" firstAttribute="leading" secondItem="YZY-WH-0pP" secondAttribute="leading" id="z4A-5g-szh"/>
+                            <constraint firstItem="G6Y-ur-XgL" firstAttribute="top" secondItem="brM-AO-rOc" secondAttribute="top" id="tIN-m9-bbf"/>
+                            <constraint firstItem="dxo-z3-6Sf" firstAttribute="top" secondItem="bcx-WT-fQl" secondAttribute="bottom" constant="20" id="vJu-SU-kF0"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="BHf-3g-3yg"/>
                                 <exclude reference="S8P-En-PrD"/>
+                                <exclude reference="mVG-5V-bP0"/>
+                                <exclude reference="4nN-Za-JvJ"/>
+                                <exclude reference="Srx-Te-YWm"/>
+                                <exclude reference="5YM-uF-3q2"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="FinishButton" destination="G6Y-ur-XgL" id="O6k-lx-b5w"/>
+                        <outlet property="ImageView" destination="dxo-z3-6Sf" id="mWt-Ji-Wuo"/>
                         <outlet property="recordButton" destination="brM-AO-rOc" id="hqr-xc-xig"/>
                         <outlet property="stopPlayButton" destination="eq6-lY-xpc" id="fxV-NP-9Bk"/>
                     </connections>
@@ -290,9 +318,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Check-60" width="60" height="60"/>
+        <image name="Check-76" width="76" height="76"/>
         <image name="Mic-60" width="60" height="60"/>
-        <image name="Play-60" width="60" height="60"/>
+        <image name="Mic-76" width="76" height="76"/>
+        <image name="Play-76" width="76" height="76"/>
         <image name="Plus-60" width="60" height="60"/>
     </resources>
 </document>

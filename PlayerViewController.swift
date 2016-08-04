@@ -9,7 +9,29 @@
 import UIKit
 import AVFoundation
 
+
+
+private var _shareInstance: PlayerViewController = PlayerViewController()
+
+
 class PlayerViewController: UIViewController {
+    
+    
+    class public var sharedInstance:PlayerViewController {
+        return _shareInstance
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PlayerViewController.didClickOnASong(_:)), name: "didClickOnASong", object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PlayerViewController.didClickOnAMixedSong(_:)), name: "didClickOnAMixedSong", object: nil)
+        
+        FinishButton.hidden = true
+        
+    }
+    
     
     var currentSong = String()
     
@@ -29,6 +51,7 @@ class PlayerViewController: UIViewController {
                         instance.pauseSong()
                     case false:
                         instance.playSong()
+                        
                     }
                 }
             } else{
@@ -54,6 +77,7 @@ class PlayerViewController: UIViewController {
         let songInstance = CurrentSongname.sharedInstance
         
         
+        
         if let isNil = playInstance.newTrack {
             
             print("Insdie finish condition")
@@ -67,10 +91,11 @@ class PlayerViewController: UIViewController {
                 alertController.show()
                 
             }else if currentSong.rangeOfString("mix") == nil && playInstance.status == true && (voiceInstance.status == false && voiceInstance.arrayOfRecordings.count >= 1) || voiceInstance.status == true {
-                voiceInstance.stopRecord()
+//                voiceInstance.stopRecord()
                 playInstance.stopSong()
                 playInstance.finalIndex = 0
                 playInstance.startSmashing()
+                
             }else {
                 let alertController = UIAlertController(title: "Invalid Task", message: "Please press record", preferredStyle: .Alert)
                 alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Cancel, handler: nil))
@@ -116,6 +141,7 @@ class PlayerViewController: UIViewController {
                     print("stop recording")
                 case false:
                     instance.record()
+                    FinishButton.hidden = false
                     print("recording")
                 }
             }else {
@@ -141,23 +167,15 @@ class PlayerViewController: UIViewController {
     }
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PlayerViewController.didClickOnASong(_:)), name: "didClickOnASong", object: nil)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PlayerViewController.didClickOnAMixedSong(_:)), name: "didClickOnAMixedSong", object: nil)
-//        var background: UIColor = UIColor(patternImage: UIImage(named: "background.jpg")!)
-//        self.view.backgroundColor = background
-//        background.re
-
-    }
-    
+   
     func didClickOnASong(noti:NSNotification){
         let song = noti.object as! NSURL
         let playInstance = PlayStopManager.sharedInstance
         playInstance.bgMusicUrl = song
         playInstance.setUpNewTrack()
         playInstance.playSong()
+        stopPlayButton.userInteractionEnabled = false
+        
         
     }
     
@@ -166,8 +184,9 @@ class PlayerViewController: UIViewController {
         let playInstance = PlayStopManager.sharedInstance
         playInstance.bgMusicUrl = song
         playInstance.setUpNewTrack()
+        FinishButton.hidden = true
         playInstance.playSong()
-        
+        stopPlayButton.userInteractionEnabled = true
     }
     
     override func didReceiveMemoryWarning() {

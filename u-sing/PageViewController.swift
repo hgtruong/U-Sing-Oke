@@ -46,10 +46,21 @@ class PageViewController: UIPageViewController{
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnASong), name: "didClickOnASong", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnAMixedSong), name: "didClickOnAMixedSong", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didFinishMashing), name: "didFinishMashing", object: nil)
+        
 //
         // Do any additional setup after loading the view.
     }
     
+    
+    func didFinishMashing(){
+        if let firstViewController = orderedViewControllers.first {
+            setViewControllers([firstViewController],
+                               direction: .Forward,
+                               animated: true,
+                               completion: nil)
+        }
+    }
     func didClickOnASong(){
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController],

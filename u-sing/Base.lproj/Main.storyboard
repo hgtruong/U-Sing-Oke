@@ -14,7 +14,7 @@
             </objects>
             <point key="canvasLocation" x="461" y="66"/>
         </scene>
-        <!--Pick Your Poison-->
+        <!--Songs List-->
         <scene sceneID="bEs-jh-YTh">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="NOg-vL-1zk" customClass="SongListViewController" customModule="u_sing" customModuleProvider="target" sceneMemberID="viewController">
@@ -26,11 +26,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ieE-gy-HAm">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iHx-Yx-euJ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iHx-Yx-euJ">
                                 <rect key="frame" x="0.0" y="108" width="600" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -60,16 +56,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="ieE-gy-HAm" secondAttribute="trailing" id="3Wo-8K-NGF"/>
-                            <constraint firstItem="ieE-gy-HAm" firstAttribute="leading" secondItem="acs-0s-x3a" secondAttribute="leading" id="BXw-eL-s82"/>
-                            <constraint firstItem="iHx-Yx-euJ" firstAttribute="top" secondItem="ieE-gy-HAm" secondAttribute="bottom" id="Iux-YS-eOX"/>
                             <constraint firstAttribute="trailing" secondItem="iHx-Yx-euJ" secondAttribute="trailing" id="S7H-TM-ugX"/>
-                            <constraint firstItem="ieE-gy-HAm" firstAttribute="top" secondItem="hFh-Pr-uLW" secondAttribute="bottom" id="h7H-et-QXd"/>
                             <constraint firstItem="iHx-Yx-euJ" firstAttribute="leading" secondItem="acs-0s-x3a" secondAttribute="leading" id="iiG-4T-ZOn"/>
                             <constraint firstItem="Ri4-fP-Ytg" firstAttribute="top" secondItem="iHx-Yx-euJ" secondAttribute="bottom" id="qtl-Rw-MJh"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Pick Your Poison" id="PsP-sP-Bz8">
+                    <navigationItem key="navigationItem" title="Songs List" id="PsP-sP-Bz8">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Tpc-ge-aPH">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sbH-C2-fWC">
                                 <rect key="frame" x="545" y="4" width="35" height="35"/>
@@ -83,7 +75,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="AddSongButton" destination="sbH-C2-fWC" id="a8Q-00-C1Y"/>
-                        <outlet property="searchButton" destination="ieE-gy-HAm" id="1f3-o2-Hpt"/>
                         <outlet property="tableView" destination="iHx-Yx-euJ" id="uhJ-pv-Eo6"/>
                     </connections>
                 </viewController>

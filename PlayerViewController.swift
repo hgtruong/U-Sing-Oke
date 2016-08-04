@@ -22,13 +22,21 @@ class PlayerViewController: UIViewController {
     }
     
     
+    //Variables
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PlayerViewController.didClickOnASong(_:)), name: "didClickOnASong", object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PlayerViewController.didClickOnAMixedSong(_:)), name: "didClickOnAMixedSong", object: nil)
         
         FinishButton.hidden = true
+        
+        
+        
         
     }
     
@@ -59,14 +67,9 @@ class PlayerViewController: UIViewController {
                 alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Cancel, handler: nil))
             alertController.show()
         }
-        
-         
-        
+       
     }
-    
-    
-    
-    
+
     @IBOutlet weak var FinishButton: UIButton!
     
     @IBAction func FinishButton(sender: AnyObject) {
@@ -95,6 +98,14 @@ class PlayerViewController: UIViewController {
                 playInstance.stopSong()
                 playInstance.finalIndex = 0
                 playInstance.startSmashing()
+                
+                
+                // Create and add the view to the screen.
+                let progressHUD = ProgressHUD(text: "Saving Photo")
+                self.view.addSubview(progressHUD)
+                // All done!
+                
+                self.view.backgroundColor = UIColor.blackColor()
                 
             }else {
                 let alertController = UIAlertController(title: "Invalid Task", message: "Please press record", preferredStyle: .Alert)

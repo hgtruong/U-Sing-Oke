@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		61EE900ECBEF189B57D157A7 /* Pods_u_sing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4DA4127926B34032D25BD2 /* Pods_u_sing.framework */; };
 		6503FAFD1D41300F006817A0 /* VoiceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6503FAFC1D41300F006817A0 /* VoiceRecord.swift */; };
+		6521C3B41D53047A005B5AAD /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6521C3B31D53047A005B5AAD /* ProgressHUD.swift */; };
 		6535E8B71D37F94E00BFCF04 /* 21.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6535E8B61D37F94E00BFCF04 /* 21.m4a */; };
 		654796DB1D5055F6006008B1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654796DA1D5055F6006008B1 /* Extensions.swift */; };
 		65480FAF1D38522400B73320 /* 3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 65480FAE1D38522400B73320 /* 3.m4a */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		6503FAFC1D41300F006817A0 /* VoiceRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceRecord.swift; sourceTree = "<group>"; };
+		6521C3B31D53047A005B5AAD /* ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		6535E8B61D37F94E00BFCF04 /* 21.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 21.m4a; sourceTree = "<group>"; };
 		654796DA1D5055F6006008B1 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		65480FAE1D38522400B73320 /* 3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3.m4a; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				65C6A7C11D383B63009D3461 /* SmashingManager.swift */,
 				6503FAFC1D41300F006817A0 /* VoiceRecord.swift */,
 				65E450B31D51338A0060D073 /* CurrentSongName.swift */,
+				6521C3B31D53047A005B5AAD /* ProgressHUD.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				65C6A7C21D383B63009D3461 /* SmashingManager.swift in Sources */,
 				65E450B41D51338A0060D073 /* CurrentSongName.swift in Sources */,
 				654891D51D47FBE0002E3709 /* MixedSongListViewController.swift in Sources */,
+				6521C3B41D53047A005B5AAD /* ProgressHUD.swift in Sources */,
 				65DD9B511D4BE93300761E46 /* NSObject+iPodManagerHelper.m in Sources */,
 				654796DB1D5055F6006008B1 /* Extensions.swift in Sources */,
 				658358F51D3E9FD7000E9F19 /* PlayerViewController.swift in Sources */,

@@ -123,7 +123,15 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
      public func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
         
         finalIndex = 0
-        startSmashing()
+        
+        let mixedInstance = FromMixed.sharedInstance
+        
+        //Only call smash if they playback song is not a mix
+        if mixedInstance.fromMixed == false {
+            startSmashing()
+        }
+        
+        
 
 
     }

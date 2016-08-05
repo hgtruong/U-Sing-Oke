@@ -215,7 +215,7 @@
                                     <constraint firstAttribute="height" constant="76" id="zLA-sN-8A5"/>
                                 </constraints>
                                 <state key="normal" image="Play-76">
-                                    <color key="titleColor" red="0.53333333333333333" green="0.70196078431372544" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <state key="selected" image="Mic-60"/>
                                 <variation key="default">

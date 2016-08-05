@@ -35,7 +35,7 @@ class PageViewController: UIPageViewController{
         super.viewDidLoad()
         
         dataSource = self
-        orderedViewControllers = [navi, self.newColoredViewController("Player"), mixed]
+        orderedViewControllers = [self.newColoredViewController("Player"), navi, mixed]
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController],
                                direction: .Forward,

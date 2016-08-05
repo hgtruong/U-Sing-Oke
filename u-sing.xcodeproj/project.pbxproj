@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		61EE900ECBEF189B57D157A7 /* Pods_u_sing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4DA4127926B34032D25BD2 /* Pods_u_sing.framework */; };
+		6502745F1D544ADE00C93F7E /* FromMixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6502745E1D544ADE00C93F7E /* FromMixed.swift */; };
 		6503FAFD1D41300F006817A0 /* VoiceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6503FAFC1D41300F006817A0 /* VoiceRecord.swift */; };
 		6521C3B41D53047A005B5AAD /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6521C3B31D53047A005B5AAD /* ProgressHUD.swift */; };
 		6535E8B71D37F94E00BFCF04 /* 21.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6535E8B61D37F94E00BFCF04 /* 21.m4a */; };
@@ -57,6 +58,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6502745E1D544ADE00C93F7E /* FromMixed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromMixed.swift; sourceTree = "<group>"; };
 		6503FAFC1D41300F006817A0 /* VoiceRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceRecord.swift; sourceTree = "<group>"; };
 		6521C3B31D53047A005B5AAD /* ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		6535E8B61D37F94E00BFCF04 /* 21.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 21.m4a; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				6503FAFC1D41300F006817A0 /* VoiceRecord.swift */,
 				65E450B31D51338A0060D073 /* CurrentSongName.swift */,
 				6521C3B31D53047A005B5AAD /* ProgressHUD.swift */,
+				6502745E1D544ADE00C93F7E /* FromMixed.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				6503FAFD1D41300F006817A0 /* VoiceRecord.swift in Sources */,
 				65A46F401D42B2560068FD0E /* PlayStopManager.swift in Sources */,
 				658358F11D3E9F7F000E9F19 /* PageViewController.swift in Sources */,
+				6502745F1D544ADE00C93F7E /* FromMixed.swift in Sources */,
 				65C6A7C21D383B63009D3461 /* SmashingManager.swift in Sources */,
 				65E450B41D51338A0060D073 /* CurrentSongName.swift in Sources */,
 				654891D51D47FBE0002E3709 /* MixedSongListViewController.swift in Sources */,
@@ -511,6 +515,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "u-sing/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = "u-sing";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ht.u-sing1";
@@ -535,6 +540,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "u-sing/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = "u-sing";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ht.u-sing1";

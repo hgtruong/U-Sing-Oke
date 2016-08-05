@@ -81,9 +81,13 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
 //        let instance = VoiceRecord.sharedInstance
 //        instance.clearDocFolder()
         
-        self.tableView.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
+//        self.tableView.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
+//
+//        self.tableView.backgroundColor = UIColor().HexToColor("#FCAD4D", alpha: 1.0)
 
-
+        
+        self.tableView.backgroundColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
+        
         tableView.reloadData()
         
     }
@@ -138,9 +142,10 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         }
 //        print("final song is: \(finalSongName)")
         cell.textLabel!.text = finalSongName
-//        cell.textLabel?.textColor = UIColor().HexToColor("#FFFFFF", alpha: 1.0)
-        cell.textLabel?.textColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
-        cell.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
+        cell.textLabel?.textColor = UIColor().HexToColor("#FFFFFF", alpha: 1.0)
+//        cell.textLabel?.textColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
+//        cell.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
+        cell.backgroundColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
 
         
         return cell
@@ -165,6 +170,8 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
             finalSongName = String(songName.characters.suffixFrom(rangOfZero.endIndex))
         }
         print("finalM4a in song list view is: \(finalSongName)")
+//        print("NSURL Fileurl in song list view is: \(NSURL.fileURLWithPath(finalM4a))")
+//        print("selectedM4a  in song list view is: \(selectedM4a)")
         instance.selectedTitle = finalSongName
         
         //Assiging current song for record compare

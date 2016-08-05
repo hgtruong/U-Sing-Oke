@@ -29,7 +29,8 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
     var selectedTitle = String()
     var finalM4a = String()
     var songName = String()
-  
+    let mixedInstance = FromMixed.sharedInstance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,6 +59,8 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
         
         self.tableView.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
         mixedFilterM4a()
+        
+        mixedInstance.fromMixed = false
         tableView.reloadData()
     }
     
@@ -132,7 +135,7 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
         let songInstance = CurrentSongname.sharedInstance
         songInstance.songName = selectedTitle
         
-        
+        mixedInstance.fromMixed = true
         
         print("Selected Title in mixed did select is:  \(selectedTitle)")
         

@@ -7,5 +7,6 @@ target 'u-sing' do
 
   # Pods for u-sing
   pod 'Whisper'
+  pod 'MBProgressHUD', '~> 1.0.0'
 
 end

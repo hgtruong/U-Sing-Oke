@@ -1,6 +1,0 @@
-framework module Pods_u_sing {
-  umbrella header "Pods-u-sing-umbrella.h"
-
-  export *
-  module * { export * }
-}

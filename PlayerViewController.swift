@@ -36,9 +36,11 @@ class PlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PlayerViewController.didClickOnAMixedSong(_:)), name: "didClickOnAMixedSong", object: nil)
         
         FinishButton.hidden = true
-        recordButton.hidden = false
+        
 
         ImageView.image = self.ResizeImage(UIImage(named: "Musical.png")!, targetSize: CGSizeMake(ImageView.frame.size.width, ImageView.frame.size.height))
+        
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
         
     }
     
@@ -100,6 +102,13 @@ class PlayerViewController: UIViewController {
 //                voiceInstance.stopRecord()
                 playInstance.stopSong()
                 playInstance.finalIndex = 0
+                
+                var hud: MBProgressHUD = MBProgressHUD()
+                let loadingNotification = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+                loadingNotification.mode = MBProgressHUDMode.Indeterminate
+                loadingNotification.labelText = "Loading"
+                
+                
                 playInstance.startSmashing()
                 stopPlayButton.hidden = false
                 //Notify to move to mixed song view after mashing
@@ -178,6 +187,7 @@ class PlayerViewController: UIViewController {
     
    
     func didClickOnASong(noti:NSNotification){
+        recordButton.hidden = false
         let song = noti.object as! NSURL
         let playInstance = PlayStopManager.sharedInstance
         playInstance.bgMusicUrl = song
@@ -185,6 +195,7 @@ class PlayerViewController: UIViewController {
         playInstance.playSong()
         stopPlayButton.userInteractionEnabled = false
         stopPlayButton.hidden = true
+        
         
     }
     

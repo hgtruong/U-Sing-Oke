@@ -25,7 +25,11 @@ class PlayerViewController: UIViewController {
     //Variables
     @IBOutlet weak var ImageView: UIImageView!
 
-    @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var StopPlayLabel: UILabel!
+    
+    @IBOutlet weak var RecordLabel: UILabel!
+    
+    @IBOutlet weak var FinishLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,11 +39,15 @@ class PlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PlayerViewController.didClickOnAMixedSong(_:)), name: "didClickOnAMixedSong", object: nil)
         
         FinishButton.hidden = true
+        FinishLabel.hidden = true
+        
         recordButton.hidden = true
+        RecordLabel.hidden = true
+        
+        
         stopPlayButton.hidden = true
-        
-        
-
+        StopPlayLabel.hidden = true
+    
         ImageView.image = self.ResizeImage(UIImage(named: "Musical.png")!, targetSize: CGSizeMake(ImageView.frame.size.width, ImageView.frame.size.height))
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
@@ -48,6 +56,7 @@ class PlayerViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         FinishButton.hidden = true
+        FinishLabel.hidden = true
     }
     
     
@@ -105,7 +114,9 @@ class PlayerViewController: UIViewController {
                 alertController.show()
                 
             }else if currentSong.rangeOfString("mix") == nil && playInstance.status == true && (voiceInstance.status == false && voiceInstance.arrayOfRecordings.count >= 1) || voiceInstance.status == true {
-//                voiceInstance.stopRecord()
+                
+                recordButton.selected = false
+                
                 playInstance.stopSong()
                 playInstance.finalIndex = 0
                 
@@ -127,8 +138,10 @@ class PlayerViewController: UIViewController {
                 })
                 
                 stopPlayButton.hidden = false
+                StopPlayLabel.hidden = false
                 stopPlayButton.userInteractionEnabled = true
-                recordButton.selected = false
+                
+                
                 //Notify to move to mixed song view after mashing
                 
                 
@@ -142,7 +155,7 @@ class PlayerViewController: UIViewController {
             alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Cancel, handler: nil))
             alertController.show()
         }
-}
+    }
 
 
     
@@ -176,10 +189,15 @@ class PlayerViewController: UIViewController {
                     instance.stopRecord()
                     recordButton.selected = false
                     print("stop recording")
+                    
                 case false:
-                    instance.record()
                     FinishButton.hidden = false
+                    FinishLabel.hidden = false
+                    
                     recordButton.selected = true
+                    
+                    instance.record()
+                    
                     print("recording")
                 }
             }else {
@@ -194,21 +212,14 @@ class PlayerViewController: UIViewController {
         }
     }
     
-        
-        
-        
-      
-    
-    @IBOutlet weak var songProgress: NSLayoutConstraint!
-    
-    @IBAction func songProgress(sender: AnyObject) {
-    }
-    
-    
-   
     func didClickOnASong(noti:NSNotification){
+        
         recordButton.hidden = false
+        RecordLabel.hidden = false
+        
         stopPlayButton.hidden = true
+        StopPlayLabel.hidden = true
+        
         let song = noti.object as! NSURL
         let playInstance = PlayStopManager.sharedInstance
         playInstance.bgMusicUrl = song
@@ -220,12 +231,19 @@ class PlayerViewController: UIViewController {
     
     func didClickOnAMixedSong(noti:NSNotification){
         let song = noti.object as! NSURL
+        
+        FinishButton.hidden = true
+        FinishLabel.hidden = true
+        
+        recordButton.hidden = true
+        RecordLabel.hidden = true
+        
+        stopPlayButton.hidden = false
+        StopPlayLabel.hidden = false
+        
         let playInstance = PlayStopManager.sharedInstance
         playInstance.bgMusicUrl = song
         playInstance.setUpNewTrack()
-        FinishButton.hidden = true
-        recordButton.hidden = true
-        stopPlayButton.hidden = false
         playInstance.playSong()
         
     }

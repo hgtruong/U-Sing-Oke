@@ -221,7 +221,7 @@
                                     <action selector="recordButton:" destination="NPK-kK-SbC" eventType="touchUpInside" id="Utf-Bb-5Mo"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play/Pause" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVr-Af-0Ch">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play|Pause" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVr-Af-0Ch">
                                 <rect key="frame" x="41" y="543" width="76" height="21"/>
                                 <color key="backgroundColor" red="0.98431372549019602" green="0.0" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -238,7 +238,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="0.97982772435897436" green="0.97982772435897436" blue="0.97982772435897436" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finished" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQh-jq-e7B">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Done Record" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQh-jq-e7B">
                                 <rect key="frame" x="485" y="543" width="76" height="21"/>
                                 <color key="backgroundColor" red="0.98431372549019602" green="0.0" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -296,7 +296,10 @@
                     </view>
                     <connections>
                         <outlet property="FinishButton" destination="G6Y-ur-XgL" id="O6k-lx-b5w"/>
+                        <outlet property="FinishLabel" destination="tQh-jq-e7B" id="C5u-vY-tlB"/>
                         <outlet property="ImageView" destination="dxo-z3-6Sf" id="mWt-Ji-Wuo"/>
+                        <outlet property="RecordLabel" destination="dQQ-Eo-G1e" id="PEk-1E-ST5"/>
+                        <outlet property="StopPlayLabel" destination="uVr-Af-0Ch" id="ptG-7Z-db0"/>
                         <outlet property="recordButton" destination="brM-AO-rOc" id="hqr-xc-xig"/>
                         <outlet property="stopPlayButton" destination="eq6-lY-xpc" id="fxV-NP-9Bk"/>
                     </connections>

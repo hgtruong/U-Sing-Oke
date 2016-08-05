@@ -81,6 +81,9 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
 //        let instance = VoiceRecord.sharedInstance
 //        instance.clearDocFolder()
         
+        self.tableView.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
+
+
         tableView.reloadData()
         
     }
@@ -105,8 +108,6 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         } catch let error as NSError {
             print(error.localizedDescription)
         }
-        
-//        tableView.backgroundColor = UIColor().HexToColor("##FB0032", alpha: 1.0)
         tableView.reloadData()
         
     }
@@ -139,7 +140,8 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         cell.textLabel!.text = finalSongName
 //        cell.textLabel?.textColor = UIColor().HexToColor("#FFFFFF", alpha: 1.0)
         cell.textLabel?.textColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
-//        cell.backgroundColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
+        cell.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
+
         
         return cell
     }

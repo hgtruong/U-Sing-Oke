@@ -35,13 +35,16 @@ class PageViewController: UIPageViewController{
         super.viewDidLoad()
         
         dataSource = self
-        orderedViewControllers = [self.newColoredViewController("Player"), navi, mixed]
-        if let firstViewController = orderedViewControllers.first {
-            setViewControllers([firstViewController],
-                               direction: .Forward,
-                               animated: true,
-                               completion: nil)
-        }
+        orderedViewControllers = [navi, self.newColoredViewController("Player"), mixed]
+        
+        let firstViewController = orderedViewControllers[0]
+        let secondViewController = orderedViewControllers[1]
+//        let thirdViewController = orderedViewControllers[2]
+//        setViewControllers([thirdViewController], direction: .Forward, animated: true, completion: nil)
+        setViewControllers([secondViewController], direction: .Forward, animated: true, completion: nil)
+        setViewControllers([firstViewController], direction: .Forward, animated: true, completion: nil)
+        
+        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnASong), name: "didClickOnASong", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnAMixedSong), name: "didClickOnAMixedSong", object: nil)
@@ -50,32 +53,29 @@ class PageViewController: UIPageViewController{
     
     
     func didClickOnASong(){
-        if let firstViewController = orderedViewControllers.first {
+        let firstViewController = orderedViewControllers[1]
             setViewControllers([firstViewController],
                                direction: .Forward,
                                animated: true,
                                completion: nil)
-        }
     }
     
     
     func didClickOnAMixedSong(){
-        if let firstViewController = orderedViewControllers.first {
+        let firstViewController = orderedViewControllers[1]
             setViewControllers([firstViewController],
                                direction: .Reverse,
                                animated: true,
                                completion: nil)
-        }
     }
     
     
     func didFinishMashing(){
-        if let firstViewController = orderedViewControllers.first {
+        let firstViewController = orderedViewControllers[2]
             setViewControllers([firstViewController],
                                direction: .Forward,
                                animated: true,
                                completion: nil)
-        }
     }
     
     override func didReceiveMemoryWarning() {

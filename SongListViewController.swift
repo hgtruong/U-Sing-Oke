@@ -81,12 +81,15 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
 //        let instance = VoiceRecord.sharedInstance
 //        instance.clearDocFolder()
         
-//        self.tableView.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
+        self.tableView.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        self.navigationController!.navigationBar.titleTextAttributes = titleDict as! [String : AnyObject]
+        navigationController!.navigationBar.barTintColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
 //
 //        self.tableView.backgroundColor = UIColor().HexToColor("#FCAD4D", alpha: 1.0)
 
         
-        self.tableView.backgroundColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
+//        self.tableView.backgroundColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
         
         tableView.reloadData()
         
@@ -109,8 +112,8 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
 //            print("m4aFileNames in filter function: \(m4aFileNames)"
             
             
-        } catch let error as NSError {
-            print(error.localizedDescription)
+        } catch _ {
+            print("Err")
         }
         tableView.reloadData()
         
@@ -142,10 +145,10 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         }
 //        print("final song is: \(finalSongName)")
         cell.textLabel!.text = finalSongName
-        cell.textLabel?.textColor = UIColor().HexToColor("#FFFFFF", alpha: 1.0)
-//        cell.textLabel?.textColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
-//        cell.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
-        cell.backgroundColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
+//        cell.textLabel?.textColor = UIColor().HexToColor("#FFFFFF", alpha: 1.0)
+        cell.textLabel?.textColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
+        cell.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
+//        cell.backgroundColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
 
         
         return cell

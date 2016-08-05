@@ -57,8 +57,14 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
 //        let instance = VoiceRecord.sharedInstance
 //        instance.clearLibFolder()
         
+        
         self.tableView.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        self.navigationController!.navigationBar.titleTextAttributes  = titleDict as! [String : AnyObject]
+        navigationController!.navigationBar.barTintColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
         mixedFilterM4a()
+        
+        
         
         mixedInstance.fromMixed = false
         tableView.reloadData()
@@ -86,8 +92,8 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
             
              tableView.reloadData()
             
-        } catch let error as NSError {
-            print(error.localizedDescription)
+        } catch _ {
+            print("Err")
         }
         
        
@@ -159,8 +165,8 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
             
 //            print("m4a list: \(selectedM4a)")
           
-        } catch let error as NSError {
-            print(error.localizedDescription)
+        } catch _ {
+            print("Err")
         }
 
 //        setting the selected song as the original track for VoiceRecord and smashing

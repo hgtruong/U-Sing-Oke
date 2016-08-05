@@ -271,33 +271,6 @@
             </objects>
             <point key="canvasLocation" x="971" y="872"/>
         </scene>
-        <!--Test View Controller-->
-        <scene sceneID="Cer-Iu-w43">
-            <objects>
-                <viewController id="88m-rL-OCi" customClass="TestViewController" customModule="u_sing" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Df8-di-DfP"/>
-                        <viewControllerLayoutGuide type="bottom" id="MwH-9L-uJL"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="e2U-c8-rgr">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UhU-WZ-WHg">
-                                <rect key="frame" x="277" y="294" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="doGo:" destination="88m-rL-OCi" eventType="touchUpInside" id="ucV-UF-Hge"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1YH-Vm-xW9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1355" y="1960"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="acc-zR-9bK">
             <objects>

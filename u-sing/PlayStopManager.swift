@@ -48,15 +48,15 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
         
 //        let playviewInstance = PlayerViewController.sharedInstance
     
-        do{
+//        do{
             newTrack.prepareToPlay()
             newTrack.play()
 //            playviewInstance.stopPlayButton.userInteractionEnabled = false
             status = true
-        }catch _ {
-            let alertController = UIAlertController(title: "No Song Chosen!", message: "Please select a song to get started!", preferredStyle: .Alert)
-            alertController.show()
-        }
+//        }catch _ {
+//            let alertController = UIAlertController(title: "No Song Chosen!", message: "Please select a song to get started!", preferredStyle: .Alert)
+//            alertController.show()
+//        }
         
   
     }//end of playSong function
@@ -108,8 +108,7 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
             }
             dispatch_semaphore_wait(semaphore, timeout)
         }
-        //Notify to move to mixed song view after mashing
-        NSNotificationCenter.defaultCenter().postNotificationName("didFinishMashing", object: nil)
+        
         
         //Removing all the previous recordings after the song had finished
         voiceInstance.arrayOfRecordings.removeAll()

@@ -11,7 +11,7 @@ import UIKit
 import AVFoundation
 import CoreMedia
 
-class PageViewController: UIPageViewController{
+class PageViewController: UIPageViewControllerWithOverlayIndicator {
     
     
     
@@ -39,12 +39,11 @@ class PageViewController: UIPageViewController{
         
         let firstViewController = orderedViewControllers[0]
         let secondViewController = orderedViewControllers[1]
-//        let thirdViewController = orderedViewControllers[2]
-//        setViewControllers([thirdViewController], direction: .Forward, animated: true, completion: nil)
         setViewControllers([secondViewController], direction: .Forward, animated: true, completion: nil)
         setViewControllers([firstViewController], direction: .Forward, animated: true, completion: nil)
         
         
+
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnASong), name: "didClickOnASong", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnAMixedSong), name: "didClickOnAMixedSong", object: nil)
@@ -84,11 +83,6 @@ class PageViewController: UIPageViewController{
     }
     
     
-//    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool){
-//        let pageContentViewController = pageViewController.viewControllers![0] as! ViewController
-//        let index = pageContentViewController.pageIndex
-    
-//    }
 }
 
 // MARK: UIPageViewControllerDataSource

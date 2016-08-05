@@ -168,21 +168,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brM-AO-rOc">
-                                <rect key="frame" x="262" y="459" width="76" height="76"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="AZx-Z0-eoM"/>
-                                </constraints>
-                                <state key="normal" image="Mic-76"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="AZx-Z0-eoM"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="recordButton:" destination="NPK-kK-SbC" eventType="touchUpInside" id="Utf-Bb-5Mo"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6Y-ur-XgL">
                                 <rect key="frame" x="485" y="459" width="76" height="76"/>
                                 <constraints>
@@ -225,6 +210,22 @@
                                 </variation>
                                 <connections>
                                     <action selector="stopPlayButton:" destination="NPK-kK-SbC" eventType="touchUpInside" id="k0e-5l-Ulz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brM-AO-rOc">
+                                <rect key="frame" x="262" y="459" width="76" height="76"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="AZx-Z0-eoM"/>
+                                </constraints>
+                                <state key="normal" image="Mic-76"/>
+                                <state key="selected" image="MicFilled-76"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="AZx-Z0-eoM"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="recordButton:" destination="NPK-kK-SbC" eventType="touchUpInside" id="Utf-Bb-5Mo"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -294,6 +295,7 @@
         <image name="Check-76" width="76" height="76"/>
         <image name="Mic-60" width="60" height="60"/>
         <image name="Mic-76" width="76" height="76"/>
+        <image name="MicFilled-76" width="76" height="76"/>
         <image name="Play-76" width="76" height="76"/>
         <image name="Plus-60" width="60" height="60"/>
     </resources>

@@ -25,6 +25,9 @@ class PlayerViewController: UIViewController {
     //Variables
     @IBOutlet weak var ImageView: UIImageView!
 
+    @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
+    
+    let spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .White)
     
     
     
@@ -36,12 +39,20 @@ class PlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PlayerViewController.didClickOnAMixedSong(_:)), name: "didClickOnAMixedSong", object: nil)
         
         FinishButton.hidden = true
+        recordButton.hidden = true
+        stopPlayButton.hidden = true
+        
         
 
         ImageView.image = self.ResizeImage(UIImage(named: "Musical.png")!, targetSize: CGSizeMake(ImageView.frame.size.width, ImageView.frame.size.height))
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        FinishButton.hidden = true
+        spinner.stopAnimating()
     }
     
     
@@ -86,7 +97,7 @@ class PlayerViewController: UIViewController {
         
         
         
-        if let isNil = playInstance.newTrack {
+        if playInstance.newTrack != nil {
             
             print("Insdie finish condition")
             currentSong = songInstance.songName!
@@ -103,16 +114,31 @@ class PlayerViewController: UIViewController {
                 playInstance.stopSong()
                 playInstance.finalIndex = 0
                 
-                var hud: MBProgressHUD = MBProgressHUD()
-                let loadingNotification = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-                loadingNotification.mode = MBProgressHUDMode.Indeterminate
-                loadingNotification.labelText = "Loading"
+                //Creating an activity indicator
+//                spinner.frame = CGRectMake(0, 0, 24, 24)
+//                spinner.startAnimating()
+                let alertView = UIAlertController(title: "Processing...", message: "Please hold on", preferredStyle: .Alert)
+                let indicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+                indicator.startAnimating()
+                presentViewController(alertView, animated: true, completion: nil)
+//                playInstance.startSmashing(alertView)
                 
                 
-                playInstance.startSmashing()
+                
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), {() -> Void in
+                    
+                    playInstance.startSmashing(alertView)
+        
+                    dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                        alertView.dismissViewControllerAnimated(true, completion: nil)
+                    })
+
+                })
                 stopPlayButton.hidden = false
+                stopPlayButton.userInteractionEnabled = true
+                recordButton.selected = false
                 //Notify to move to mixed song view after mashing
-                NSNotificationCenter.defaultCenter().postNotificationName("didFinishMashing", object: nil)
+                
                 
             }else {
                 let alertController = UIAlertController(title: "Invalid Task", message: "Please press record", preferredStyle: .Alert)
@@ -156,10 +182,12 @@ class PlayerViewController: UIViewController {
                 switch instance.status {
                 case true:
                     instance.stopRecord()
+                    recordButton.selected = false
                     print("stop recording")
                 case false:
                     instance.record()
                     FinishButton.hidden = false
+                    recordButton.selected = true
                     print("recording")
                 }
             }else {
@@ -188,13 +216,12 @@ class PlayerViewController: UIViewController {
    
     func didClickOnASong(noti:NSNotification){
         recordButton.hidden = false
+        stopPlayButton.hidden = true
         let song = noti.object as! NSURL
         let playInstance = PlayStopManager.sharedInstance
         playInstance.bgMusicUrl = song
         playInstance.setUpNewTrack()
         playInstance.playSong()
-        stopPlayButton.userInteractionEnabled = false
-        stopPlayButton.hidden = true
         
         
     }
@@ -207,7 +234,7 @@ class PlayerViewController: UIViewController {
         FinishButton.hidden = true
         recordButton.hidden = true
         playInstance.playSong()
-        stopPlayButton.userInteractionEnabled = true
+        
     }
     
     override func didReceiveMemoryWarning() {

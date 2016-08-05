@@ -8,7 +8,7 @@
 
 import AVFoundation
 import Foundation
-
+import MBProgressHUD
 
 private var _shareInstance: PlayStopManager = PlayStopManager()
 
@@ -73,7 +73,7 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
     
     
     //Func to start the mashing process
-    func startSmashing() {
+    func startSmashing(alertView:UIAlertController) {
         
         numOfFinalMix = numOfFinalMix + 1
         print("inside audioplayer didfinish playing")
@@ -87,6 +87,10 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
         let semaphore = dispatch_semaphore_create(0)
         let timeoutLengthInNanoSeconds: Int64 = 1000000000000000000  //Adjust the timeout to suit your case
         let timeout = dispatch_time(DISPATCH_TIME_FOREVER, timeoutLengthInNanoSeconds)
+
+        
+
+
         for index in voiceInstance.arrayOfRecordings{
             finalIndex = finalIndex + 1
             print("\(voiceInstance.arrayOfRecordings.count)")
@@ -109,7 +113,11 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
             dispatch_semaphore_wait(semaphore, timeout)
         }
         
+//                dispatch_async(dispatch_get_main_queue(), {() -> Void in
+//                    alertView.dismissViewControllerAnimated(true, completion: nil)
+//                })
         
+        NSNotificationCenter.defaultCenter().postNotificationName("didFinishMashing", object: nil)
         //Removing all the previous recordings after the song had finished
         voiceInstance.arrayOfRecordings.removeAll()
         print("array cont: \(voiceInstance.arrayOfRecordings.count)")
@@ -127,7 +135,11 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
         
         //Only call smash if they playback song is not a mix
         if mixedInstance.fromMixed == false {
-            startSmashing()
+            let alertView = UIAlertController(title: "Processing...", message: "Please hold on", preferredStyle: .Alert)
+            let indicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+            indicator.startAnimating()
+            alertView.show()
+            startSmashing(alertView)
         }
         
         

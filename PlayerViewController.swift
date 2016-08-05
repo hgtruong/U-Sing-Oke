@@ -27,10 +27,6 @@ class PlayerViewController: UIViewController {
 
     @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
     
-    let spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .White)
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +48,6 @@ class PlayerViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         FinishButton.hidden = true
-        spinner.stopAnimating()
     }
     
     
@@ -115,25 +110,22 @@ class PlayerViewController: UIViewController {
                 playInstance.finalIndex = 0
                 
                 //Creating an activity indicator
-//                spinner.frame = CGRectMake(0, 0, 24, 24)
-//                spinner.startAnimating()
-                let alertView = UIAlertController(title: "Processing...", message: "Please hold on", preferredStyle: .Alert)
+
+                let alertView = UIAlertController(title: "Processing...", message: "Don't worry, app did not crash!", preferredStyle: .Alert)
                 let indicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
                 indicator.startAnimating()
                 presentViewController(alertView, animated: true, completion: nil)
-//                playInstance.startSmashing(alertView)
-                
-                
-                
+
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), {() -> Void in
                     
-                    playInstance.startSmashing(alertView)
+                    playInstance.startSmashing()
         
                     dispatch_async(dispatch_get_main_queue(), {() -> Void in
                         alertView.dismissViewControllerAnimated(true, completion: nil)
                     })
 
                 })
+                
                 stopPlayButton.hidden = false
                 stopPlayButton.userInteractionEnabled = true
                 recordButton.selected = false
@@ -233,6 +225,7 @@ class PlayerViewController: UIViewController {
         playInstance.setUpNewTrack()
         FinishButton.hidden = true
         recordButton.hidden = true
+        stopPlayButton.hidden = false
         playInstance.playSong()
         
     }

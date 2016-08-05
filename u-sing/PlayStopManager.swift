@@ -73,7 +73,7 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
     
     
     //Func to start the mashing process
-    func startSmashing(alertView:UIAlertController) {
+    func startSmashing() {
         
         numOfFinalMix = numOfFinalMix + 1
         print("inside audioplayer didfinish playing")
@@ -112,11 +112,7 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
             }
             dispatch_semaphore_wait(semaphore, timeout)
         }
-        
-//                dispatch_async(dispatch_get_main_queue(), {() -> Void in
-//                    alertView.dismissViewControllerAnimated(true, completion: nil)
-//                })
-        
+
         NSNotificationCenter.defaultCenter().postNotificationName("didFinishMashing", object: nil)
         //Removing all the previous recordings after the song had finished
         voiceInstance.arrayOfRecordings.removeAll()
@@ -139,7 +135,7 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
             let indicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
             indicator.startAnimating()
             alertView.show()
-            startSmashing(alertView)
+            startSmashing()
         }
         
         

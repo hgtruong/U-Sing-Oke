@@ -131,10 +131,7 @@ public class PlayStopManager: NSObject, AVAudioPlayerDelegate {
         
         //Only call smash if they playback song is not a mix
         if mixedInstance.fromMixed == false {
-            let alertView = UIAlertController(title: "Processing...", message: "Please hold on", preferredStyle: .Alert)
-            let indicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-            indicator.startAnimating()
-            alertView.show()
+
             startSmashing()
         }
         

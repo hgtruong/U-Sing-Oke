@@ -121,11 +121,13 @@ class PlayerViewController: UIViewController {
                 playInstance.finalIndex = 0
                 
                 //Creating an activity indicator
-
                 let alertView = UIAlertController(title: "Processing...", message: "Don't worry, app did not crash!", preferredStyle: .Alert)
                 let indicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
                 indicator.startAnimating()
-                presentViewController(alertView, animated: true, completion: nil)
+                alertView.popoverPresentationController?.sourceView = self.view
+//                presentViewController(alertView, animated: true, completion: nil)
+                
+
 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), {() -> Void in
                     
@@ -140,11 +142,6 @@ class PlayerViewController: UIViewController {
                 stopPlayButton.hidden = false
                 StopPlayLabel.hidden = false
                 stopPlayButton.userInteractionEnabled = true
-                
-                
-                //Notify to move to mixed song view after mashing
-                
-                
             }else {
                 let alertController = UIAlertController(title: "Invalid Task", message: "Please press record", preferredStyle: .Alert)
                 alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Cancel, handler: nil))
@@ -157,7 +154,15 @@ class PlayerViewController: UIViewController {
         }
     }
 
-
+    func presentActivityViewController(sourceView: UIView, activityItem: String ) {
+        
+        let activityViewController = UIActivityViewController(activityItems: [activityItem], applicationActivities: [])
+        
+        activityViewController.popoverPresentationController?.sourceView = sourceView
+        activityViewController.popoverPresentationController?.sourceRect = sourceView.bounds
+        
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+    }
     
     
     @IBOutlet weak var recordButton: UIButton!

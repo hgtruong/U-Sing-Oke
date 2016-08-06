@@ -109,9 +109,7 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
             m4aFiles = directoryContents.filter{ $0.pathExtension == "m4a" }
 //            print("m4aFiles in filter function: \(m4aFiles)")
             m4aFileNames = m4aFiles.flatMap({$0.URLByDeletingPathExtension!})
-//            print("m4aFileNames in filter function: \(m4aFileNames)"
-            
-            
+//            print("m4aFileNames in filter function: \(m4aFileNames)"  
         } catch _ {
             print("Err")
         }

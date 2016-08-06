@@ -522,7 +522,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = "u-sing";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ht.u-sing1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.huytruong.u-sung-oke1357924680";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "u-sing-Bridging-Header.h";
@@ -547,7 +547,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = "u-sing";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ht.u-sing1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.huytruong.u-sung-oke1357924680";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "u-sing-Bridging-Header.h";

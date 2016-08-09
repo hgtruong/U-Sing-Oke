@@ -23,7 +23,7 @@ class CurrentSongname{
         return Static.instance!
     }
     
-    var songName: String?
+    var songName: String = "nil"
 
     
 }

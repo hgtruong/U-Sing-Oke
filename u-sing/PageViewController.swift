@@ -11,7 +11,7 @@ import UIKit
 import AVFoundation
 import CoreMedia
 
-class PageViewController: UIPageViewControllerWithOverlayIndicator {
+class PageViewController: UIPageViewController { //UIPageViewControllerWithOverlayIndicator {
     
     
     
@@ -28,6 +28,10 @@ class PageViewController: UIPageViewControllerWithOverlayIndicator {
         return self.newColoredViewController("mixedSongListNavigation") as! UINavigationController
     }()
     
+    private(set) lazy var player: UINavigationController = {
+        return self.newColoredViewController("playerNavigation") as! UINavigationController
+    }()
+    
     //hard coding to create two tabs pages
     var orderedViewControllers: [UIViewController]!
 
@@ -35,20 +39,32 @@ class PageViewController: UIPageViewControllerWithOverlayIndicator {
         super.viewDidLoad()
         
         dataSource = self
-        orderedViewControllers = [navi, self.newColoredViewController("Player"), mixed]
+        
+        orderedViewControllers = [navi, player, mixed]
         
         let firstViewController = orderedViewControllers[0]
         let secondViewController = orderedViewControllers[1]
+        
         setViewControllers([secondViewController], direction: .Forward, animated: true, completion: nil)
         setViewControllers([firstViewController], direction: .Forward, animated: true, completion: nil)
         
+        let pageControl = UIPageControl()
+        pageControl.pageIndicatorTintColor = UIColor.grayColor()
+        pageControl.currentPageIndicatorTintColor = UIColor.whiteColor()
+        pageControl.backgroundColor = UIColor.darkGrayColor()
+        pageControl.numberOfPages = orderedViewControllers.count
+        pageControl.center = self.view.center
+        self.view.addSubview(pageControl)
         
-
+        pageControl.layer.position.y = self.view.frame.height - 10
+        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnASong), name: "didClickOnASong", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnAMixedSong), name: "didClickOnAMixedSong", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didFinishMashing), name: "didFinishMashing", object: nil)
+        
     }
+    
     
     
     func didClickOnASong(){
@@ -81,7 +97,6 @@ class PageViewController: UIPageViewControllerWithOverlayIndicator {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
 }
 
@@ -131,5 +146,7 @@ extension PageViewController: UIPageViewControllerDataSource {
         
         return orderedViewControllers[nextIndex]
     }
+    
+
     
 }

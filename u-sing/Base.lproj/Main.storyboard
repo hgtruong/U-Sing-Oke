@@ -160,7 +160,7 @@
         <!--Player View Controller-->
         <scene sceneID="0l2-OW-Jmm">
             <objects>
-                <viewController storyboardIdentifier="PlayerViewController" id="NPK-kK-SbC" customClass="PlayerViewController" customModule="u_sing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlayerViewController" automaticallyAdjustsScrollViewInsets="NO" id="NPK-kK-SbC" customClass="PlayerViewController" customModule="u_sing" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bcx-WT-fQl"/>
                         <viewControllerLayoutGuide type="bottom" id="AMd-tR-Q2E"/>
@@ -246,9 +246,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dxo-z3-6Sf">
-                                <rect key="frame" x="0.0" y="40" width="600" height="350"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="320"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="350" id="X16-9i-2NU"/>
+                                    <constraint firstAttribute="height" constant="320" id="X16-9i-2NU"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -277,7 +277,7 @@
                             <constraint firstItem="dxo-z3-6Sf" firstAttribute="leading" secondItem="YZY-WH-0pP" secondAttribute="leading" id="pWW-9n-BaU"/>
                             <constraint firstItem="dxo-z3-6Sf" firstAttribute="centerX" secondItem="brM-AO-rOc" secondAttribute="centerX" id="q58-K5-XzL"/>
                             <constraint firstItem="uVr-Af-0Ch" firstAttribute="top" secondItem="eq6-lY-xpc" secondAttribute="bottom" constant="25" id="vCn-2z-qC4"/>
-                            <constraint firstItem="dxo-z3-6Sf" firstAttribute="top" secondItem="bcx-WT-fQl" secondAttribute="bottom" constant="20" id="vSb-0s-OGb"/>
+                            <constraint firstItem="dxo-z3-6Sf" firstAttribute="top" secondItem="bcx-WT-fQl" secondAttribute="bottom" id="vSb-0s-OGb"/>
                             <constraint firstItem="uVr-Af-0Ch" firstAttribute="baseline" secondItem="dQQ-Eo-G1e" secondAttribute="baseline" id="vvC-Ia-6rE"/>
                             <constraint firstItem="brM-AO-rOc" firstAttribute="trailing" secondItem="dQQ-Eo-G1e" secondAttribute="trailing" id="wSN-Ee-ifX"/>
                             <constraint firstItem="brM-AO-rOc" firstAttribute="top" secondItem="G6Y-ur-XgL" secondAttribute="top" id="xrW-yw-mpi"/>
@@ -294,6 +294,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="n0R-B8-z4i"/>
                     <connections>
                         <outlet property="FinishButton" destination="G6Y-ur-XgL" id="O6k-lx-b5w"/>
                         <outlet property="FinishLabel" destination="tQh-jq-e7B" id="C5u-vY-tlB"/>
@@ -306,7 +307,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xa3-0k-kLV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="971" y="872"/>
+            <point key="canvasLocation" x="1783" y="872"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="acc-zR-9bK">
@@ -325,6 +326,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vts-S4-5W6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-724" y="1637"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5Ii-Qb-ftA">
+            <objects>
+                <navigationController storyboardIdentifier="playerNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="nf8-yb-TyE" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Q5W-aU-oF9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="NPK-kK-SbC" kind="relationship" relationship="rootViewController" id="cBB-06-w1d"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HVn-3c-fTo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="971" y="872"/>
         </scene>
     </scenes>
     <resources>

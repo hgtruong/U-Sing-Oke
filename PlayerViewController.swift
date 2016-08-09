@@ -31,6 +31,8 @@ class PlayerViewController: UIViewController {
     
     @IBOutlet weak var FinishLabel: UILabel!
     
+    let songInstance = CurrentSongname.sharedInstance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,12 +53,24 @@ class PlayerViewController: UIViewController {
         ImageView.image = self.ResizeImage(UIImage(named: "Musical.png")!, targetSize: CGSizeMake(ImageView.frame.size.width, ImageView.frame.size.height))
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        self.navigationController!.navigationBar.titleTextAttributes = (titleDict as! [String : AnyObject])
+        navigationController!.navigationBar.barTintColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
+
+        
         
     }
     
     override func viewWillAppear(animated: Bool) {
         FinishButton.hidden = true
         FinishLabel.hidden = true
+        
+        if songInstance.songName == "nil" {
+            self.title = "Playing: "
+        }else {
+            self.title = "Playing: \(songInstance.songName)"
+        }
+        
     }
     
     
@@ -104,7 +118,7 @@ class PlayerViewController: UIViewController {
         if playInstance.newTrack != nil {
             
             print("Insdie finish condition")
-            currentSong = songInstance.songName!
+            currentSong = songInstance.songName
             
             print("current song is: \(currentSong)")
             
@@ -125,7 +139,7 @@ class PlayerViewController: UIViewController {
                 let indicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
                 indicator.startAnimating()
                 alertView.popoverPresentationController?.sourceView = self.view
-//                presentViewController(alertView, animated: true, completion: nil)
+                presentViewController(alertView, animated: true, completion: nil)
                 
 
 
@@ -178,7 +192,7 @@ class PlayerViewController: UIViewController {
 
         if let isNil = playInstance.newTrack{
             
-            currentSong = songInstance.songName!
+            currentSong = songInstance.songName
             
             print("current song is: \(currentSong)")
             print("play status is: \(playInstance.status)")

@@ -52,13 +52,61 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SongListViewController.swift"
-            timestampString = "492458470.343152"
+            timestampString = "492459916.581024"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "mediaPicker(_:didPickMediaItems:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SongListViewController.swift"
+            timestampString = "492459342.815005"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "filterM4aAndMp3()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "u_sing.SongListViewController.filterM4aAndMp3 () -&gt; ()"
+                  moduleName = "u-sing"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/HT/Desktop/Make%20School%20SA%202016/U-Sing-Oke/SongListViewController.swift"
+                  timestampString = "492459342.963571"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "1916">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "u_sing.SongListViewController.(filterM4aAndMp3 () -&gt; ()).(closure #3)"
+                  moduleName = "u-sing"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/HT/Desktop/Make%20School%20SA%202016/U-Sing-Oke/SongListViewController.swift"
+                  timestampString = "492459342.963669"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

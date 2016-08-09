@@ -43,7 +43,7 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationController!.navigationBar.titleTextAttributes  = titleDict as? [String : AnyObject]
         navigationController!.navigationBar.barTintColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
-        mixedFilterM4a()
+        mixedfilterM4aAndMp3 ()
         
         
         
@@ -52,10 +52,10 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     override func viewWillAppear(animated: Bool) {
-        mixedFilterM4a()
+        mixedfilterM4aAndMp3 ()
     }
 
-    func mixedFilterM4a() {
+    func mixedfilterM4aAndMp3 () {
         
         let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask).first!
         

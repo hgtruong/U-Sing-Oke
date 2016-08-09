@@ -26,6 +26,14 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     var m4aFileNames:[AnyObject] = []
     var m4aFiles:[AnyObject] = []
     
+    var mp3FileNames:[AnyObject] = []
+    var mp3Files:[AnyObject] = []
+    
+    
+    var m4aMp3FileNames:[AnyObject] = []
+    var m4aMp3Files:[AnyObject] = []
+    
+    
     var selectedM4a = NSURL()
     var finalSongName = String()
     var documentsUrl = NSURL()
@@ -98,7 +106,7 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     //Function to filter out m4a files for table view cells
-    func filterM4a() {
+    func filterM4aAndMp3() {
         
         
         do {
@@ -108,10 +116,17 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
             
             // if you want to filter the directory contents you can do like this:
             m4aFiles = directoryContents.filter{ $0.pathExtension == "m4a"}
+            mp3Files = directoryContents.filter{ $0.pathExtension == "mp3"}
+            //Combining both m4a and mp3 array into one big array
+            m4aMp3Files = m4aFiles + mp3Files
+//            print("m4amp3 array is: \(m4aMp3Files) ")
             
 //            print("m4aFiles in filter function: \(m4aFiles)")
-            m4aFileNames = m4aFiles.flatMap({$0.URLByDeletingPathExtension!})
-//            print("m4aFileNames in filter function: \(m4aFileNames)"  
+//            m4aFileNames = m4aFiles.flatMap({$0.URLByDeletingPathExtension!})
+//            mp3FileNames = mp3Files.flatMap({$0.URLByDeletingPathExtension!})
+            m4aMp3FileNames = m4aMp3Files.flatMap({$0.URLByDeletingPathExtension!})
+            
+            print("m4aFileNames in filter function: \(m4aMp3FileNames)")
         } catch _ {
             print("Err")
         }
@@ -126,7 +141,8 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("numOfRows: " + "\(m4aFiles.count)")
-        return m4aFiles.count
+//        return m4aFiles.count + mp3Files.count
+        return m4aMp3Files.count
     }
     
     
@@ -135,22 +151,22 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("songListCell", forIndexPath: indexPath)
         
         
-        print("m4aFiles in TableView: \(m4aFileNames[0])")
-        print("m4aFiles in TableView: \(m4aFileNames[indexPath.row])")
+//        print("m4aFiles in TableView: \(m4aFileNames[0])")
+//        print("m4aFiles in TableView: \(m4aFileNames[indexPath.row])")
         
         //        print("indexPath = \(indexPath.row)")
-        let songName = m4aFileNames[indexPath.row].absoluteString
+//        let songName = m4aFileNames[indexPath.row].absoluteString
+        
+        
+        let songName = m4aMp3FileNames[indexPath.row].absoluteString
+        
         if let rangOfZero = songName.rangeOfString("Documents/", options: NSStringCompareOptions.BackwardsSearch){
             finalSongName = String(songName.characters.suffixFrom(rangOfZero.endIndex))
         }
 //        print("final song is: \(finalSongName)")
         cell.textLabel!.text = finalSongName
-//        cell.textLabel?.textColor = UIColor().HexToColor("#FFFFFF", alpha: 1.0)
         cell.textLabel?.textColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
         cell.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
-//        cell.backgroundColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
-
-        
         return cell
     }
     
@@ -160,7 +176,7 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let instance = PlayStopManager.sharedInstance
-        selectedM4a = m4aFiles[indexPath.row] as! NSURL
+        selectedM4a = m4aMp3Files[indexPath.row] as! NSURL
         let stringSelectedM4a = selectedM4a.absoluteString
         let finalM4a = stringSelectedM4a.stringByReplacingOccurrencesOfString("file:///", withString: "")
         instance.bgMusicUrl = NSURL.fileURLWithPath(finalM4a)
@@ -168,7 +184,7 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         
         
         //Extracting the selected song name
-        let songName = m4aFileNames[indexPath.row].absoluteString
+        let songName = m4aMp3FileNames[indexPath.row].absoluteString
         if let rangOfZero = songName.rangeOfString("Documents/", options: NSStringCompareOptions.BackwardsSearch){
             finalSongName = String(songName.characters.suffixFrom(rangOfZero.endIndex))
         }
@@ -210,10 +226,8 @@ extension SongListViewController : MPMediaPickerControllerDelegate {
         for i in 0..<mediaItemCollection.items.count {
             //            self.exportAssetAsSourceFormat(mediaItemCollection.items[i])
             object.exportAssetAsSourceFormat(mediaItemCollection.items[i],completion:{
-                //setting the document url to document directory
-//                self.documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
                 
-                self.filterM4a()
+                self.filterM4aAndMp3 ()
                 
                 self.dismissViewControllerAnimated(true, completion: nil)
                 
@@ -223,7 +237,7 @@ extension SongListViewController : MPMediaPickerControllerDelegate {
     
     func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
         print("cancel")
-        filterM4a()
+        filterM4aAndMp3 ()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 

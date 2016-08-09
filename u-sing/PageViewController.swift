@@ -34,6 +34,7 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
     
     //hard coding to create two tabs pages
     var orderedViewControllers: [UIViewController]!
+    let pageControl = UIPageControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +49,30 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
         setViewControllers([secondViewController], direction: .Forward, animated: true, completion: nil)
         setViewControllers([firstViewController], direction: .Forward, animated: true, completion: nil)
         
-        let pageControl = UIPageControl()
+       //addPageIndicator()
+        pageControl.pageIndicatorTintColor = UIColor.grayColor()
+        pageControl.backgroundColor = UIColor.darkGrayColor()
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnASong), name: "didClickOnASong", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnAMixedSong), name: "didClickOnAMixedSong", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didFinishMashing), name: "didFinishMashing", object: nil)
+        
+    }
+    
+    //This function removes the uipagecontrol black bars 
+    override func viewDidLayoutSubviews() {
+        //corrects scrollview frame to allow for full-screen view controller pages
+        for subView in self.view.subviews {
+            if subView is UIScrollView {
+                subView.frame = self.view.bounds
+            }
+        }
+        super.viewDidLayoutSubviews()
+    }
+    
+    func addPageIndicator() {
+        
         pageControl.pageIndicatorTintColor = UIColor.grayColor()
         pageControl.currentPageIndicatorTintColor = UIColor.whiteColor()
         pageControl.backgroundColor = UIColor.darkGrayColor()
@@ -56,12 +80,7 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
         pageControl.center = self.view.center
         self.view.addSubview(pageControl)
         
-        pageControl.layer.position.y = self.view.frame.height - 10
-        
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnASong), name: "didClickOnASong", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnAMixedSong), name: "didClickOnAMixedSong", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didFinishMashing), name: "didFinishMashing", object: nil)
+        pageControl.layer.position.y = self.view.frame.height - 15
         
     }
     
@@ -102,7 +121,7 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
 
 // MARK: UIPageViewControllerDataSource
 
-extension PageViewController: UIPageViewControllerDataSource {
+extension PageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     //
 
     
@@ -113,6 +132,8 @@ extension PageViewController: UIPageViewControllerDataSource {
         guard let viewControllerIndex = orderedViewControllers.indexOf(viewController) else {
             return nil
         }
+        
+//        pageControl.currentPage = viewControllerIndex - 1
         
         let previousIndex = viewControllerIndex - 1
         
@@ -133,6 +154,8 @@ extension PageViewController: UIPageViewControllerDataSource {
             return nil
         }
         
+//        pageControl.currentPage = viewControllerIndex
+        
         let nextIndex = viewControllerIndex + 1
         let orderedViewControllersCount = orderedViewControllers.count
         
@@ -147,6 +170,18 @@ extension PageViewController: UIPageViewControllerDataSource {
         return orderedViewControllers[nextIndex]
     }
     
+    
+    //The two methods below add the dot indicators
+    func presentationCountForPageViewController(pageViewController: UIPageViewController!) -> Int {
+        return self.orderedViewControllers.count
+    }
+    
+    func presentationIndexForPageViewController(pageViewController: UIPageViewController!) -> Int {
+        return 0
+    }
 
+    
+    
+    
     
 }

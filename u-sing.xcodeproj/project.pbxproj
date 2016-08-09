@@ -35,10 +35,8 @@
 		65C6A7BE1D3839C8009D3461 /* SongStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C6A7BD1D3839C8009D3461 /* SongStruct.swift */; };
 		65C6A7C21D383B63009D3461 /* SmashingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C6A7C11D383B63009D3461 /* SmashingManager.swift */; };
 		65DD9B511D4BE93300761E46 /* NSObject+iPodManagerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DD9B501D4BE93300761E46 /* NSObject+iPodManagerHelper.m */; };
-		65DD9B531D4BEF3700761E46 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD9B521D4BEF3700761E46 /* TestViewController.swift */; };
 		65E450B41D51338A0060D073 /* CurrentSongName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E450B31D51338A0060D073 /* CurrentSongName.swift */; };
 		65E450B61D5162E30060D073 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E450B51D5162E30060D073 /* UIColor.swift */; };
-		65E7FB231D54FD8500254721 /* UIPageViewControllerWithOverlayIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E7FB221D54FD8500254721 /* UIPageViewControllerWithOverlayIndicator.swift */; };
 		65E7FB251D5500A700254721 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E7FB241D5500A700254721 /* PageViewController.swift */; };
 		65F58A491D4A98D900D8C386 /* jeopardy.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 655BA4321D49472600BA6896 /* jeopardy.m4a */; };
 /* End PBXBuildFile section */
@@ -89,10 +87,8 @@
 		65DD9B4C1D4BE90F00761E46 /* u-sing-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "u-sing-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		65DD9B4F1D4BE93300761E46 /* NSObject+iPodManagerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+iPodManagerHelper.h"; sourceTree = "<group>"; };
 		65DD9B501D4BE93300761E46 /* NSObject+iPodManagerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+iPodManagerHelper.m"; sourceTree = "<group>"; };
-		65DD9B521D4BEF3700761E46 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		65E450B31D51338A0060D073 /* CurrentSongName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentSongName.swift; sourceTree = "<group>"; };
 		65E450B51D5162E30060D073 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		65E7FB221D54FD8500254721 /* UIPageViewControllerWithOverlayIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPageViewControllerWithOverlayIndicator.swift; sourceTree = "<group>"; };
 		65E7FB241D5500A700254721 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		91A42EE5C43327E7B6B0BC54 /* Pods-u-sing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-u-sing.release.xcconfig"; path = "Pods/Target Support Files/Pods-u-sing/Pods-u-sing.release.xcconfig"; sourceTree = "<group>"; };
 		995C0A4C1BB0189DF2F4E864 /* Pods-u-sing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-u-sing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-u-sing/Pods-u-sing.debug.xcconfig"; sourceTree = "<group>"; };
@@ -162,9 +158,9 @@
 				65DD9B4C1D4BE90F00761E46 /* u-sing-Bridging-Header.h */,
 				659D43C81D35598300B2B289 /* AppDelegate.swift */,
 				654796D91D5055C8006008B1 /* Extensions */,
+				65C6A7C01D383B31009D3461 /* ViewController */,
 				658358EF1D3E9F45000E9F19 /* Views */,
 				65C6A7C31D383B69009D3461 /* Helper */,
-				65C6A7C01D383B31009D3461 /* ViewController */,
 				65C6A7BF1D383B2C009D3461 /* Model */,
 				659D43CC1D35598300B2B289 /* Main.storyboard */,
 				65480FAE1D38522400B73320 /* 3.m4a */,
@@ -195,8 +191,6 @@
 			isa = PBXGroup;
 			children = (
 				65E7FB241D5500A700254721 /* PageViewController.swift */,
-				65DD9B521D4BEF3700761E46 /* TestViewController.swift */,
-				65E7FB221D54FD8500254721 /* UIPageViewControllerWithOverlayIndicator.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -382,7 +376,6 @@
 				65E450B61D5162E30060D073 /* UIColor.swift in Sources */,
 				6503FAFD1D41300F006817A0 /* VoiceRecord.swift in Sources */,
 				65A46F401D42B2560068FD0E /* PlayStopManager.swift in Sources */,
-				65E7FB231D54FD8500254721 /* UIPageViewControllerWithOverlayIndicator.swift in Sources */,
 				6502745F1D544ADE00C93F7E /* FromMixed.swift in Sources */,
 				65C6A7C21D383B63009D3461 /* SmashingManager.swift in Sources */,
 				65E450B41D51338A0060D073 /* CurrentSongName.swift in Sources */,
@@ -393,7 +386,6 @@
 				654796DB1D5055F6006008B1 /* Extensions.swift in Sources */,
 				658358F51D3E9FD7000E9F19 /* PlayerViewController.swift in Sources */,
 				659D43C91D35598300B2B289 /* AppDelegate.swift in Sources */,
-				65DD9B531D4BEF3700761E46 /* TestViewController.swift in Sources */,
 				658358F31D3E9FC3000E9F19 /* SongListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

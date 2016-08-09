@@ -76,10 +76,12 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         // run query
         mediaCollections = mediaQuery.collections!
         
+    
+        
         
         let mediaPickerController = MPMediaPickerController(mediaTypes: .Music)
         mediaPickerController.delegate = self
-        mediaPickerController.showsCloudItems = false
+        mediaPickerController.showsCloudItems = true
         mediaPickerController.allowsPickingMultipleItems = false
         mediaPickerController.modalPresentationStyle = .Popover
         mediaPickerController.preferredContentSize = CGSizeMake(500,600)

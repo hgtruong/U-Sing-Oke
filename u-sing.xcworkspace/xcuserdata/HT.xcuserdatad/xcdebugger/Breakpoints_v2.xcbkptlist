@@ -6,7 +6,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             scope = "0"
@@ -16,39 +16,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "u-sing/PageViewController.swift"
-            timestampString = "492454301.001462"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
-            landmarkName = "pageViewController(_:viewControllerBeforeViewController:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "u-sing/PageViewController.swift"
-            timestampString = "492454301.001462"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "pageViewController(_:viewControllerAfterViewController:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SongListViewController.swift"
@@ -57,56 +25,72 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "219"
             endingLineNumber = "219"
-            landmarkName = "mediaPicker(_:didPickMediaItems:)"
-            landmarkType = "5">
+            landmarkName = "SongListViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SongListViewController.swift"
-            timestampString = "492459342.815005"
+            timestampString = "492470794.371465"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
-            landmarkName = "filterM4aAndMp3()"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
+            landmarkName = "mediaPicker(_:didPickMediaItems:)"
             landmarkType = "5">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "u_sing.SongListViewController.filterM4aAndMp3 () -&gt; ()"
+                  symbolName = "u_sing.SongListViewController.mediaPicker (__ObjC.MPMediaPickerController, didPickMediaItems : __ObjC.MPMediaItemCollection) -&gt; ()"
                   moduleName = "u-sing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/HT/Desktop/Make%20School%20SA%202016/U-Sing-Oke/SongListViewController.swift"
-                  timestampString = "492459342.963571"
+                  timestampString = "492475401.09831"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "127"
-                  endingLineNumber = "127"
-                  offsetFromSymbolStart = "1916">
+                  startingLineNumber = "230"
+                  endingLineNumber = "230"
+                  offsetFromSymbolStart = "716">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "u_sing.SongListViewController.(filterM4aAndMp3 () -&gt; ()).(closure #3)"
+                  symbolName = "u_sing.SongListViewController.(mediaPicker (__ObjC.MPMediaPickerController, didPickMediaItems : __ObjC.MPMediaItemCollection) -&gt; ()).(closure #1)"
                   moduleName = "u-sing"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/HT/Desktop/Make%20School%20SA%202016/U-Sing-Oke/SongListViewController.swift"
-                  timestampString = "492459342.963669"
+                  timestampString = "492475401.098504"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "127"
-                  endingLineNumber = "127"
+                  startingLineNumber = "232"
+                  endingLineNumber = "232"
                   offsetFromSymbolStart = "16">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "u-sing/PageViewController.swift"
+            timestampString = "492477184.212821"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "presentationIndexForPageViewController(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

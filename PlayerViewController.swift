@@ -71,8 +71,8 @@ class PlayerViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        FinishButton.hidden = true
-        FinishLabel.hidden = true
+//        FinishButton.hidden = true
+//        FinishLabel.hidden = true
         
         if songInstance.songName == "nil" {
             NowPlayingLabel.text = "Playing: "
@@ -100,8 +100,11 @@ class PlayerViewController: UIViewController {
                     switch instance.status {
                     case true:
                         instance.pauseSong()
+                        stopPlayButton.selected = true
                     case false:
                         instance.playSong()
+                        stopPlayButton.selected = false
+
                         
                     }
                 }

@@ -13,7 +13,7 @@ import CoreMedia
 
 class PageViewController: UIPageViewController { //UIPageViewControllerWithOverlayIndicator {
     
-    
+    var currentIndex = 0
     
     //Function to generate new ViewController
     private func newColoredViewController(color: String) -> UIViewController {
@@ -28,14 +28,9 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
         return self.newColoredViewController("mixedSongListNavigation") as! UINavigationController
     }()
     
-//    private(set) lazy var player: UINavigationController = {
-//        return self.newColoredViewController("playerNavigation") as! UINavigationController
-//    }()
-    
     //hard coding to create two tabs pages
-    var orderedViewControllers: [UIViewController]!
-    let pageControl = UIPageControl()
-
+    var orderedViewControllers: [UIViewController] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,22 +68,12 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
         super.viewDidLayoutSubviews()
     }
     
-//    func addPageIndicator() {
-//        
-//        pageControl.pageIndicatorTintColor = UIColor.grayColor()
-//        pageControl.currentPageIndicatorTintColor = UIColor.whiteColor()
-//        pageControl.backgroundColor = UIColor.darkGrayColor()
-//        pageControl.numberOfPages = orderedViewControllers.count
-//        pageControl.center = self.view.center
-//        self.view.addSubview(pageControl)
-//        
-//        pageControl.layer.position.y = self.view.frame.height - 15
-//        
-//    }
     
     
     
-    func didClickOnASong(){
+    
+    func didClickOnASong() {
+        currentIndex = 1
         let firstViewController = orderedViewControllers[1]
             setViewControllers([firstViewController],
                                direction: .Forward,
@@ -97,7 +82,8 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
     }
     
     
-    func didClickOnAMixedSong(){
+    func didClickOnAMixedSong() {
+        currentIndex = 1
         let firstViewController = orderedViewControllers[1]
             setViewControllers([firstViewController],
                                direction: .Reverse,
@@ -106,12 +92,17 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
     }
     
     
-    func didFinishMashing(){
+    func didFinishMashing() {
+        
+        currentIndex += 1
+        
         let firstViewController = orderedViewControllers[2]
             setViewControllers([firstViewController],
                                direction: .Forward,
                                animated: true,
                                completion: nil)
+        
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -134,11 +125,9 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
         guard let viewControllerIndex = orderedViewControllers.indexOf(viewController) else {
             return nil
         }
-        
-//        pageControl.currentPage = viewControllerIndex - 1
-        
+    
         let previousIndex = viewControllerIndex - 1
-        
+
         guard previousIndex >= 0 else {
             return nil
         }
@@ -146,7 +135,7 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
         guard orderedViewControllers.count > previousIndex else {
             return nil
         }
-        
+        currentIndex = previousIndex
         return orderedViewControllers[previousIndex]
     }
     
@@ -156,9 +145,8 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
             return nil
         }
         
-//        pageControl.currentPage = viewControllerIndex
-        
         let nextIndex = viewControllerIndex + 1
+        
         let orderedViewControllersCount = orderedViewControllers.count
         
         guard orderedViewControllersCount != nextIndex else {
@@ -168,22 +156,22 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
         guard orderedViewControllersCount > nextIndex else {
             return nil
         }
-        
+        currentIndex = nextIndex
         return orderedViewControllers[nextIndex]
     }
     
     
-    //The two methods below add the dot indicators
-    func presentationCountForPageViewController(pageViewController: UIPageViewController!) -> Int {
+    //Ddd the dot indicators
+    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
         return self.orderedViewControllers.count
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController!) -> Int {
-        return 0
-    }
+    
 
     
-    
-    
-    
+    //Updating the indicator when you page is changed programatically
+    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+
+           return self.orderedViewControllers.indexOf(pageViewController.viewControllers!.first!)!
+    }
 }

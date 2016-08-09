@@ -25,6 +25,7 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     
     var m4aFileNames:[AnyObject] = []
     var m4aFiles:[AnyObject] = []
+    
     var selectedM4a = NSURL()
     var finalSongName = String()
     var documentsUrl = NSURL()
@@ -83,7 +84,7 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.tableView.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationController!.navigationBar.titleTextAttributes = titleDict as! [String : AnyObject]
+        self.navigationController!.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
         navigationController!.navigationBar.barTintColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
 //
 //        self.tableView.backgroundColor = UIColor().HexToColor("#FCAD4D", alpha: 1.0)
@@ -106,7 +107,8 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
             print(directoryContents)
             
             // if you want to filter the directory contents you can do like this:
-            m4aFiles = directoryContents.filter{ $0.pathExtension == "m4a" }
+            m4aFiles = directoryContents.filter{ $0.pathExtension == "m4a"}
+            
 //            print("m4aFiles in filter function: \(m4aFiles)")
             m4aFileNames = m4aFiles.flatMap({$0.URLByDeletingPathExtension!})
 //            print("m4aFileNames in filter function: \(m4aFileNames)"  

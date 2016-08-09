@@ -28,9 +28,9 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
         return self.newColoredViewController("mixedSongListNavigation") as! UINavigationController
     }()
     
-    private(set) lazy var player: UINavigationController = {
-        return self.newColoredViewController("playerNavigation") as! UINavigationController
-    }()
+//    private(set) lazy var player: UINavigationController = {
+//        return self.newColoredViewController("playerNavigation") as! UINavigationController
+//    }()
     
     //hard coding to create two tabs pages
     var orderedViewControllers: [UIViewController]!
@@ -41,7 +41,9 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
         
         dataSource = self
         
-        orderedViewControllers = [navi, player, mixed]
+//        orderedViewControllers = [navi, player, mixed]
+        
+        orderedViewControllers = [navi, self.newColoredViewController("Player"), mixed]
         
         let firstViewController = orderedViewControllers[0]
         let secondViewController = orderedViewControllers[1]
@@ -50,9 +52,9 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
         setViewControllers([firstViewController], direction: .Forward, animated: true, completion: nil)
         
        //addPageIndicator()
-        pageControl.pageIndicatorTintColor = UIColor.grayColor()
-        pageControl.backgroundColor = UIColor.darkGrayColor()
-        
+//        pageControl.pageIndicatorTintColor = UIColor.grayColor()
+//        pageControl.backgroundColor = UIColor.darkGrayColor()
+//        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnASong), name: "didClickOnASong", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnAMixedSong), name: "didClickOnAMixedSong", object: nil)
@@ -71,18 +73,18 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
         super.viewDidLayoutSubviews()
     }
     
-    func addPageIndicator() {
-        
-        pageControl.pageIndicatorTintColor = UIColor.grayColor()
-        pageControl.currentPageIndicatorTintColor = UIColor.whiteColor()
-        pageControl.backgroundColor = UIColor.darkGrayColor()
-        pageControl.numberOfPages = orderedViewControllers.count
-        pageControl.center = self.view.center
-        self.view.addSubview(pageControl)
-        
-        pageControl.layer.position.y = self.view.frame.height - 15
-        
-    }
+//    func addPageIndicator() {
+//        
+//        pageControl.pageIndicatorTintColor = UIColor.grayColor()
+//        pageControl.currentPageIndicatorTintColor = UIColor.whiteColor()
+//        pageControl.backgroundColor = UIColor.darkGrayColor()
+//        pageControl.numberOfPages = orderedViewControllers.count
+//        pageControl.center = self.view.center
+//        self.view.addSubview(pageControl)
+//        
+//        pageControl.layer.position.y = self.view.frame.height - 15
+//        
+//    }
     
     
     

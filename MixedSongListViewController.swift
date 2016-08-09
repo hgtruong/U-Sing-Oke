@@ -34,25 +34,6 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask).first!
-//        
-//        do {
-//            // Get the directory contents urls (including subfolders urls)
-//            let directoryContents = try NSFileManager.defaultManager().contentsOfDirectoryAtURL( documentsUrl, includingPropertiesForKeys: nil, options: [])
-////            print(directoryContents)
-//            
-//            // if you want to filter the directory contents you can do like this:
-//            m4aFiles = directoryContents.filter{ $0.pathExtension == "m4a" }
-////            print("m4a urls: \(m4aFiles)")
-//            m4aFileNames = m4aFiles.flatMap({$0.URLByDeletingPathExtension!})
-//            print("m4a list in mixedSong View: \(m4aFileNames)")
-////            print("m4a count: \(m4aFileNames.count)")
-//            
-//        } catch let error as NSError {
-//            print(error.localizedDescription)
-//        }
-        
-        
 //        //If need to clear m4a files in libr
 //        let instance = VoiceRecord.sharedInstance
 //        instance.clearLibFolder()
@@ -60,7 +41,7 @@ class MixedSongListViewController: UIViewController, UITableViewDelegate, UITabl
         
         self.tableView.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationController!.navigationBar.titleTextAttributes  = titleDict as! [String : AnyObject]
+        self.navigationController!.navigationBar.titleTextAttributes  = titleDict as? [String : AnyObject]
         navigationController!.navigationBar.barTintColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
         mixedFilterM4a()
         

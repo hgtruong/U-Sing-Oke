@@ -31,6 +31,8 @@ class PlayerViewController: UIViewController {
     
     @IBOutlet weak var FinishLabel: UILabel!
     
+    @IBOutlet weak var NowPlayingLabel: UILabel!
+    
     let songInstance = CurrentSongname.sharedInstance
     
     override func viewDidLoad() {
@@ -52,10 +54,17 @@ class PlayerViewController: UIViewController {
     
         ImageView.image = self.ResizeImage(UIImage(named: "Musical.png")!, targetSize: CGSizeMake(ImageView.frame.size.width, ImageView.frame.size.height))
         
+        //Setting nowplayinglabel properties
+        NowPlayingLabel.textAlignment = NSTextAlignment.Center
+        NowPlayingLabel.textColor = UIColor.whiteColor()
+        NowPlayingLabel.font = UIFont.boldSystemFontOfSize(16.0)
+        NowPlayingLabel.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
+        
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationController!.navigationBar.titleTextAttributes = (titleDict as! [String : AnyObject])
-        navigationController!.navigationBar.barTintColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
+        
+//        self.navigationController!.navigationBar.titleTextAttributes = (titleDict as! [String : AnyObject])
+//        navigationController!.navigationBar.barTintColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
 
         
         
@@ -66,9 +75,9 @@ class PlayerViewController: UIViewController {
         FinishLabel.hidden = true
         
         if songInstance.songName == "nil" {
-            self.title = "Playing: "
+            NowPlayingLabel.text = "Playing: "
         }else {
-            self.title = "Playing: \(songInstance.songName)"
+            NowPlayingLabel.text = "Playing: \(songInstance.songName)"
         }
         
     }

@@ -33,7 +33,7 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         dataSource = self
         
 //        orderedViewControllers = [navi, player, mixed]
@@ -54,6 +54,7 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnASong), name: "didClickOnASong", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnAMixedSong), name: "didClickOnAMixedSong", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didFinishMashing), name: "didFinishMashing", object: nil)
+
         
     }
     
@@ -67,10 +68,6 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
         }
         super.viewDidLayoutSubviews()
     }
-    
-    
-    
-    
     
     func didClickOnASong() {
         currentIndex = 1
@@ -93,22 +90,29 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
     
     
     func didFinishMashing() {
-        
-        currentIndex += 1
-        
         let firstViewController = orderedViewControllers[2]
             setViewControllers([firstViewController],
                                direction: .Forward,
                                animated: true,
                                completion: nil)
-        
-
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+//    func scrollToNext() {
+//        var current: UIViewController = orderedViewControllers[0]
+//        var currentIndex: Int = orderedViewControllers.indexOf(current)!
+//        currentIndex += 1
+//        var nextController: UIViewController = orderedViewControllers.indexOf(currentIndex += 1)
+//        if nextController != nil {
+//            var viewControllers: [AnyObject] = [nextController]
+//            // This changes the View Controller and calls the presentationIndexForPageViewController datasource method
+//            self.setViewControllers(viewControllers, direction: .Forward, animated: true, completion: { _ in })
+//        }
+//    }
     
 }
 
@@ -135,7 +139,6 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
         guard orderedViewControllers.count > previousIndex else {
             return nil
         }
-        currentIndex = previousIndex
         return orderedViewControllers[previousIndex]
     }
     
@@ -156,7 +159,6 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
         guard orderedViewControllersCount > nextIndex else {
             return nil
         }
-        currentIndex = nextIndex
         return orderedViewControllers[nextIndex]
     }
     
@@ -171,7 +173,6 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
     
     //Updating the indicator when you page is changed programatically
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
-
            return self.orderedViewControllers.indexOf(pageViewController.viewControllers!.first!)!
     }
 }

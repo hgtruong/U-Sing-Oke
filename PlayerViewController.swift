@@ -14,7 +14,7 @@ import AVFoundation
 private var _shareInstance: PlayerViewController = PlayerViewController()
 
 
-class PlayerViewController: UIViewController {
+class PlayerViewController: UIViewController, UIPageViewControllerDelegate {
     
     
     class public var sharedInstance:PlayerViewController {
@@ -37,6 +37,7 @@ class PlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PlayerViewController.didClickOnASong(_:)), name: "didClickOnASong", object: nil)
         
@@ -69,6 +70,7 @@ class PlayerViewController: UIViewController {
         
         
     }
+    
     
     override func viewWillAppear(animated: Bool) {
 //        FinishButton.hidden = true
@@ -153,17 +155,17 @@ class PlayerViewController: UIViewController {
                 alertView.popoverPresentationController?.sourceView = self.view
                 presentViewController(alertView, animated: true, completion: nil)
                 
-
-
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), {() -> Void in
                     
                     playInstance.startSmashing()
         
-                    dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                    dispatch_sync(dispatch_get_main_queue(), {() -> Void in
                         alertView.dismissViewControllerAnimated(true, completion: nil)
                     })
 
                 })
+                
+                NSNotificationCenter.defaultCenter().postNotificationName("readyToSmashing", object: nil)
                 
                 stopPlayButton.hidden = false
                 StopPlayLabel.hidden = false

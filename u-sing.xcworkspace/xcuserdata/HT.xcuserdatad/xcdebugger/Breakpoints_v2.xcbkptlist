@@ -77,5 +77,53 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SongListViewController.swift"
+            timestampString = "492540542.097511"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "u_sing.SongListViewController.viewDidLoad () -&gt; ()"
+                  moduleName = "u-sing"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/HT/Desktop/Make%20School%20SA%202016/U-Sing-Oke/SongListViewController.swift"
+                  timestampString = "492540550.475038"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "88"
+                  endingLineNumber = "88"
+                  offsetFromSymbolStart = "1932">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "u_sing.SongListViewController.(viewDidLoad () -&gt; ()).(closure #1)"
+                  moduleName = "u-sing"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/HT/Desktop/Make%20School%20SA%202016/U-Sing-Oke/SongListViewController.swift"
+                  timestampString = "492540550.475292"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "88"
+                  endingLineNumber = "88"
+                  offsetFromSymbolStart = "0">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

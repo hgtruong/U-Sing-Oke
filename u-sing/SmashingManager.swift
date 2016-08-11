@@ -63,7 +63,7 @@ public class SmashingManager : NSObject {
 //            print("ASSET MUSIC TRACK \(assetMusicTrack)")
             let musicParam: AVMutableAudioMixInputParameters = AVMutableAudioMixInputParameters(track: assetMusicTrack) //you only need one of these
             musicParam.trackID = originalTrack.trackID
-            musicParam.setVolumeRampFromStartVolume(0.25, toEndVolume: 1, timeRange: CMTimeRangeMake(recording.startTime, audioAsset.duration))
+            musicParam.setVolumeRampFromStartVolume(0.0, toEndVolume: 1, timeRange: CMTimeRangeMake(recording.startTime, audioAsset.duration))
             audioMix.inputParameters.append(musicParam)
             
             

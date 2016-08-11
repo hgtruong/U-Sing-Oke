@@ -64,7 +64,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Songs List" id="PsP-sP-Bz8">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Tpc-ge-aPH">
+                        <barButtonItem key="rightBarButtonItem" id="Tpc-ge-aPH">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sbH-C2-fWC">
                                 <rect key="frame" x="545" y="4" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

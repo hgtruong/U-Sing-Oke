@@ -11,22 +11,14 @@
 		6502745F1D544ADE00C93F7E /* FromMixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6502745E1D544ADE00C93F7E /* FromMixed.swift */; };
 		6503FAFD1D41300F006817A0 /* VoiceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6503FAFC1D41300F006817A0 /* VoiceRecord.swift */; };
 		6521C3B41D53047A005B5AAD /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6521C3B31D53047A005B5AAD /* ProgressHUD.swift */; };
-		6535E8B71D37F94E00BFCF04 /* 21.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6535E8B61D37F94E00BFCF04 /* 21.m4a */; };
 		654796DB1D5055F6006008B1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654796DA1D5055F6006008B1 /* Extensions.swift */; };
-		65480FAF1D38522400B73320 /* 3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 65480FAE1D38522400B73320 /* 3.m4a */; };
 		654891D51D47FBE0002E3709 /* MixedSongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654891D41D47FBE0002E3709 /* MixedSongListViewController.swift */; };
-		655BA4371D49475E00BA6896 /* 1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 655BA4341D49475E00BA6896 /* 1.m4a */; };
-		655BA4381D49475E00BA6896 /* 21.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 655BA4351D49475E00BA6896 /* 21.m4a */; };
-		655BA4391D49475E00BA6896 /* 22.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 655BA4361D49475E00BA6896 /* 22.m4a */; };
 		658358F31D3E9FC3000E9F19 /* SongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658358F21D3E9FC3000E9F19 /* SongListViewController.swift */; };
 		658358F51D3E9FD7000E9F19 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658358F41D3E9FD7000E9F19 /* PlayerViewController.swift */; };
-		659C56411D397EA60054AFB9 /* 22.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 659C56401D397EA60054AFB9 /* 22.m4a */; };
 		659D43C91D35598300B2B289 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659D43C81D35598300B2B289 /* AppDelegate.swift */; };
 		659D43CE1D35598300B2B289 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 659D43CC1D35598300B2B289 /* Main.storyboard */; };
 		659D43D01D35598300B2B289 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 659D43CF1D35598300B2B289 /* Assets.xcassets */; };
 		659D43D31D35598300B2B289 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 659D43D11D35598300B2B289 /* LaunchScreen.storyboard */; };
-		659D43DD1D3559FC00B2B289 /* 2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 659D43DB1D3559FC00B2B289 /* 2.m4a */; };
-		659D43E31D359BE900B2B289 /* 1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 659D43E21D359BE900B2B289 /* 1.m4a */; };
 		65A46F3B1D42A9E20068FD0E /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A46F391D42A9E20068FD0E /* Realm.framework */; };
 		65A46F3C1D42A9E20068FD0E /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 65A46F391D42A9E20068FD0E /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		65A46F3D1D42A9E20068FD0E /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A46F3A1D42A9E20068FD0E /* RealmSwift.framework */; };
@@ -38,7 +30,9 @@
 		65E450B41D51338A0060D073 /* CurrentSongName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E450B31D51338A0060D073 /* CurrentSongName.swift */; };
 		65E450B61D5162E30060D073 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E450B51D5162E30060D073 /* UIColor.swift */; };
 		65E7FB251D5500A700254721 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E7FB241D5500A700254721 /* PageViewController.swift */; };
-		65F58A491D4A98D900D8C386 /* jeopardy.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 655BA4321D49472600BA6896 /* jeopardy.m4a */; };
+		65F926021D5BD3FD00C7BC32 /* Spotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F926011D5BD3FD00C7BC32 /* Spotify.framework */; };
+		65F926041D5BDF1000C7BC32 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F926031D5BDF1000C7BC32 /* AVFoundation.framework */; };
+		65F926061D5BDF2200C7BC32 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F926051D5BDF2200C7BC32 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,25 +54,16 @@
 		6502745E1D544ADE00C93F7E /* FromMixed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromMixed.swift; sourceTree = "<group>"; };
 		6503FAFC1D41300F006817A0 /* VoiceRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceRecord.swift; sourceTree = "<group>"; };
 		6521C3B31D53047A005B5AAD /* ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
-		6535E8B61D37F94E00BFCF04 /* 21.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 21.m4a; sourceTree = "<group>"; };
 		654796DA1D5055F6006008B1 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		65480FAE1D38522400B73320 /* 3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3.m4a; sourceTree = "<group>"; };
 		654891D41D47FBE0002E3709 /* MixedSongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MixedSongListViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		655BA4321D49472600BA6896 /* jeopardy.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = jeopardy.m4a; path = ../jeopardy.m4a; sourceTree = "<group>"; };
-		655BA4341D49475E00BA6896 /* 1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = 1.m4a; path = ../1.m4a; sourceTree = "<group>"; };
-		655BA4351D49475E00BA6896 /* 21.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = 21.m4a; path = ../21.m4a; sourceTree = "<group>"; };
-		655BA4361D49475E00BA6896 /* 22.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = 22.m4a; path = ../22.m4a; sourceTree = "<group>"; };
 		658358F21D3E9FC3000E9F19 /* SongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongListViewController.swift; sourceTree = "<group>"; };
 		658358F41D3E9FD7000E9F19 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
-		659C56401D397EA60054AFB9 /* 22.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 22.m4a; sourceTree = "<group>"; };
 		659D43C51D35598300B2B289 /* u-sing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "u-sing.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		659D43C81D35598300B2B289 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		659D43CD1D35598300B2B289 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		659D43CF1D35598300B2B289 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		659D43D21D35598300B2B289 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		659D43D41D35598300B2B289 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		659D43DB1D3559FC00B2B289 /* 2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2.m4a; sourceTree = "<group>"; };
-		659D43E21D359BE900B2B289 /* 1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.m4a; sourceTree = "<group>"; };
 		65A46F391D42A9E20068FD0E /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		65A46F3A1D42A9E20068FD0E /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		65A46F3F1D42B2560068FD0E /* PlayStopManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayStopManager.swift; sourceTree = "<group>"; };
@@ -90,6 +75,9 @@
 		65E450B31D51338A0060D073 /* CurrentSongName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentSongName.swift; sourceTree = "<group>"; };
 		65E450B51D5162E30060D073 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		65E7FB241D5500A700254721 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		65F926011D5BD3FD00C7BC32 /* Spotify.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Spotify.framework; sourceTree = "<group>"; };
+		65F926031D5BDF1000C7BC32 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		65F926051D5BDF2200C7BC32 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		91A42EE5C43327E7B6B0BC54 /* Pods-u-sing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-u-sing.release.xcconfig"; path = "Pods/Target Support Files/Pods-u-sing/Pods-u-sing.release.xcconfig"; sourceTree = "<group>"; };
 		995C0A4C1BB0189DF2F4E864 /* Pods-u-sing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-u-sing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-u-sing/Pods-u-sing.debug.xcconfig"; sourceTree = "<group>"; };
 		DB4DA4127926B34032D25BD2 /* Pods_u_sing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_u_sing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,9 +88,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65F926061D5BDF2200C7BC32 /* SystemConfiguration.framework in Frameworks */,
+				65F926041D5BDF1000C7BC32 /* AVFoundation.framework in Frameworks */,
 				65A46F3D1D42A9E20068FD0E /* RealmSwift.framework in Frameworks */,
 				65A46F3B1D42A9E20068FD0E /* Realm.framework in Frameworks */,
 				61EE900ECBEF189B57D157A7 /* Pods_u_sing.framework in Frameworks */,
+				65F926021D5BD3FD00C7BC32 /* Spotify.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,15 +154,6 @@
 				65C6A7C31D383B69009D3461 /* Helper */,
 				65C6A7BF1D383B2C009D3461 /* Model */,
 				659D43CC1D35598300B2B289 /* Main.storyboard */,
-				65480FAE1D38522400B73320 /* 3.m4a */,
-				659C56401D397EA60054AFB9 /* 22.m4a */,
-				655BA4341D49475E00BA6896 /* 1.m4a */,
-				655BA4351D49475E00BA6896 /* 21.m4a */,
-				655BA4321D49472600BA6896 /* jeopardy.m4a */,
-				655BA4361D49475E00BA6896 /* 22.m4a */,
-				659D43E21D359BE900B2B289 /* 1.m4a */,
-				659D43DB1D3559FC00B2B289 /* 2.m4a */,
-				6535E8B61D37F94E00BFCF04 /* 21.m4a */,
 				659D43CF1D35598300B2B289 /* Assets.xcassets */,
 				659D43D11D35598300B2B289 /* LaunchScreen.storyboard */,
 				659D43D41D35598300B2B289 /* Info.plist */,
@@ -220,6 +202,9 @@
 		D380493294243368BC69CABC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65F926051D5BDF2200C7BC32 /* SystemConfiguration.framework */,
+				65F926031D5BDF1000C7BC32 /* AVFoundation.framework */,
+				65F926011D5BD3FD00C7BC32 /* Spotify.framework */,
 				DB4DA4127926B34032D25BD2 /* Pods_u_sing.framework */,
 			);
 			name = Frameworks;
@@ -289,17 +274,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				655BA4371D49475E00BA6896 /* 1.m4a in Resources */,
-				655BA4381D49475E00BA6896 /* 21.m4a in Resources */,
-				655BA4391D49475E00BA6896 /* 22.m4a in Resources */,
-				6535E8B71D37F94E00BFCF04 /* 21.m4a in Resources */,
-				659D43E31D359BE900B2B289 /* 1.m4a in Resources */,
-				659D43DD1D3559FC00B2B289 /* 2.m4a in Resources */,
-				659C56411D397EA60054AFB9 /* 22.m4a in Resources */,
 				659D43D31D35598300B2B289 /* LaunchScreen.storyboard in Resources */,
 				659D43D01D35598300B2B289 /* Assets.xcassets in Resources */,
-				65480FAF1D38522400B73320 /* 3.m4a in Resources */,
-				65F58A491D4A98D900D8C386 /* jeopardy.m4a in Resources */,
 				659D43CE1D35598300B2B289 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -508,13 +484,21 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"/Users/HT/Desktop/Make\\ School\\ SA\\ 2016/realm-swift-1.0.2/ios/swift-2.2",
+					/Users/HT/Desktop/Make,
+					School,
+					SA,
+					"2016/realm-swift-1.0.2/ios/swift-2.2",
 					"$(inherited)",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "u-sing/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = "u-sing";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.huytruong.u-sung-oke1357924680";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -531,17 +515,25 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"/Users/HT/Desktop/Make\\ School\\ SA\\ 2016/realm-swift-1.0.2/ios/swift-2.2",
+					/Users/HT/Desktop/Make,
+					School,
+					SA,
+					"2016/realm-swift-1.0.2/ios/swift-2.2",
 					"$(inherited)",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "u-sing/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = "u-sing";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.huytruong.u-sung-oke1357924680";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

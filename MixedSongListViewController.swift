@@ -14,7 +14,7 @@ private var _shareInstance: MixedSongListViewController = MixedSongListViewContr
 
 class MixedSongListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    class public var sharedInstance:MixedSongListViewController {
+    class internal var sharedInstance:MixedSongListViewController {
         return _shareInstance
     }
     

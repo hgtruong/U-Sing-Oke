@@ -17,7 +17,7 @@ private var _shareInstance: PlayerViewController = PlayerViewController()
 class PlayerViewController: UIViewController, UIPageViewControllerDelegate {
     
     
-    class public var sharedInstance:PlayerViewController {
+    class internal var sharedInstance:PlayerViewController {
         return _shareInstance
     }
     
@@ -62,7 +62,7 @@ class PlayerViewController: UIViewController, UIPageViewControllerDelegate {
         NowPlayingLabel.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
-        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+//        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
 //        self.navigationController!.navigationBar.titleTextAttributes = (titleDict as! [String : AnyObject])
 //        navigationController!.navigationBar.barTintColor = UIColor(patternImage: UIImage(named: "wallpaper")!)
@@ -204,7 +204,7 @@ class PlayerViewController: UIViewController, UIPageViewControllerDelegate {
 //        print("RIGHT HERE!!!")
         print("Status of recorder is: \(instance.status)")
 
-        if let isNil = playInstance.newTrack{
+        if playInstance.newTrack != nil{
             
             currentSong = songInstance.songName
             

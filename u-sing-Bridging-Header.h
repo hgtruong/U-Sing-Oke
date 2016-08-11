@@ -4,3 +4,4 @@
 
 #import "NSObject+iPodManagerHelper.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import <Spotify/Spotify.h>

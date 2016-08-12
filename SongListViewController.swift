@@ -11,7 +11,7 @@ import MediaPlayer
 import MobileCoreServices
 import CoreFoundation
 
-class SongListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SongListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SPTAudioStreamingPlaybackDelegate{
     
     
     //Variable declarations
@@ -38,13 +38,135 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
     var finalSongName = String()
     var documentsUrl = NSURL()
     
+    let kClientID = "6b896f994e624235b2c248ca8d443527"
+    let kCallbackURL = "USingOke://returnAfterLogin"
+    let kTokenSwapURL = "https://limitless-falls-43689.herokuapp.com/swap"
+    let kTokenRefreshServiceURL = "https://limitless-falls-43689.herokuapp.com/refresh"
     
-    
-    @IBOutlet weak var searchButton: UISearchBar!
+    var session:SPTSession!
+    var player:SPTAudioStreamingController?
+
     
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var AddSongButton: UIButton!
+    
+    @IBOutlet weak var SpotifyButton: UIButton!
+    
+    @IBAction func SpotifyButton(sender: AnyObject) {
+        
+        //Loging the user in if they have yet, this need
+        //to be in an if else
+        
+        let auth = SPTAuth.defaultInstance()
+        let loginURL = SPTAuth.loginURLForClientId(kClientID, withRedirectURL: NSURL(string: kCallbackURL), scopes: [SPTAuthStreamingScope],responseType: "code")
+        print(loginURL.absoluteString)
+        UIApplication.sharedApplication().openURL(loginURL)
+    
+    }
+    
+    
+    func updateAfterFirstLogin () {
+//        loginButton.hidden = true
+        
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        
+        if let sessionObj:AnyObject = userDefaults.objectForKey("SpotifySession") {
+            let sessionDataObj = sessionObj as! NSData
+            let firstTimeSession = NSKeyedUnarchiver.unarchiveObjectWithData(sessionDataObj) as! SPTSession
+            self.session = firstTimeSession
+            playUsingSession(firstTimeSession)
+            
+        }
+        
+    }
+    
+    func playUsingSession(sessionObj:SPTSession!){
+        if player == nil {
+            player = SPTAudioStreamingController.sharedInstance()
+            try! player?.startWithClientId(kClientID)
+            player?.playbackDelegate = self
+        }
+        player?.loginWithAccessToken(kTokenSwapURL)
+        
+//        player?.loginWithSession(sessionObj, callback: { (error:NSError!) -> Void in
+//            if error != nil {
+//                print("Enabling playback got error \(error)")
+//                return
+//            }
+        
+            SPTRequest.requestItemAtURI(NSURL(string: "spotify:album:4L1HDyfdGIkACuygktO7T7"), withSession: sessionObj, callback: { (error:NSError!, albumObj:AnyObject!) -> Void in
+             if error != nil {
+             print("Album lookup got error \(error)")
+             return
+             }
+             
+             let album = albumObj as! SPTAlbum
+             
+             self.player?.playTrackProvider(album, callback: nil)
+             })
+        
+            SPTRequest.performSearchWithQuery("let it go", queryType: SPTSearchQueryType.QueryTypeTrack, offset: 0, session: nil, callback: { (error:NSError!, result:AnyObject!) -> Void in
+                let trackListPage = result as! SPTListPage
+                
+                let partialTrack = trackListPage.items.first as! SPTPartialTrack
+                
+                SPTRequest.requestItemFromPartialObject(partialTrack, withSession: nil, callback: { (error:NSError!, results:AnyObject!) -> Void in
+                    let track = results as! SPTTrack
+                    self.player?.playTrackProvider(track, callback: nil)
+                    
+                })
+                
+                
+            })
+            
+//        })
+        
+    }
+    
+    
+    //The function below updates the artwork
+    //it needs to be in the playerviewcontroller
+//    func updateCoverArt(){
+//        if player?.currentTrackMetadata == nil {
+//            
+//            artworkImageView.image = UIImage()
+//            return
+//        }
+//        
+//        let uri = player?.currentTrackMetadata[SPTAudioStreamingMetadataAlbumURI] as! String
+//        
+//        SPTAlbum.albumWithURI(NSURL(string: uri), session: session) { (error:NSError!, albumObj:AnyObject!) -> Void in
+//            let album = albumObj as! SPTAlbum
+//            
+//            if let imgURL = album.largestCover.imageURL as NSURL! {
+//                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+//                    var error:NSError? = nil
+//                    var coverImage = UIImage()
+//                    do {
+//                        let imageData = try NSData(contentsOfURL: imgURL, options: NSDataReadingOptions.DataReadingMappedIfSafe)
+//                        coverImage = UIImage(data: imageData)!
+//                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//                            self.artworkImageView.image = coverImage
+//                        })
+//                    } catch {
+//                        
+//                    }
+//                    
+//                    
+//                    
+//                })
+//            }
+//            
+//        }
+//        
+//    }
+    
+    
+    func audioStreaming(audioStreaming: SPTAudioStreamingController!, didStartPlayingTrack trackUri: NSURL!) {
+//        updateCoverArt()
+    }
+    
     
     @IBAction func AddSongButton(sender: AnyObject) {
         
@@ -103,6 +225,44 @@ class SongListViewController: UIViewController, UITableViewDelegate, UITableView
 //        self.tableView.backgroundColor = UIColor().HexToColor("#FB0032", alpha: 1.0)
         
         tableView.reloadData()
+        
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateAfterFirstLogin", name: "loginSuccessfull", object: nil)
+        
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        
+        if let sessionObj:AnyObject = userDefaults.objectForKey("SpotifySession") { // session available
+            let sessionDataObj = sessionObj as! NSData
+            
+            let session = NSKeyedUnarchiver.unarchiveObjectWithData(sessionDataObj) as! SPTSession
+            
+            if !session.isValid() {
+                
+                SPTAuth.defaultInstance().renewSession(session, callback: { (error:NSError!, renewdSession:SPTSession!) -> Void in
+                    if error == nil {
+                        let sessionData = NSKeyedArchiver.archivedDataWithRootObject(session)
+                        userDefaults.setObject(sessionData, forKey: "SpotifySession")
+                        userDefaults.synchronize()
+                        
+                        self.session = renewdSession
+                        self.playUsingSession(renewdSession)
+                    }else{
+                        print("error refreshing session")
+                    }
+                })
+            }else{
+                print("session valid")
+                self.session = session
+                playUsingSession(session)
+            }
+            
+            
+            
+        }else{
+            print("Unable to log in")
+        }
+
         
     }
     

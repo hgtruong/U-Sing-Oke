@@ -64,6 +64,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Songs List" id="PsP-sP-Bz8">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="k8x-ok-khD">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aTr-Dd-7pk">
+                                <rect key="frame" x="20" y="4" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Spotify-60"/>
+                                <connections>
+                                    <action selector="SpotifyButton:" destination="NOg-vL-1zk" eventType="touchUpInside" id="oNY-QV-HAF"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="Tpc-ge-aPH">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sbH-C2-fWC">
                                 <rect key="frame" x="545" y="4" width="35" height="35"/>
@@ -77,6 +87,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="AddSongButton" destination="sbH-C2-fWC" id="a8Q-00-C1Y"/>
+                        <outlet property="SpotifyButton" destination="aTr-Dd-7pk" id="MyF-IG-loy"/>
                         <outlet property="tableView" destination="iHx-Yx-euJ" id="uhJ-pv-Eo6"/>
                     </connections>
                 </viewController>
@@ -347,5 +358,6 @@
         <image name="Play-76" width="76" height="76"/>
         <image name="Play-Filled-76" width="76" height="76"/>
         <image name="Plus-60" width="60" height="60"/>
+        <image name="Spotify-60" width="60" height="60"/>
     </resources>
 </document>

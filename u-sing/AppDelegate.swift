@@ -12,12 +12,68 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    let kClientID = "6b896f994e624235b2c248ca8d443527"
+    let kCallbackURL = "USingOke://returnAfterLogin"
+    let kTokenSwapURL = "https://limitless-falls-43689.herokuapp.com/swap"
+    let kTokenRefreshServiceURL = "https://limitless-falls-43689.herokuapp.com/refresh"
+    
     var window: UIWindow?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        SPTAuth.defaultInstance().clientID = kClientID
+        SPTAuth.defaultInstance().tokenSwapURL = NSURL(string: kTokenSwapURL)
+        SPTAuth.defaultInstance().tokenRefreshURL = NSURL(string: kTokenRefreshServiceURL)
         return true
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        //        if SPTAuth.defaultInstance().canHandleURL(url, withDeclaredRedirectURL: NSURL(string: kCallbackURL)) {
+        
+        SPTAuth.defaultInstance().handleAuthCallbackWithTriggeredAuthURL(url) { (error:NSError!,session: SPTSession!) in
+            if error != nil {
+                print("AUTHENTICATION ERROR")
+                return
+            }
+            
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            
+            let sessionData = NSKeyedArchiver.archivedDataWithRootObject(session)
+            
+            print(sessionData)
+            
+            userDefaults.setObject(sessionData, forKey: "SpotifySession")
+            
+            userDefaults.synchronize()
+            
+            NSNotificationCenter.defaultCenter().postNotificationName("loginSuccessfull", object: nil)
+        }
+//        SPTAuth.defaultInstance().handleAuthCallbackWithTriggeredAuthURL(url, tokenSwapServiceEndpointAtURL: NSURL(string: kTokenSwapURL), callback: { (error:NSError!, session:SPTSession!) -> Void in
+//            if error != nil {
+//                print("AUTHENTICATION ERROR")
+//                return
+//            }
+//            
+//            let userDefaults = NSUserDefaults.standardUserDefaults()
+//            
+//            let sessionData = NSKeyedArchiver.archivedDataWithRootObject(session)
+//            
+//            print(sessionData)
+//            
+//            userDefaults.setObject(sessionData, forKey: "SpotifySession")
+//            
+//            userDefaults.synchronize()
+//            
+//            NSNotificationCenter.defaultCenter().postNotificationName("loginSuccessfull", object: nil)
+//            
+//            
+//        })
+        //        }
+        
+        return true
+        
     }
 
     func applicationWillResignActive(application: UIApplication) {

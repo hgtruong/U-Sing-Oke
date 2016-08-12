@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SongListViewController.swift"
-            timestampString = "492459916.581024"
+            timestampString = "492654429.243328"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
             landmarkName = "SongListViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SongListViewController.swift"
-            timestampString = "492470794.371465"
+            timestampString = "492654429.243328"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
+            startingLineNumber = "394"
+            endingLineNumber = "394"
             landmarkName = "mediaPicker(_:didPickMediaItems:)"
             landmarkType = "5">
             <Locations>
@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SongListViewController.swift"
-            timestampString = "492540542.097511"
+            timestampString = "492654429.243328"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
             <Locations>

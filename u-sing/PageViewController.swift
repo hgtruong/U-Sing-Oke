@@ -49,7 +49,7 @@ class PageViewController: UIPageViewController { //UIPageViewControllerWithOverl
        //addPageIndicator()
 //        pageControl.pageIndicatorTintColor = UIColor.grayColor()
 //        pageControl.backgroundColor = UIColor.darkGrayColor()
-//        
+
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnASong), name: "didClickOnASong", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PageViewController.didClickOnAMixedSong), name: "didClickOnAMixedSong", object: nil)
